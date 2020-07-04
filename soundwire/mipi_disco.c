@@ -23,12 +23,6 @@
 #include <dkms/linux/soundwire/sdw.h>
 #include "bus.h"
 
-static inline int fwnode_property_count_u32(const struct fwnode_handle *fwnode,
-					    const char *propname)
-{
-	return fwnode_property_read_u32_array(fwnode, propname, NULL, 0);
-}
-
 /**
  * sdw_master_read_prop() - Read Master properties
  * @bus: SDW bus instance
