@@ -11,6 +11,7 @@
 #include <linux/dma-mapping.h>
 #include <linux/genalloc.h>
 #include <linux/vmalloc.h>
+#include <linux/version.h>
 #ifdef CONFIG_X86
 #include <asm/set_memory.h>
 #endif
@@ -143,7 +144,11 @@ int snd_dma_alloc_pages(int type, struct device *device, size_t size,
 		break;
 	case SNDRV_DMA_TYPE_VMALLOC:
 		gfp = snd_mem_get_gfp_flags(device, GFP_KERNEL | __GFP_HIGHMEM);
+		#if LINUX_VERSION_CODE < KERNEL_VERSION(5,8,0)
+		dmab->area = __vmalloc(size, gfp, PAGE_KERNEL);
+		#else
 		dmab->area = __vmalloc(size, gfp);
+		#endif
 		dmab->addr = 0;
 		break;
 #ifdef CONFIG_HAS_DMA

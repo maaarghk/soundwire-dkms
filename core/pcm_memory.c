@@ -11,6 +11,7 @@
 #include <linux/moduleparam.h>
 #include <linux/vmalloc.h>
 #include <linux/export.h>
+#include <linux/version.h>
 #include <dkms/sound/core.h>
 #include <dkms/sound/pcm.h>
 #include <dkms/sound/info.h>
@@ -460,7 +461,11 @@ int _snd_pcm_lib_alloc_vmalloc_buffer(struct snd_pcm_substream *substream,
 			return 0; /* already large enough */
 		vfree(runtime->dma_area);
 	}
+	#if LINUX_VERSION_CODE < KERNEL_VERSION(5,8,0)
+	runtime->dma_area = __vmalloc(size, gfp_flags, PAGE_KERNEL);
+	#else
 	runtime->dma_area = __vmalloc(size, gfp_flags);
+	#endif
 	if (!runtime->dma_area)
 		return -ENOMEM;
 	runtime->dma_bytes = size;
