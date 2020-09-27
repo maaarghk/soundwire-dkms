@@ -13,7 +13,7 @@
 #include <linux/types.h>
 #include <dkms/sound/control.h>
 #include <dkms/sound/soc-topology.h>
-#include <dkms/sound/asoc.h>
+#include <dkms/uapi/sound/asoc.h>
 
 struct device;
 struct snd_soc_pcm_runtime;

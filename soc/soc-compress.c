@@ -14,7 +14,7 @@
 #include <linux/slab.h>
 #include <linux/workqueue.h>
 #include <dkms/sound/core.h>
-#include <dkms/sound/compress_params.h>
+#include <dkms/uapi/sound/compress_params.h>
 #include <dkms/sound/compress_driver.h>
 #include <dkms/sound/soc.h>
 #include <dkms/sound/initval.h>

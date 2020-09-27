@@ -6,7 +6,7 @@
 #include <linux/slab.h>
 #include <linux/usb.h>
 #include <dkms/linux/usb/audio.h>
-#include <dkms/linux/usb/midi.h>
+#include <dkms/uapi/linux/usb/midi.h>
 #include <linux/bits.h>
 
 #include <dkms/sound/control.h>

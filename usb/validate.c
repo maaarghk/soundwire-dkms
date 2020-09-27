@@ -8,7 +8,7 @@
 #include <dkms/linux/usb/audio.h>
 #include <dkms/linux/usb/audio-v2.h>
 #include <dkms/linux/usb/audio-v3.h>
-#include <dkms/linux/usb/midi.h>
+#include <dkms/uapi/linux/usb/midi.h>
 #include "usbaudio.h"
 #include "helper.h"
 

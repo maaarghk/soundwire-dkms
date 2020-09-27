@@ -5,7 +5,7 @@
 #include <linux/init.h>
 #include <linux/device.h>
 #include <linux/module.h>
-#include <linux/mod_devicetable.h>
+#include <dkms/linux/mod_devicetable.h>
 #include <linux/export.h>
 #include <dkms/sound/hdaudio.h>
 

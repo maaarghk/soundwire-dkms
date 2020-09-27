@@ -28,7 +28,7 @@
 
 #include <linux/types.h>
 #include <dkms/sound/asound.h>
-#include <dkms/sound/compress_params.h>
+#include <dkms/uapi/sound/compress_params.h>
 
 
 #define SNDRV_COMPRESS_VERSION SNDRV_PROTOCOL_VERSION(0, 2, 0)

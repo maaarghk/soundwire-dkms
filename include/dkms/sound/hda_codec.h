@@ -9,7 +9,7 @@
 #define __SOUND_HDA_CODEC_H
 
 #include <linux/kref.h>
-#include <linux/mod_devicetable.h>
+#include <dkms/linux/mod_devicetable.h>
 #include <dkms/sound/info.h>
 #include <dkms/sound/control.h>
 #include <dkms/sound/pcm.h>

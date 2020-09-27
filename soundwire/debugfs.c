@@ -3,7 +3,7 @@
 
 #include <linux/device.h>
 #include <linux/debugfs.h>
-#include <linux/mod_devicetable.h>
+#include <dkms/linux/mod_devicetable.h>
 #include <linux/slab.h>
 #include <dkms/linux/soundwire/sdw.h>
 #include <dkms/linux/soundwire/sdw_registers.h>

@@ -12,7 +12,7 @@
 #ifndef __LINUX_SND_SOC_TPLG_H
 #define __LINUX_SND_SOC_TPLG_H
 
-#include <dkms/sound/asoc.h>
+#include <dkms/uapi/sound/asoc.h>
 #include <linux/list.h>
 
 struct firmware;

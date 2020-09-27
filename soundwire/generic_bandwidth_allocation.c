@@ -8,7 +8,7 @@
 
 #include <linux/device.h>
 #include <linux/module.h>
-#include <linux/mod_devicetable.h>
+#include <dkms/linux/mod_devicetable.h>
 #include <linux/slab.h>
 #include <dkms/linux/soundwire/sdw.h>
 #include "bus.h"

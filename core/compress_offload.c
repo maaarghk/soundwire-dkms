@@ -29,8 +29,8 @@
 #include <dkms/sound/core.h>
 #include <dkms/sound/initval.h>
 #include <dkms/sound/info.h>
-#include <dkms/sound/compress_params.h>
-#include <dkms/sound/compress_offload.h>
+#include <dkms/uapi/sound/compress_params.h>
+#include <dkms/uapi/sound/compress_offload.h>
 #include <dkms/sound/compress_driver.h>
 
 /* struct snd_compr_codec_caps overflows the ioctl bit size for some

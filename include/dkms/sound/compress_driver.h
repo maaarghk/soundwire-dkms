@@ -13,7 +13,7 @@
 #include <linux/types.h>
 #include <linux/sched.h>
 #include <dkms/sound/core.h>
-#include <dkms/sound/compress_offload.h>
+#include <dkms/uapi/sound/compress_offload.h>
 #include <dkms/sound/asound.h>
 #include <dkms/sound/pcm.h>
 

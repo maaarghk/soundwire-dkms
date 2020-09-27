@@ -4,7 +4,7 @@
 #ifndef __SOUNDWIRE_H
 #define __SOUNDWIRE_H
 
-#include <linux/mod_devicetable.h>
+#include <dkms/linux/mod_devicetable.h>
 #include <linux/bitfield.h>
 
 struct sdw_bus;

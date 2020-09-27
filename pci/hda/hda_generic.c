@@ -3887,7 +3887,6 @@ static int parse_mic_boost(struct hda_codec *codec)
 	return 0;
 }
 
-#ifdef CONFIG_SND_HDA_GENERIC_LEDS
 /*
  * vmaster mute LED hook helpers
  */
@@ -4100,7 +4099,6 @@ int snd_hda_gen_add_micmute_led_cdev(struct hda_codec *codec,
 	return add_micmute_led_hook(codec);
 }
 EXPORT_SYMBOL_GPL(snd_hda_gen_add_micmute_led_cdev);
-#endif /* CONFIG_SND_HDA_GENERIC_LEDS */
 
 /*
  * parse digital I/Os and set up NIDs in BIOS auto-parse mode
