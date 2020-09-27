@@ -14,8 +14,8 @@
 #include <linux/pinctrl/consumer.h>
 #include <linux/reset.h>
 
-#include <sound/dmaengine_pcm.h>
-#include <sound/core.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/core.h>
 
 #include "stm32_sai.h"
 

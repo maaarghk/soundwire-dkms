@@ -9,7 +9,7 @@
 #ifndef _MT_2701_AFE_COMMON_H_
 #define _MT_2701_AFE_COMMON_H_
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 #include <linux/clk.h>
 #include <linux/regmap.h>
 #include "mt2701-reg.h"

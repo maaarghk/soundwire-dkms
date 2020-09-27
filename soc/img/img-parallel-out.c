@@ -16,12 +16,12 @@
 #include <linux/pm_runtime.h>
 #include <linux/reset.h>
 
-#include <sound/core.h>
-#include <sound/dmaengine_pcm.h>
-#include <sound/initval.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 
 #define IMG_PRL_OUT_TX_FIFO		0
 
@@ -163,8 +163,10 @@ static int img_prl_out_set_fmt(struct snd_soc_dai *dai, unsigned int fmt)
 	}
 
 	ret = pm_runtime_get_sync(prl->dev);
-	if (ret < 0)
+	if (ret < 0) {
+		pm_runtime_put_noidle(prl->dev);
 		return ret;
+	}
 
 	reg = img_prl_out_readl(prl, IMG_PRL_OUT_CTL);
 	reg = (reg & ~IMG_PRL_OUT_CTL_EDGE_MASK) | control_set;

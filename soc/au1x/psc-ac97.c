@@ -15,10 +15,10 @@
 #include <linux/delay.h>
 #include <linux/mutex.h>
 #include <linux/suspend.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/initval.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc.h>
 #include <asm/mach-au1x00/au1000.h>
 #include <asm/mach-au1x00/au1xxx_psc.h>
 
@@ -58,7 +58,7 @@ static struct au1xpsc_audio_data *au1xpsc_ac97_workdata;
 static inline struct au1xpsc_audio_data *ac97_to_pscdata(struct snd_ac97 *x)
 {
 	struct snd_soc_card *c = x->bus->card->private_data;
-	return snd_soc_dai_get_drvdata(c->rtd->cpu_dai);
+	return snd_soc_dai_get_drvdata(c->asoc_rtd_to_cpu(rtd, 0));
 }
 
 #else

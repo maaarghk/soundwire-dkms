@@ -19,11 +19,11 @@
 #include <linux/interrupt.h>
 #include <linux/wait.h>
 #include <linux/delay.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/ac97_codec.h>
-#include <sound/initval.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/ac97_codec.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc.h>
 
 /* regs and bits */
 #define HACCR		0x08

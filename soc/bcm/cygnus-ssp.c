@@ -17,11 +17,11 @@
 #include <linux/module.h>
 #include <linux/of_device.h>
 #include <linux/slab.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
 
 #include "cygnus-ssp.h"
 
@@ -1056,7 +1056,7 @@ static int __cygnus_ssp_suspend(struct snd_soc_dai *cpu_dai)
 {
 	struct cygnus_aio_port *aio = cygnus_dai_get_portinfo(cpu_dai);
 
-	if (!cpu_dai->active)
+	if (!snd_soc_dai_active(cpu_dai))
 		return 0;
 
 	if (!aio->is_slave) {
@@ -1097,7 +1097,7 @@ static int __cygnus_ssp_resume(struct snd_soc_dai *cpu_dai)
 	struct cygnus_aio_port *aio = cygnus_dai_get_portinfo(cpu_dai);
 	int error;
 
-	if (!cpu_dai->active)
+	if (!snd_soc_dai_active(cpu_dai))
 		return 0;
 
 	if (!aio->is_slave) {

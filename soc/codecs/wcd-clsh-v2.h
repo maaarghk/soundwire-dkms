@@ -2,7 +2,7 @@
 
 #ifndef _WCD_CLSH_V2_H_
 #define _WCD_CLSH_V2_H_
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 enum wcd_clsh_event {
 	WCD_CLSH_EVENT_PRE_DAC = 1,

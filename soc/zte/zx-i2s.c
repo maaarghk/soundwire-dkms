@@ -11,14 +11,14 @@
 #include <linux/io.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
 
-#include <sound/core.h>
-#include <sound/dmaengine_pcm.h>
-#include <sound/initval.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/initval.h>
 
 #define ZX_I2S_PROCESS_CTRL	0x04
 #define ZX_I2S_TIMING_CTRL	0x08
@@ -294,7 +294,7 @@ static int zx_i2s_trigger(struct snd_pcm_substream *substream, int cmd,
 			zx_i2s_rx_dma_en(zx_i2s->reg_base, true);
 		else
 			zx_i2s_tx_dma_en(zx_i2s->reg_base, true);
-	/* fall thru */
+		fallthrough;
 	case SNDRV_PCM_TRIGGER_RESUME:
 	case SNDRV_PCM_TRIGGER_PAUSE_RELEASE:
 		if (capture)
@@ -308,7 +308,7 @@ static int zx_i2s_trigger(struct snd_pcm_substream *substream, int cmd,
 			zx_i2s_rx_dma_en(zx_i2s->reg_base, false);
 		else
 			zx_i2s_tx_dma_en(zx_i2s->reg_base, false);
-	/* fall thru */
+		fallthrough;
 	case SNDRV_PCM_TRIGGER_SUSPEND:
 	case SNDRV_PCM_TRIGGER_PAUSE_PUSH:
 		if (capture)

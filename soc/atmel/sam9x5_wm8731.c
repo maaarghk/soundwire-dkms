@@ -15,13 +15,13 @@
 #include <linux/of.h>
 #include <linux/export.h>
 #include <linux/module.h>
-#include <linux/mod_devicetable.h>
+#include <dkms/linux/mod_devicetable.h>
 #include <linux/platform_device.h>
 #include <linux/device.h>
 
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
-#include <sound/soc-dapm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
+#include <dkms/sound/soc-dapm.h>
 
 #include "../codecs/wm8731.h"
 #include "atmel_ssc_dai.h"
@@ -40,7 +40,7 @@ struct sam9x5_drvdata {
  */
 static int sam9x5_wm8731_init(struct snd_soc_pcm_runtime *rtd)
 {
-	struct snd_soc_dai *codec_dai = rtd->codec_dai;
+	struct snd_soc_dai *codec_dai = asoc_rtd_to_codec(rtd, 0);
 	struct device *dev = rtd->dev;
 	int ret;
 

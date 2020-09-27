@@ -21,13 +21,13 @@
 #include <linux/regmap.h>
 #include <linux/slab.h>
 
-#include <sound/core.h>
-#include <sound/initval.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/tlv.h>
 
 /* STA529 Register offsets */
 #define	 STA529_FFXCFG0		0x00
@@ -251,7 +251,7 @@ static int sta529_hw_params(struct snd_pcm_substream *substream,
 	return 0;
 }
 
-static int sta529_mute(struct snd_soc_dai *dai, int mute)
+static int sta529_mute(struct snd_soc_dai *dai, int mute, int direction)
 {
 	u8 val = 0;
 
@@ -291,7 +291,8 @@ static int sta529_set_dai_fmt(struct snd_soc_dai *codec_dai, u32 fmt)
 static const struct snd_soc_dai_ops sta529_dai_ops = {
 	.hw_params	=	sta529_hw_params,
 	.set_fmt	=	sta529_set_dai_fmt,
-	.digital_mute	=	sta529_mute,
+	.mute_stream	=	sta529_mute,
+	.no_capture_mute = 1,
 };
 
 static struct snd_soc_dai_driver sta529_dai = {

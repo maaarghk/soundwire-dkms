@@ -15,10 +15,10 @@
 #include <linux/delay.h>
 #include <linux/io.h>
 #include <linux/time.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 
 #include "mxs-saif.h"
 
@@ -733,11 +733,8 @@ static int mxs_saif_probe(struct platform_device *pdev)
 {
 	struct device_node *np = pdev->dev.of_node;
 	struct mxs_saif *saif;
-	int irq, ret = 0;
+	int irq, ret;
 	struct device_node *master;
-
-	if (!np)
-		return -EINVAL;
 
 	saif = devm_kzalloc(&pdev->dev, sizeof(*saif), GFP_KERNEL);
 	if (!saif)

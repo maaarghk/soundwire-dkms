@@ -13,7 +13,7 @@
 #include <linux/of.h>
 #include <linux/platform_device.h>
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 struct adau7002_priv {
 	int wakeup_delay;

@@ -19,7 +19,7 @@
 #include <linux/clk.h>
 #include <linux/gpio.h>
 #include <linux/reset.h>
-#include <linux/usb/otg.h>
+#include <dkms/linux/usb/otg.h>
 
 /*
  * utmi_pll_config_in_car_module: true if the UTMI PLL configuration registers

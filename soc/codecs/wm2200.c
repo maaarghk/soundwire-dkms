@@ -20,14 +20,14 @@
 #include <linux/regulator/consumer.h>
 #include <linux/regulator/fixed.h>
 #include <linux/slab.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/jack.h>
-#include <sound/initval.h>
-#include <sound/tlv.h>
-#include <sound/wm2200.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/wm2200.h>
 
 #include "wm2200.h"
 #include "wmfw.h"
@@ -2027,7 +2027,7 @@ static int wm2200_set_fll(struct snd_soc_component *component, int fll_id, int s
 			msleep(1);
 		}
 
-		ret = snd_soc_component_read32(component,
+		ret = snd_soc_component_read(component,
 				   WM2200_INTERRUPT_RAW_STATUS_2);
 		if (ret < 0) {
 			dev_err(component->dev,
@@ -2060,7 +2060,7 @@ static int wm2200_dai_probe(struct snd_soc_dai *dai)
 	unsigned int val = 0;
 	int ret;
 
-	ret = snd_soc_component_read32(component, WM2200_GPIO_CTRL_1);
+	ret = snd_soc_component_read(component, WM2200_GPIO_CTRL_1);
 	if (ret >= 0) {
 		if ((ret & WM2200_GP1_FN_MASK) != 0) {
 			wm2200->symmetric_rates = true;

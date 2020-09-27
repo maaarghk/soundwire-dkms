@@ -13,12 +13,12 @@
 
 #include <linux/delay.h>
 
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/initval.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 
 #define JZ4740_REG_CODEC_1 0x0
 #define JZ4740_REG_CODEC_2 0x4
@@ -344,19 +344,17 @@ static int jz4740_codec_probe(struct platform_device *pdev)
 	return ret;
 }
 
-#ifdef CONFIG_OF
 static const struct of_device_id jz4740_codec_of_matches[] = {
 	{ .compatible = "ingenic,jz4740-codec", },
 	{ }
 };
 MODULE_DEVICE_TABLE(of, jz4740_codec_of_matches);
-#endif
 
 static struct platform_driver jz4740_codec_driver = {
 	.probe = jz4740_codec_probe,
 	.driver = {
 		.name = "jz4740-codec",
-		.of_match_table = of_match_ptr(jz4740_codec_of_matches),
+		.of_match_table = jz4740_codec_of_matches,
 	},
 };
 

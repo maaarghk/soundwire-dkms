@@ -16,16 +16,16 @@
 #include <linux/spi/spi.h>
 #include <linux/dmi.h>
 #include <linux/acpi.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/initval.h>
-#include <sound/tlv.h>
-#include <sound/jack.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/jack.h>
 #include <linux/workqueue.h>
-#include <sound/rt286.h>
+#include <dkms/sound/rt286.h>
 
 #include "rl6347a.h"
 #include "rt286.h"
@@ -272,13 +272,13 @@ static int rt286_jack_detect(struct rt286_priv *rt286, bool *hp, bool *mic)
 		regmap_read(rt286->regmap, RT286_GET_MIC1_SENSE, &buf);
 		*mic = buf & 0x80000000;
 	}
-	if (!*mic) {
+
+	if (!*hp) {
 		snd_soc_dapm_disable_pin(dapm, "HV");
 		snd_soc_dapm_disable_pin(dapm, "VREF");
-	}
-	if (!*hp)
 		snd_soc_dapm_disable_pin(dapm, "LDO1");
-	snd_soc_dapm_sync(dapm);
+		snd_soc_dapm_sync(dapm);
+	}
 
 	return 0;
 }
@@ -1079,11 +1079,13 @@ static const struct i2c_device_id rt286_i2c_id[] = {
 };
 MODULE_DEVICE_TABLE(i2c, rt286_i2c_id);
 
+#ifdef CONFIG_ACPI
 static const struct acpi_device_id rt286_acpi_match[] = {
 	{ "INT343A", 0 },
 	{},
 };
 MODULE_DEVICE_TABLE(acpi, rt286_acpi_match);
+#endif
 
 static const struct dmi_system_id force_combo_jack_table[] = {
 	{

@@ -18,13 +18,13 @@
 #include <linux/of_gpio.h>
 #include <linux/platform_device.h>
 #include <linux/firmware.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/initval.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/tlv.h>
 
 #include "rl6231.h"
 #include "rt1305.h"
@@ -411,7 +411,7 @@ static int rt1305_is_rc_clk_from_pll(struct snd_soc_dapm_widget *source,
 	struct rt1305_priv *rt1305 = snd_soc_component_get_drvdata(component);
 	unsigned int val;
 
-	snd_soc_component_read(component, RT1305_CLK_1, &val);
+	val = snd_soc_component_read(component, RT1305_CLK_1);
 
 	if (rt1305->sysclk_src == RT1305_FS_SYS_PRE_S_PLL1 &&
 		(val & RT1305_SEL_PLL_SRC_2_RCCLK))

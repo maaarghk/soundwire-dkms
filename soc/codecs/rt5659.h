@@ -9,7 +9,7 @@
 #ifndef __RT5659_H__
 #define __RT5659_H__
 
-#include <sound/rt5659.h>
+#include <dkms/sound/rt5659.h>
 
 #define DEVICE_ID 0x6311
 

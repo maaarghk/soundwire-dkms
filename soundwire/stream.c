@@ -9,12 +9,10 @@
 #include <linux/device.h>
 #include <linux/init.h>
 #include <linux/module.h>
-#include <linux/mod_devicetable.h>
+#include <dkms/linux/mod_devicetable.h>
 #include <linux/slab.h>
 #include <dkms/linux/soundwire/sdw_registers.h>
 #include <dkms/linux/soundwire/sdw.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/pcm.h>
 #include <dkms/sound/soc.h>
 #include "bus.h"
 
@@ -27,9 +25,9 @@
 int sdw_rows[SDW_FRAME_ROWS] = {48, 50, 60, 64, 75, 80, 125, 147,
 			96, 100, 120, 128, 150, 160, 250, 0,
 			192, 200, 240, 256, 72, 144, 90, 180};
+EXPORT_SYMBOL(sdw_rows);
 
 int sdw_cols[SDW_FRAME_COLS] = {2, 4, 6, 8, 10, 12, 14, 16};
-EXPORT_SYMBOL(sdw_rows);
 EXPORT_SYMBOL(sdw_cols);
 
 int sdw_find_col_index(int col)
@@ -104,9 +102,7 @@ static int _sdw_program_slave_port_params(struct sdw_bus *bus,
 		return ret;
 
 	/* Program DPN_SampleCtrl2 register */
-	wbuf = (t_params->sample_interval - 1);
-	wbuf &= SDW_DPN_SAMPLECTRL_HIGH;
-	wbuf >>= SDW_REG_SHIFT(SDW_DPN_SAMPLECTRL_HIGH);
+	wbuf = FIELD_GET(SDW_DPN_SAMPLECTRL_HIGH, t_params->sample_interval - 1);
 
 	ret = sdw_write(slave, addr3, wbuf);
 	if (ret < 0) {
@@ -115,9 +111,8 @@ static int _sdw_program_slave_port_params(struct sdw_bus *bus,
 	}
 
 	/* Program DPN_HCtrl register */
-	wbuf = t_params->hstart;
-	wbuf <<= SDW_REG_SHIFT(SDW_DPN_HCTRL_HSTART);
-	wbuf |= t_params->hstop;
+	wbuf = FIELD_PREP(SDW_DPN_HCTRL_HSTART, t_params->hstart);
+	wbuf |= FIELD_PREP(SDW_DPN_HCTRL_HSTOP, t_params->hstop);
 
 	ret = sdw_write(slave, addr4, wbuf);
 	if (ret < 0)
@@ -161,8 +156,8 @@ static int sdw_program_slave_port_params(struct sdw_bus *bus,
 	}
 
 	/* Program DPN_PortCtrl register */
-	wbuf = p_params->data_mode << SDW_REG_SHIFT(SDW_DPN_PORTCTRL_DATAMODE);
-	wbuf |= p_params->flow_mode;
+	wbuf = FIELD_PREP(SDW_DPN_PORTCTRL_DATAMODE, p_params->data_mode);
+	wbuf |= FIELD_PREP(SDW_DPN_PORTCTRL_FLOWMODE, p_params->flow_mode);
 
 	ret = sdw_update(s_rt->slave, addr1, 0xF, wbuf);
 	if (ret < 0) {
@@ -448,7 +443,8 @@ static int sdw_prep_deprep_slave_ports(struct sdw_bus *bus,
 
 	prep_ch.bank = bus->params.next_bank;
 
-	if (dpn_prop->imp_def_interrupts || !dpn_prop->simple_ch_prep_sm)
+	if (dpn_prop->imp_def_interrupts || !dpn_prop->simple_ch_prep_sm ||
+	    bus->params.s_data_mode != SDW_PORT_DATA_MODE_NORMAL)
 		intr = true;
 
 	/*
@@ -721,6 +717,7 @@ error:
 	kfree(wbuf);
 error_1:
 	kfree(wr_msg);
+	bus->defer_msg.msg = NULL;
 	return ret;
 }
 
@@ -847,9 +844,10 @@ static int do_bank_switch(struct sdw_stream_runtime *stream)
 error:
 	list_for_each_entry(m_rt, &stream->master_list, stream_node) {
 		bus = m_rt->bus;
-
-		kfree(bus->defer_msg.msg->buf);
-		kfree(bus->defer_msg.msg);
+		if (bus->defer_msg.msg) {
+			kfree(bus->defer_msg.msg->buf);
+			kfree(bus->defer_msg.msg);
+		}
 	}
 
 msg_unlock:
@@ -1582,7 +1580,6 @@ int sdw_prepare_stream(struct sdw_stream_runtime *stream)
 	sdw_acquire_bus_lock(stream);
 
 	if (stream->state == SDW_STREAM_PREPARED) {
-		/* nothing to do */
 		ret = 0;
 		goto state_err;
 	}
@@ -1672,12 +1669,6 @@ int sdw_enable_stream(struct sdw_stream_runtime *stream)
 
 	sdw_acquire_bus_lock(stream);
 
-	if (stream->state == SDW_STREAM_ENABLED) {
-		/* nothing to do */
-		ret = 0;
-		goto state_err;
-	}
-
 	if (stream->state != SDW_STREAM_PREPARED &&
 	    stream->state != SDW_STREAM_DISABLED) {
 		pr_err("%s: %s: inconsistent state state %d\n",
@@ -1761,12 +1752,6 @@ int sdw_disable_stream(struct sdw_stream_runtime *stream)
 
 	sdw_acquire_bus_lock(stream);
 
-	if (stream->state == SDW_STREAM_DISABLED) {
-		/* nothing to do */
-		ret = 0;
-		goto state_err;
-	}
-
 	if (stream->state != SDW_STREAM_ENABLED) {
 		pr_err("%s: %s: inconsistent state state %d\n",
 		       __func__, stream->name, stream->state);
@@ -1842,12 +1827,6 @@ int sdw_deprepare_stream(struct sdw_stream_runtime *stream)
 
 	sdw_acquire_bus_lock(stream);
 
-	if (stream->state == SDW_STREAM_DEPREPARED) {
-		/* nothing to do */
-		ret = 0;
-		goto state_err;
-	}
-
 	if (stream->state != SDW_STREAM_PREPARED &&
 	    stream->state != SDW_STREAM_DISABLED) {
 		pr_err("%s: %s: inconsistent state state %d\n",
@@ -1874,12 +1853,9 @@ static int set_stream(struct snd_pcm_substream *substream,
 
 	/* Set stream pointer on all DAIs */
 	for_each_rtd_dais(rtd, i, dai) {
-		ret = snd_soc_dai_set_sdw_stream(dai, sdw_stream,
-						 substream->stream);
+		ret = snd_soc_dai_set_sdw_stream(dai, sdw_stream, substream->stream);
 		if (ret < 0) {
-			dev_err(rtd->dev,
-				"failed to set stream pointer on dai %s",
-				dai->name);
+			dev_err(rtd->dev, "failed to set stream pointer on dai %s", dai->name);
 			break;
 		}
 	}
@@ -1887,6 +1863,13 @@ static int set_stream(struct snd_pcm_substream *substream,
 	return ret;
 }
 
+/**
+ * sdw_startup_stream() - Startup SoundWire stream
+ *
+ * @sdw_substream: Soundwire stream
+ *
+ * Documentation/driver-api/soundwire/stream.rst explains this API in detail
+ */
 int sdw_startup_stream(void *sdw_substream)
 {
 	struct snd_pcm_substream *substream = sdw_substream;
@@ -1905,8 +1888,7 @@ int sdw_startup_stream(void *sdw_substream)
 
 	sdw_stream = sdw_alloc_stream(name);
 	if (!sdw_stream) {
-		dev_err(rtd->dev, "alloc stream failed for substream DAI %s",
-			substream->name);
+		dev_err(rtd->dev, "alloc stream failed for substream DAI %s", substream->name);
 		ret = -ENOMEM;
 		goto error;
 	}
@@ -1925,6 +1907,13 @@ error:
 }
 EXPORT_SYMBOL(sdw_startup_stream);
 
+/**
+ * sdw_shutdown_stream() - Shutdown SoundWire stream
+ *
+ * @sdw_substream: Soundwire stream
+ *
+ * Documentation/driver-api/soundwire/stream.rst explains this API in detail
+ */
 void sdw_shutdown_stream(void *sdw_substream)
 {
 	struct snd_pcm_substream *substream = sdw_substream;
@@ -1933,10 +1922,11 @@ void sdw_shutdown_stream(void *sdw_substream)
 	struct snd_soc_dai *dai;
 
 	/* Find stream from first CPU DAI */
-	dai = rtd->cpu_dais[0];
+	dai = asoc_rtd_to_cpu(rtd, 0);
+
 	sdw_stream = snd_soc_dai_get_sdw_stream(dai, substream->stream);
 
-	if (!sdw_stream) {
+	if (IS_ERR(sdw_stream)) {
 		dev_err(rtd->dev, "no stream found for DAI %s", dai->name);
 		return;
 	}

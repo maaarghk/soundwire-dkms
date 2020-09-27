@@ -11,11 +11,11 @@
 #include <linux/clk.h>
 #include <linux/delay.h>
 #include <linux/slab.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 #include <linux/gcd.h>
 #include <linux/i2c.h>
 #include <linux/spi/spi.h>
@@ -385,7 +385,7 @@ static int adau17x1_set_dai_sysclk(struct snd_soc_dai *dai,
 	case ADAU17X1_CLK_SRC_PLL_AUTO:
 		if (!adau->mclk)
 			return -EINVAL;
-		/* Fall-through */
+		fallthrough;
 	case ADAU17X1_CLK_SRC_PLL:
 		is_pll = true;
 		break;
@@ -469,7 +469,7 @@ static int adau17x1_hw_params(struct snd_pcm_substream *substream,
 		ret = adau17x1_auto_pll(dai, params);
 		if (ret)
 			return ret;
-		/* Fall-through */
+		fallthrough;
 	case ADAU17X1_CLK_SRC_PLL:
 		freq = adau->pll_freq;
 		break;

@@ -9,8 +9,8 @@
 #include <linux/regmap.h>
 #include <linux/regulator/consumer.h>
 #include <linux/reset.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 
 #define BLOCK_EN	0x00
 #define  LORN_EN	0

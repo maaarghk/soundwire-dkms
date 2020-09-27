@@ -6,7 +6,7 @@
  */
 
 #include "chip_offset_byte.h"
-#include <sound/pcm.h>
+#include <dkms/sound/pcm.h>
 #define I2S_SP_INSTANCE                 0x01
 #define I2S_BT_INSTANCE                 0x02
 
@@ -75,6 +75,8 @@
 #define ACP_POWER_ON_IN_PROGRESS	0x01
 #define ACP_POWERED_OFF			0x02
 #define ACP_POWER_OFF_IN_PROGRESS	0x03
+
+#define ACP3x_ITER_IRER_SAMP_LEN_MASK	0x38
 
 struct acp3x_platform_info {
 	u16 play_i2s_instance;

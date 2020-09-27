@@ -6,7 +6,7 @@
 #include <linux/gpio/consumer.h>
 #include <linux/of_platform.h>
 #include <linux/module.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 struct es7241_clock_mode {
 	unsigned int rate_min;

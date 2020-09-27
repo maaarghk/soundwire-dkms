@@ -9,8 +9,8 @@
 #include <linux/io.h>
 #include <linux/module.h>
 #include <linux/regmap.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 #include "bcm63xx-i2s.h"
 
 #define DRV_NAME "brcm-i2s"

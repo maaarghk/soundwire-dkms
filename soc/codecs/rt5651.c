@@ -16,14 +16,14 @@
 #include <linux/platform_device.h>
 #include <linux/spi/spi.h>
 #include <linux/acpi.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/initval.h>
-#include <sound/tlv.h>
-#include <sound/jack.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/jack.h>
 
 #include "rl6231.h"
 #include "rt5651.h"
@@ -1514,7 +1514,7 @@ static int rt5651_set_bias_level(struct snd_soc_component *component,
 	switch (level) {
 	case SND_SOC_BIAS_PREPARE:
 		if (SND_SOC_BIAS_STANDBY == snd_soc_component_get_bias_level(component)) {
-			if (snd_soc_component_read32(component, RT5651_PLL_MODE_1) & 0x9200)
+			if (snd_soc_component_read(component, RT5651_PLL_MODE_1) & 0x9200)
 				snd_soc_component_update_bits(component, RT5651_D_MISC,
 						    0xc00, 0xc00);
 		}
@@ -1608,7 +1608,7 @@ static bool rt5651_micbias1_ovcd(struct snd_soc_component *component)
 {
 	int val;
 
-	val = snd_soc_component_read32(component, RT5651_IRQ_CTRL2);
+	val = snd_soc_component_read(component, RT5651_IRQ_CTRL2);
 	dev_dbg(component->dev, "irq ctrl2 %#04x\n", val);
 
 	return (val & RT5651_MB1_OC_CLR);
@@ -1625,7 +1625,7 @@ static bool rt5651_jack_inserted(struct snd_soc_component *component)
 		return val;
 	}
 
-	val = snd_soc_component_read32(component, RT5651_INT_IRQ_ST);
+	val = snd_soc_component_read(component, RT5651_INT_IRQ_ST);
 	dev_dbg(component->dev, "irq status %#04x\n", val);
 
 	switch (rt5651->jd_src) {

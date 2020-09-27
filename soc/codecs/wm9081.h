@@ -10,7 +10,7 @@
  * Copyright 2009 Wolfson Microelectronics plc
  */
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 /*
  * SYSCLK sources

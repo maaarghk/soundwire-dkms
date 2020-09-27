@@ -42,8 +42,8 @@
 #include <linux/of_gpio.h>
 #include <linux/regulator/consumer.h>
 
-#include <sound/soc.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/pcm_params.h>
 
 struct tse850_priv {
 	struct gpio_desc *add;

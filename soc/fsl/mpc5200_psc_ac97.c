@@ -11,9 +11,9 @@
 #include <linux/delay.h>
 #include <linux/time.h>
 
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 
 #include <asm/time.h>
 #include <asm/delay.h>

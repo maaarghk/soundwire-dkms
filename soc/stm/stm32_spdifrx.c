@@ -15,8 +15,8 @@
 #include <linux/regmap.h>
 #include <linux/reset.h>
 
-#include <sound/dmaengine_pcm.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/pcm_params.h>
 
 /* SPDIF-rx Register Map */
 #define STM32_SPDIFRX_CR	0x00

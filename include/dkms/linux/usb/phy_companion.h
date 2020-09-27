@@ -2,7 +2,7 @@
 /*
  * phy-companion.h -- phy companion to indicate the comparator part of PHY
  *
- * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com
+ * Copyright (C) 2012 Texas Instruments Incorporated - https://www.ti.com
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -20,7 +20,7 @@
 #ifndef __DRIVERS_PHY_COMPANION_H
 #define __DRIVERS_PHY_COMPANION_H
 
-#include <linux/usb/otg.h>
+#include <dkms/linux/usb/otg.h>
 
 /* phy_companion to take care of VBUS, ID and srp capabilities */
 struct phy_companion {

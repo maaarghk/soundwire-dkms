@@ -8,7 +8,7 @@
 #ifndef _WM8350_H
 #define _WM8350_H
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 #include <linux/mfd/wm8350/audio.h>
 
 enum wm8350_jack {

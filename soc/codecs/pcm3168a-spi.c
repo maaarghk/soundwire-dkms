@@ -11,7 +11,7 @@
 #include <linux/module.h>
 #include <linux/spi/spi.h>
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include "pcm3168a.h"
 

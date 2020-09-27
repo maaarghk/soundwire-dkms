@@ -15,13 +15,13 @@
 #include <linux/pm_runtime.h>
 #include <linux/regmap.h>
 #include <linux/slab.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/jack.h>
-#include <sound/initval.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/tlv.h>
 
 #include <linux/mfd/arizona/core.h>
 #include <linux/mfd/arizona/registers.h>
@@ -1068,22 +1068,22 @@ static struct snd_soc_dai_driver cs47l24_dai[] = {
 	},
 };
 
-static int cs47l24_open(struct snd_compr_stream *stream)
+static int cs47l24_open(struct snd_soc_component *component,
+			struct snd_compr_stream *stream)
 {
 	struct snd_soc_pcm_runtime *rtd = stream->private_data;
-	struct snd_soc_component *component = snd_soc_rtdcom_lookup(rtd, DRV_NAME);
 	struct cs47l24_priv *priv = snd_soc_component_get_drvdata(component);
 	struct arizona *arizona = priv->core.arizona;
 	int n_adsp;
 
-	if (strcmp(rtd->codec_dai->name, "cs47l24-dsp-voicectrl") == 0) {
+	if (strcmp(asoc_rtd_to_codec(rtd, 0)->name, "cs47l24-dsp-voicectrl") == 0) {
 		n_adsp = 2;
-	} else if (strcmp(rtd->codec_dai->name, "cs47l24-dsp-trace") == 0) {
+	} else if (strcmp(asoc_rtd_to_codec(rtd, 0)->name, "cs47l24-dsp-trace") == 0) {
 		n_adsp = 1;
 	} else {
 		dev_err(arizona->dev,
 			"No suitable compressed stream for DAI '%s'\n",
-			rtd->codec_dai->name);
+			asoc_rtd_to_codec(rtd, 0)->name);
 		return -EINVAL;
 	}
 
@@ -1178,7 +1178,7 @@ static unsigned int cs47l24_digital_vu[] = {
 	ARIZONA_DAC_DIGITAL_VOLUME_4L,
 };
 
-static struct snd_compr_ops cs47l24_compr_ops = {
+static struct snd_compress_ops cs47l24_compress_ops = {
 	.open		= cs47l24_open,
 	.free		= wm_adsp_compr_free,
 	.set_params	= wm_adsp_compr_set_params,
@@ -1194,7 +1194,7 @@ static const struct snd_soc_component_driver soc_component_dev_cs47l24 = {
 	.set_sysclk		= arizona_set_sysclk,
 	.set_pll		= cs47l24_set_fll,
 	.name			= DRV_NAME,
-	.compr_ops		= &cs47l24_compr_ops,
+	.compress_ops		= &cs47l24_compress_ops,
 	.controls		= cs47l24_snd_controls,
 	.num_controls		= ARRAY_SIZE(cs47l24_snd_controls),
 	.dapm_widgets		= cs47l24_dapm_widgets,

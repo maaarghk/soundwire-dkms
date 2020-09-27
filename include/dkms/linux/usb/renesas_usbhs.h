@@ -20,7 +20,7 @@
 #define RENESAS_USB_H
 #include <linux/notifier.h>
 #include <linux/platform_device.h>
-#include <linux/usb/ch9.h>
+#include <dkms/linux/usb/ch9.h>
 
 /*
  * module type

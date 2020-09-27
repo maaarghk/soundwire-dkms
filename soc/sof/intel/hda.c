@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: (GPL-2.0 OR BSD-3-Clause)
+// SPDX-License-Identifier: (GPL-2.0-only OR BSD-3-Clause)
 //
 // This file is provided under a dual BSD/GPLv2 license.  When using or
 // redistributing this file, you may do so under either license.
@@ -37,8 +37,7 @@
 #include "shim.h"
 
 #define EXCEPT_MAX_HDR_SIZE	0x400
-
-#if IS_ENABLED(CONFIG_SND_SOC_SOF_INTEL_SOUNDWIRE)
+#define HDA_EXT_ROM_STATUS_SIZE 8
 
 /*
  * The default for SoundWire clock stop quirks is to power gate the IP
@@ -68,8 +67,6 @@ static int sdw_params_stream(struct device *dev,
 	config.type = SOF_DAI_INTEL_ALH;
 	config.dai_index = (link_id << 8) | (d->id);
 	config.alh.stream_id = alh_stream_id;
-	config.alh.rate = params_rate(params_data->hw_params);
-	config.alh.channels = params_channels(params_data->hw_params);
 
 	/* send message to DSP */
 	ret = sof_ipc_tx_message(sdev->ipc,
@@ -137,10 +134,8 @@ static int hda_sdw_acpi_scan(struct snd_sof_dev *sdev)
 	hdev = sdev->pdata->hw_pdata;
 
 	ret = sdw_intel_acpi_scan(handle, &hdev->info);
-	if (ret < 0) {
-		dev_err(sdev->dev, "%s failed\n", __func__);
+	if (ret < 0)
 		return -EINVAL;
-	}
 
 	return 0;
 }
@@ -267,7 +262,6 @@ void hda_sdw_process_wakeen(struct snd_sof_dev *sdev)
 	sdw_intel_process_wakeen_event(hdev->sdw);
 }
 
-#endif
 
 /*
  * Debug
@@ -283,6 +277,10 @@ static bool hda_use_msi = IS_ENABLED(CONFIG_PCI);
 module_param_named(use_msi, hda_use_msi, bool, 0444);
 MODULE_PARM_DESC(use_msi, "SOF HDA use PCI MSI mode");
 #endif
+
+static char *hda_model;
+module_param(hda_model, charp, 0444);
+MODULE_PARM_DESC(hda_model, "Use the given HDA board model.");
 
 #if IS_ENABLED(CONFIG_SND_SOC_SOF_HDA)
 static int hda_dmic_num = -1;
@@ -414,8 +412,28 @@ void hda_dsp_dump_skl(struct snd_sof_dev *sdev, u32 flags)
 	}
 }
 
+/* dump the first 8 dwords representing the extended ROM status */
+static void hda_dsp_dump_ext_rom_status(struct snd_sof_dev *sdev)
+{
+	struct sof_intel_hda_dev *hda = sdev->pdata->hw_pdata;
+	char msg[128];
+	int len = 0;
+	u32 value;
+	int i;
+
+	for (i = 0; i < HDA_EXT_ROM_STATUS_SIZE; i++) {
+		value = snd_sof_dsp_read(sdev, HDA_DSP_BAR, HDA_DSP_SRAM_REG_ROM_STATUS + i * 0x4);
+		len += snprintf(msg + len, sizeof(msg) - len, " 0x%x", value);
+	}
+
+	sof_dev_dbg_or_err(sdev->dev, hda->boot_iteration == HDA_FW_BOOT_ATTEMPTS,
+			   "extended rom status: %s", msg);
+
+}
+
 void hda_dsp_dump(struct snd_sof_dev *sdev, u32 flags)
 {
+	struct sof_intel_hda_dev *hda = sdev->pdata->hw_pdata;
 	struct sof_ipc_dsp_oops_xtensa xoops;
 	struct sof_ipc_panic_info panic_info;
 	u32 stack[HDA_DSP_STACK_DUMP_SIZE];
@@ -435,8 +453,11 @@ void hda_dsp_dump(struct snd_sof_dev *sdev, u32 flags)
 		snd_sof_get_status(sdev, status, panic, &xoops, &panic_info,
 				   stack, HDA_DSP_STACK_DUMP_SIZE);
 	} else {
-		dev_err(sdev->dev, "error: status = 0x%8.8x panic = 0x%8.8x\n",
-			status, panic);
+		sof_dev_dbg_or_err(sdev->dev, hda->boot_iteration == HDA_FW_BOOT_ATTEMPTS,
+				   "status = 0x%8.8x panic = 0x%8.8x\n",
+				   status, panic);
+
+		hda_dsp_dump_ext_rom_status(sdev);
 		hda_dsp_get_status(sdev);
 	}
 }
@@ -505,7 +526,7 @@ static int hda_init(struct snd_sof_dev *sdev)
 	mutex_init(&hbus->prepare_mutex);
 	hbus->pci = pci;
 	hbus->mixer_assigned = -1;
-	hbus->modelname = "sofbus";
+	hbus->modelname = hda_model;
 
 	/* initialise hdac bus */
 	bus->addr = pci_resource_start(pci, 0);
@@ -544,7 +565,7 @@ static int check_nhlt_dmic(struct snd_sof_dev *sdev)
 	if (nhlt) {
 		dmic_num = intel_nhlt_get_dmic_geo(sdev->dev, nhlt);
 		intel_nhlt_free(nhlt);
-		if (dmic_num == 2 || dmic_num == 4)
+		if (dmic_num >= 1 && dmic_num <= 4)
 			return dmic_num;
 	}
 
@@ -606,7 +627,7 @@ static int hda_init_caps(struct snd_sof_dev *sdev)
 	/* scan SoundWire capabilities exposed by DSDT */
 	ret = hda_sdw_acpi_scan(sdev);
 	if (ret < 0) {
-		dev_dbg(sdev->dev, "skipping SoundWire, ACPI scan error\n");
+		dev_dbg(sdev->dev, "skipping SoundWire, not detected with ACPI scan\n");
 		goto skip_soundwire;
 	}
 
@@ -910,7 +931,7 @@ int hda_dsp_remove(struct snd_sof_dev *sdev)
 
 	/* disable cores */
 	if (chip)
-		hda_dsp_core_reset_power_down(sdev, chip->cores_mask);
+		hda_dsp_core_reset_power_down(sdev, chip->host_managed_cores_mask);
 
 	/* disable DSP */
 	snd_sof_dsp_update_bits(sdev, HDA_DSP_PP_BAR, SOF_HDA_REG_PP_PPCTL,
@@ -992,8 +1013,14 @@ static int hda_generic_machine_select(struct snd_sof_dev *sdev)
 				dmic_num = hda_dmic_num;
 
 			switch (dmic_num) {
+			case 1:
+				dmic_str = "-1ch";
+				break;
 			case 2:
 				dmic_str = "-2ch";
+				break;
+			case 3:
+				dmic_str = "-3ch";
 				break;
 			case 4:
 				dmic_str = "-4ch";
@@ -1009,6 +1036,10 @@ static int hda_generic_machine_select(struct snd_sof_dev *sdev)
 							idisp_str, dmic_str);
 			if (!tplg_filename)
 				return -EINVAL;
+
+			dev_info(bus->dev,
+				 "DMICs detected in NHLT tables: %d\n",
+				 dmic_num);
 
 			pdata->machine = hda_mach;
 			pdata->tplg_filename = tplg_filename;
@@ -1033,7 +1064,6 @@ static int hda_generic_machine_select(struct snd_sof_dev *sdev)
 }
 #endif
 
-#if IS_ENABLED(CONFIG_SND_SOC_SOF_INTEL_SOUNDWIRE)
 /* Check if all Slaves defined on the link can be found */
 static bool link_slaves_found(struct snd_sof_dev *sdev,
 			      const struct snd_soc_acpi_link_adr *link,
@@ -1103,7 +1133,15 @@ static int hda_sdw_machine_select(struct snd_sof_dev *sdev)
 	if (link_mask && !pdata->machine) {
 		for (mach = pdata->desc->alt_machines;
 		     mach && mach->link_mask; mach++) {
-			if (mach->link_mask != link_mask)
+			/*
+			 * On some platforms such as Up Extreme all links
+			 * are enabled but only one link can be used by
+			 * external codec. Instead of exact match of two masks,
+			 * first check whether link_mask of mach is subset of
+			 * link_mask supported by hw and then go on searching
+			 * link_adr
+			 */
+			if (~link_mask & mach->link_mask)
 				continue;
 
 			/* No need to match adr if there is no links defined */
@@ -1143,12 +1181,6 @@ static int hda_sdw_machine_select(struct snd_sof_dev *sdev)
 
 	return 0;
 }
-#else
-static int hda_sdw_machine_select(struct snd_sof_dev *sdev)
-{
-	return 0;
-}
-#endif
 
 void hda_set_mach_params(const struct snd_soc_acpi_mach *mach,
 			 struct device *dev)
@@ -1167,7 +1199,13 @@ void hda_machine_select(struct snd_sof_dev *sdev)
 
 	mach = snd_soc_acpi_find_machine(desc->machines);
 	if (mach) {
-		sof_pdata->tplg_filename = mach->sof_tplg_filename;
+		/*
+		 * If tplg file name is overridden, use it instead of
+		 * the one set in mach table
+		 */
+		if (!sof_pdata->tplg_filename)
+			sof_pdata->tplg_filename = mach->sof_tplg_filename;
+
 		sof_pdata->machine = mach;
 
 		if (mach->link_mask) {
@@ -1192,4 +1230,7 @@ void hda_machine_select(struct snd_sof_dev *sdev)
 }
 
 MODULE_LICENSE("Dual BSD/GPL");
-
+MODULE_IMPORT_NS(SND_SOC_SOF_HDA_AUDIO_CODEC);
+MODULE_IMPORT_NS(SND_SOC_SOF_HDA_AUDIO_CODEC_I915);
+MODULE_IMPORT_NS(SND_SOC_SOF_XTENSA);
+MODULE_IMPORT_NS(SOUNDWIRE_INTEL_INIT);

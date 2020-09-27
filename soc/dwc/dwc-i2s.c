@@ -19,11 +19,11 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 #include <linux/pm_runtime.h>
-#include <sound/designware_i2s.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/dmaengine_pcm.h>
+#include <dkms/sound/designware_i2s.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/dmaengine_pcm.h>
 #include "local.h"
 
 static inline void i2s_write_reg(void __iomem *io_base, int reg, u32 val)
@@ -429,7 +429,7 @@ static int dw_i2s_resume(struct snd_soc_component *component)
 
 	for_each_component_dais(component, dai) {
 		for_each_pcm_streams(stream)
-			if (dai->stream_active[stream])
+			if (snd_soc_dai_stream_active(dai, stream))
 				dw_i2s_config(dev, stream);
 	}
 

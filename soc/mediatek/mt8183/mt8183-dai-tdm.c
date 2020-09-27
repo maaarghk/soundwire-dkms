@@ -6,7 +6,7 @@
 // Author: KaiChieh Chuang <kaichieh.chuang@mediatek.com>
 
 #include <linux/regmap.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/pcm_params.h>
 #include "mt8183-afe-clk.h"
 #include "mt8183-afe-common.h"
 #include "mt8183-interconnection.h"

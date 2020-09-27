@@ -18,13 +18,13 @@
 #include <linux/regmap.h>
 #include <linux/slab.h>
 #include <linux/platform_device.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/initval.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/tlv.h>
 #include "cs4265.h"
 
 struct cs4265_private {
@@ -378,7 +378,7 @@ static int cs4265_set_fmt(struct snd_soc_dai *codec_dai, unsigned int fmt)
 	return 0;
 }
 
-static int cs4265_digital_mute(struct snd_soc_dai *dai, int mute)
+static int cs4265_mute(struct snd_soc_dai *dai, int mute, int direction)
 {
 	struct snd_soc_component *component = dai->component;
 
@@ -498,9 +498,10 @@ static int cs4265_set_bias_level(struct snd_soc_component *component,
 
 static const struct snd_soc_dai_ops cs4265_ops = {
 	.hw_params	= cs4265_pcm_hw_params,
-	.digital_mute	= cs4265_digital_mute,
+	.mute_stream	= cs4265_mute,
 	.set_fmt	= cs4265_set_fmt,
 	.set_sysclk	= cs4265_set_sysclk,
+	.no_capture_mute = 1,
 };
 
 static struct snd_soc_dai_driver cs4265_dai[] = {

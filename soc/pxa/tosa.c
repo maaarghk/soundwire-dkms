@@ -18,9 +18,9 @@
 #include <linux/device.h>
 #include <linux/gpio.h>
 
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
 
 #include <asm/mach-types.h>
 #include <mach/tosa.h>
@@ -72,7 +72,7 @@ static void tosa_ext_control(struct snd_soc_dapm_context *dapm)
 
 static int tosa_startup(struct snd_pcm_substream *substream)
 {
-	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+	struct snd_soc_pcm_runtime *rtd = asoc_substream_to_rtd(substream);
 
 	/* check the jack status at stream startup */
 	tosa_ext_control(&rtd->card->dapm);

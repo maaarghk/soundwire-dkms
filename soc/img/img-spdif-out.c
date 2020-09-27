@@ -16,12 +16,12 @@
 #include <linux/pm_runtime.h>
 #include <linux/reset.h>
 
-#include <sound/core.h>
-#include <sound/dmaengine_pcm.h>
-#include <sound/initval.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 
 #define IMG_SPDIF_OUT_TX_FIFO		0x0
 
@@ -370,8 +370,10 @@ static int img_spdif_out_probe(struct platform_device *pdev)
 			goto err_pm_disable;
 	}
 	ret = pm_runtime_get_sync(&pdev->dev);
-	if (ret < 0)
+	if (ret < 0) {
+		pm_runtime_put_noidle(&pdev->dev);
 		goto err_suspend;
+	}
 
 	img_spdif_out_writel(spdif, IMG_SPDIF_OUT_CTL_FS_MASK,
 			     IMG_SPDIF_OUT_CTL);

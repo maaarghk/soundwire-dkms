@@ -4,9 +4,9 @@
 //
 // Copyright 2011 Wolfson Microelectronics
 
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/jack.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/jack.h>
 #include <linux/gpio.h>
 #include <linux/module.h>
 
@@ -32,7 +32,7 @@ static struct snd_soc_jack_pin lowland_headset_pins[] = {
 
 static int lowland_wm5100_init(struct snd_soc_pcm_runtime *rtd)
 {
-	struct snd_soc_component *component = rtd->codec_dai->component;
+	struct snd_soc_component *component = asoc_rtd_to_codec(rtd, 0)->component;
 	int ret;
 
 	ret = snd_soc_component_set_sysclk(component, WM5100_CLK_SYSCLK,
@@ -65,7 +65,7 @@ static int lowland_wm5100_init(struct snd_soc_pcm_runtime *rtd)
 
 static int lowland_wm9081_init(struct snd_soc_pcm_runtime *rtd)
 {
-	struct snd_soc_component *component = rtd->codec_dai->component;
+	struct snd_soc_component *component = asoc_rtd_to_codec(rtd, 0)->component;
 
 	snd_soc_dapm_nc_pin(&rtd->card->dapm, "LINEOUT");
 

@@ -28,15 +28,15 @@
 #include <linux/regulator/consumer.h>
 #include <linux/gpio/consumer.h>
 #include <linux/slab.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/initval.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/tlv.h>
 
-#include <sound/sta350.h>
+#include <dkms/sound/sta350.h>
 #include "sta350.h"
 
 #define STA350_RATES (SNDRV_PCM_RATE_32000 | \
@@ -726,7 +726,7 @@ static int sta350_hw_params(struct snd_pcm_substream *substream,
 	switch (params_width(params)) {
 	case 24:
 		dev_dbg(component->dev, "24bit\n");
-		/* fall through */
+		fallthrough;
 	case 32:
 		dev_dbg(component->dev, "24bit or 32bit\n");
 		switch (sta350->format) {

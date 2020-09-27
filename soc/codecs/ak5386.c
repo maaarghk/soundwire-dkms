@@ -12,9 +12,9 @@
 #include <linux/of_gpio.h>
 #include <linux/of_device.h>
 #include <linux/regulator/consumer.h>
-#include <sound/soc.h>
-#include <sound/pcm.h>
-#include <sound/initval.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/initval.h>
 
 static const char * const supply_names[] = {
 	"va", "vd"

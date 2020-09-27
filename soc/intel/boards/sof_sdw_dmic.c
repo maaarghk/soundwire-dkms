@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-2.0
+// SPDX-License-Identifier: GPL-2.0-only
 // Copyright (c) 2020 Intel Corporation
 
 /*
@@ -7,6 +7,7 @@
 
 #include <dkms/sound/soc.h>
 #include <dkms/sound/soc-acpi.h>
+#include <dkms/sound/soc-dapm.h>
 #include "sof_sdw_common.h"
 
 static const struct snd_soc_dapm_widget dmic_widgets[] = {

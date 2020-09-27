@@ -13,8 +13,8 @@
 
 #include <linux/io.h>
 #include <linux/rcupdate.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
 #include "local.h"
 
 #define BUFFER_BYTES_MAX	(3 * 2 * 8 * PERIOD_BYTES_MIN)
@@ -139,8 +139,8 @@ static int dw_pcm_open(struct snd_soc_component *component,
 		       struct snd_pcm_substream *substream)
 {
 	struct snd_pcm_runtime *runtime = substream->runtime;
-	struct snd_soc_pcm_runtime *rtd = substream->private_data;
-	struct dw_i2s_dev *dev = snd_soc_dai_get_drvdata(rtd->cpu_dai);
+	struct snd_soc_pcm_runtime *rtd = asoc_substream_to_rtd(substream);
+	struct dw_i2s_dev *dev = snd_soc_dai_get_drvdata(asoc_rtd_to_cpu(rtd, 0));
 
 	snd_soc_set_runtime_hwparams(substream, &dw_pcm_hardware);
 	snd_pcm_hw_constraint_integer(runtime, SNDRV_PCM_HW_PARAM_PERIODS);

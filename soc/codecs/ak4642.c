@@ -27,9 +27,9 @@
 #include <linux/of_device.h>
 #include <linux/module.h>
 #include <linux/regmap.h>
-#include <sound/soc.h>
-#include <sound/initval.h>
-#include <sound/tlv.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/tlv.h>
 
 #define PW_MGMT1	0x00
 #define PW_MGMT2	0x01

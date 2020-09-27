@@ -24,13 +24,13 @@
 #include <linux/reset.h>
 #include <linux/gpio/consumer.h>
 
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
-#include <sound/initval.h>
-#include <sound/dmaengine_pcm.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/dmaengine_pcm.h>
 
 /* Codec DAC digital controls and FIFO registers */
 #define SUN4I_CODEC_DAC_DPC			(0x00)
@@ -286,7 +286,7 @@ static void sun4i_codec_stop_capture(struct sun4i_codec *scodec)
 static int sun4i_codec_trigger(struct snd_pcm_substream *substream, int cmd,
 			       struct snd_soc_dai *dai)
 {
-	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+	struct snd_soc_pcm_runtime *rtd = asoc_substream_to_rtd(substream);
 	struct sun4i_codec *scodec = snd_soc_card_get_drvdata(rtd->card);
 
 	switch (cmd) {
@@ -318,7 +318,7 @@ static int sun4i_codec_trigger(struct snd_pcm_substream *substream, int cmd,
 static int sun4i_codec_prepare_capture(struct snd_pcm_substream *substream,
 				       struct snd_soc_dai *dai)
 {
-	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+	struct snd_soc_pcm_runtime *rtd = asoc_substream_to_rtd(substream);
 	struct sun4i_codec *scodec = snd_soc_card_get_drvdata(rtd->card);
 
 
@@ -335,7 +335,7 @@ static int sun4i_codec_prepare_capture(struct snd_pcm_substream *substream,
 
 	/*
 	 * FIXME: Undocumented in the datasheet, but
-	 *        Allwinner's code mentions that it is related
+	 *        Allwinner's code mentions that it is
 	 *        related to microphone gain
 	 */
 	if (of_device_is_compatible(scodec->dev->of_node,
@@ -360,7 +360,7 @@ static int sun4i_codec_prepare_capture(struct snd_pcm_substream *substream,
 static int sun4i_codec_prepare_playback(struct snd_pcm_substream *substream,
 					struct snd_soc_dai *dai)
 {
-	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+	struct snd_soc_pcm_runtime *rtd = asoc_substream_to_rtd(substream);
 	struct sun4i_codec *scodec = snd_soc_card_get_drvdata(rtd->card);
 	u32 val;
 
@@ -573,7 +573,7 @@ static int sun4i_codec_hw_params(struct snd_pcm_substream *substream,
 				 struct snd_pcm_hw_params *params,
 				 struct snd_soc_dai *dai)
 {
-	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+	struct snd_soc_pcm_runtime *rtd = asoc_substream_to_rtd(substream);
 	struct sun4i_codec *scodec = snd_soc_card_get_drvdata(rtd->card);
 	unsigned long clk_freq;
 	int ret, hwrate;
@@ -614,7 +614,7 @@ static struct snd_pcm_hw_constraint_list sun4i_codec_constraints = {
 static int sun4i_codec_startup(struct snd_pcm_substream *substream,
 			       struct snd_soc_dai *dai)
 {
-	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+	struct snd_soc_pcm_runtime *rtd = asoc_substream_to_rtd(substream);
 	struct sun4i_codec *scodec = snd_soc_card_get_drvdata(rtd->card);
 
 	snd_pcm_hw_constraint_list(substream->runtime, 0,
@@ -634,7 +634,7 @@ static int sun4i_codec_startup(struct snd_pcm_substream *substream,
 static void sun4i_codec_shutdown(struct snd_pcm_substream *substream,
 				 struct snd_soc_dai *dai)
 {
-	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+	struct snd_soc_pcm_runtime *rtd = asoc_substream_to_rtd(substream);
 	struct sun4i_codec *scodec = snd_soc_card_get_drvdata(rtd->card);
 
 	clk_disable_unprepare(scodec->clk_module);

@@ -5,19 +5,19 @@
  * Copyright 2012 Philippe Retornaz, philippe.retornaz@epfl.ch
  *
  * Initial development of this code was funded by
- * Phytec Messtechnik GmbH, http://www.phytec.de
+ * Phytec Messtechnik GmbH, https://www.phytec.de
  */
 #include <linux/module.h>
 #include <linux/device.h>
 #include <linux/of.h>
 #include <linux/mfd/mc13xxx.h>
 #include <linux/slab.h>
-#include <sound/core.h>
-#include <sound/control.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
-#include <sound/initval.h>
-#include <sound/soc-dapm.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc-dapm.h>
 #include <linux/regmap.h>
 
 #include "mc13783.h"

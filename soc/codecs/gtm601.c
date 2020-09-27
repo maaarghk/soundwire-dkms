@@ -14,10 +14,10 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/of_device.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/initval.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc.h>
 
 static const struct snd_soc_dapm_widget gtm601_dapm_widgets[] = {
 	SND_SOC_DAPM_OUTPUT("AOUT"),

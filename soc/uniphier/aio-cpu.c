@@ -13,10 +13,10 @@
 #include <linux/of_platform.h>
 #include <linux/platform_device.h>
 #include <linux/reset.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 
 #include "aio.h"
 
@@ -424,7 +424,7 @@ static void uniphier_aio_dai_suspend(struct snd_soc_dai *dai)
 {
 	struct uniphier_aio *aio = uniphier_priv(dai);
 
-	if (!dai->active)
+	if (!snd_soc_dai_active(dai))
 		return;
 
 	aio->chip->num_wup_aios--;
@@ -448,7 +448,7 @@ static int uniphier_aio_dai_resume(struct snd_soc_dai *dai)
 	struct uniphier_aio *aio = uniphier_priv(dai);
 	int ret, i;
 
-	if (!dai->active)
+	if (!snd_soc_dai_active(dai))
 		return 0;
 
 	if (!aio->chip->active)

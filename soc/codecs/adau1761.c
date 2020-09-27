@@ -11,11 +11,11 @@
 #include <linux/i2c.h>
 #include <linux/spi/spi.h>
 #include <linux/slab.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 #include <linux/platform_data/adau17x1.h>
 
 #include "adau17x1.h"
@@ -642,7 +642,7 @@ static int adau1761_setup_digmic_jackdetect(struct snd_soc_component *component)
 			ARRAY_SIZE(adau1761_jack_detect_controls));
 		if (ret)
 			return ret;
-		/* fall through */
+		fallthrough;
 	case ADAU1761_DIGMIC_JACKDET_PIN_MODE_NONE:
 		ret = snd_soc_dapm_add_routes(dapm, adau1761_no_dmic_routes,
 			ARRAY_SIZE(adau1761_no_dmic_routes));
@@ -693,7 +693,7 @@ static int adau1761_setup_headphone_mode(struct snd_soc_component *component)
 			ADAU1761_PLAY_MONO_OUTPUT_VOL_UNMUTE,
 			ADAU1761_PLAY_MONO_OUTPUT_VOL_MODE_HP |
 			ADAU1761_PLAY_MONO_OUTPUT_VOL_UNMUTE);
-		/* fallthrough */
+		fallthrough;
 	case ADAU1761_OUTPUT_MODE_HEADPHONE:
 		regmap_update_bits(adau->regmap, ADAU1761_PLAY_HP_RIGHT_VOL,
 			ADAU1761_PLAY_HP_RIGHT_VOL_MODE_HP,

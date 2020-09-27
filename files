@@ -1,0 +1,18 @@
+sound/core
+sound/hda
+sound/pci/hda
+sound/soc
+sound/usb
+drivers/soundwire
+drivers/base/regmap
+
+
+
+includes:
+
+include/linux/soundwire/ include/dkms/linux/soundwire/
+rsync -avzh ../sofproject-linux/include/linux/usb/ include/dkms/linux/usb/
+rsync -avzh ../sofproject-linux/include/sound/ include/dkms/sound/
+rsync -avzh ../sofproject-linux/include/uapi/linux/usb/ include/dkms/uapi/linux/usb/
+rsync -avzh ../sofproject-linux/include/uapi/sound/ include/dkms/uapi/sound/
+

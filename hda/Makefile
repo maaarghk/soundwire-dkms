@@ -1,6 +1,4 @@
 # SPDX-License-Identifier: GPL-2.0
-CONFIG_SND_INTEL_NHLT=y
-CONFIG_SND_INTEL_DSP_CONFIG=m
 snd-hda-core-objs := hda_bus_type.o hdac_bus.o hdac_device.o hdac_sysfs.o \
 	hdac_regmap.o hdac_controller.o hdac_stream.o array.o hdmi_chmap.o
 

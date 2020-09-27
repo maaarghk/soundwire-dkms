@@ -2,7 +2,7 @@
 /*
  * ad73311.c  --  ALSA Soc AD73311 codec support
  *
- * Copyright:	Analog Device Inc.
+ * Copyright:	Analog Devices Inc.
  * Author:	Cliff Cai <cliff.cai@analog.com>
  */
 
@@ -11,11 +11,11 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/device.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/ac97_codec.h>
-#include <sound/initval.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/ac97_codec.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc.h>
 
 #include "ad73311.h"
 

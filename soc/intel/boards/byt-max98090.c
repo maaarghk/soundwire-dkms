@@ -12,10 +12,10 @@
 #include <linux/gpio.h>
 #include <linux/gpio/consumer.h>
 #include <linux/slab.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/jack.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/jack.h>
 #include "../../codecs/max98090.h"
 
 struct byt_max98090_private {
@@ -89,7 +89,7 @@ static int byt_max98090_init(struct snd_soc_pcm_runtime *runtime)
 
 	card->dapm.idle_bias_off = true;
 
-	ret = snd_soc_dai_set_sysclk(runtime->codec_dai,
+	ret = snd_soc_dai_set_sysclk(asoc_rtd_to_codec(runtime, 0),
 				     M98090_REG_SYSTEM_CLOCK,
 				     25000000, SND_SOC_CLOCK_IN);
 	if (ret < 0) {

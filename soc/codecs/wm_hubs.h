@@ -13,7 +13,7 @@
 #include <linux/completion.h>
 #include <linux/interrupt.h>
 #include <linux/list.h>
-#include <sound/control.h>
+#include <dkms/sound/control.h>
 
 struct snd_soc_component;
 
@@ -27,6 +27,7 @@ struct wm_hubs_data {
 	int hp_startup_mode;
 	int series_startup;
 	int no_series_update;
+	bool micd_scthr;
 
 	bool no_cache_dac_hp_direct;
 	struct list_head dcs_cache;

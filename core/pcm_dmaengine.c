@@ -252,8 +252,8 @@ snd_pcm_uframes_t snd_dmaengine_pcm_pointer(struct snd_pcm_substream *substream)
 		if (state.residue > 0 && state.residue <= buf_size)
 			pos = buf_size - state.residue;
 
-		//		runtime->delay = bytes_to_frames(runtime,
-		//				 state.in_flight_bytes);
+		runtime->delay = bytes_to_frames(runtime,
+						 state.in_flight_bytes);
 	}
 
 	return bytes_to_frames(runtime, pos);

@@ -13,12 +13,12 @@
 #include <linux/platform_data/dma-mmp_tdma.h>
 #include <linux/platform_data/mmp_audio.h>
 
-#include <sound/pxa2xx-lib.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/dmaengine_pcm.h>
+#include <dkms/sound/pxa2xx-lib.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/dmaengine_pcm.h>
 
 #define DRV_NAME "mmp-pcm"
 
@@ -110,9 +110,9 @@ static bool filter(struct dma_chan *chan, void *param)
 static int mmp_pcm_open(struct snd_soc_component *component,
 			struct snd_pcm_substream *substream)
 {
-	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+	struct snd_soc_pcm_runtime *rtd = asoc_substream_to_rtd(substream);
 	struct platform_device *pdev = to_platform_device(component->dev);
-	struct snd_soc_dai *cpu_dai = rtd->cpu_dai;
+	struct snd_soc_dai *cpu_dai = asoc_rtd_to_cpu(rtd, 0);
 	struct mmp_dma_data dma_data;
 	struct resource *r;
 

@@ -2,7 +2,7 @@
 /*
  * ALSA SoC TLV320AIC31xx CODEC Driver
  *
- * Copyright (C) 2014-2017 Texas Instruments Incorporated - http://www.ti.com/
+ * Copyright (C) 2014-2017 Texas Instruments Incorporated - https://www.ti.com/
  *	Jyri Sarha <jsarha@ti.com>
  *
  * Based on ground work by: Ajit Kulkarni <x0175765@ti.com>
@@ -24,13 +24,13 @@
 #include <linux/of.h>
 #include <linux/of_gpio.h>
 #include <linux/slab.h>
-#include <sound/core.h>
-#include <sound/jack.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/initval.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/tlv.h>
 #include <dt-bindings/sound/tlv320aic31xx-micbias.h>
 
 #include "tlv320aic31xx.h"
@@ -877,7 +877,7 @@ static int aic31xx_setup_pll(struct snd_soc_component *component,
 		   there may be trouble. To fix the issue edit the
 		   aic31xx_divs table for your mclk and sample
 		   rate. Details can be found from:
-		   http://www.ti.com/lit/ds/symlink/tlv320aic3100.pdf
+		   https://www.ti.com/lit/ds/symlink/tlv320aic3100.pdf
 		   Section: 5.6 CLOCK Generation and PLL
 		*/
 	}
@@ -972,7 +972,8 @@ static int aic31xx_hw_params(struct snd_pcm_substream *substream,
 	return aic31xx_setup_pll(component, params);
 }
 
-static int aic31xx_dac_mute(struct snd_soc_dai *codec_dai, int mute)
+static int aic31xx_dac_mute(struct snd_soc_dai *codec_dai, int mute,
+			    int direction)
 {
 	struct snd_soc_component *component = codec_dai->component;
 
@@ -1080,7 +1081,8 @@ static int aic31xx_set_dai_fmt(struct snd_soc_dai *codec_dai,
 	case SND_SOC_DAIFMT_I2S:
 		break;
 	case SND_SOC_DAIFMT_DSP_A:
-		dsp_a_val = 0x1; /* fall through */
+		dsp_a_val = 0x1;
+		fallthrough;
 	case SND_SOC_DAIFMT_DSP_B:
 		/*
 		 * NOTE: This CODEC samples on the falling edge of BCLK in
@@ -1378,7 +1380,8 @@ static const struct snd_soc_dai_ops aic31xx_dai_ops = {
 	.hw_params	= aic31xx_hw_params,
 	.set_sysclk	= aic31xx_set_dai_sysclk,
 	.set_fmt	= aic31xx_set_dai_fmt,
-	.digital_mute	= aic31xx_dac_mute,
+	.mute_stream	= aic31xx_dac_mute,
+	.no_capture_mute = 1,
 };
 
 static struct snd_soc_dai_driver dac31xx_dai_driver[] = {

@@ -9,7 +9,7 @@
 #ifndef __RT5645_H__
 #define __RT5645_H__
 
-#include <sound/rt5645.h>
+#include <dkms/sound/rt5645.h>
 
 /* Info */
 #define RT5645_RESET				0x00

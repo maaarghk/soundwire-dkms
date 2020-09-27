@@ -12,12 +12,12 @@
 #include <linux/kernel.h>
 #include <linux/device.h>
 
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/initval.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 #include <linux/of.h>
 
 #include "pcm179x.h"
@@ -76,7 +76,7 @@ static int pcm179x_set_dai_fmt(struct snd_soc_dai *codec_dai,
 	return 0;
 }
 
-static int pcm179x_digital_mute(struct snd_soc_dai *dai, int mute)
+static int pcm179x_mute(struct snd_soc_dai *dai, int mute, int direction)
 {
 	struct snd_soc_component *component = dai->component;
 	struct pcm179x_private *priv = snd_soc_component_get_drvdata(component);
@@ -145,7 +145,8 @@ static int pcm179x_hw_params(struct snd_pcm_substream *substream,
 static const struct snd_soc_dai_ops pcm179x_dai_ops = {
 	.set_fmt	= pcm179x_set_dai_fmt,
 	.hw_params	= pcm179x_hw_params,
-	.digital_mute	= pcm179x_digital_mute,
+	.mute_stream	= pcm179x_mute,
+	.no_capture_mute = 1,
 };
 
 static const DECLARE_TLV_DB_SCALE(pcm179x_dac_tlv, -12000, 50, 1);

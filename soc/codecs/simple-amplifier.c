@@ -7,7 +7,7 @@
 #include <linux/gpio/consumer.h>
 #include <linux/module.h>
 #include <linux/regulator/consumer.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #define DRV_NAME "simple-amplifier"
 

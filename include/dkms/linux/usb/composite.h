@@ -37,8 +37,8 @@
 
 #include <linux/bcd.h>
 #include <linux/version.h>
-#include <linux/usb/ch9.h>
-#include <linux/usb/gadget.h>
+#include <dkms/linux/usb/ch9.h>
+#include <dkms/linux/usb/gadget.h>
 #include <linux/log2.h>
 #include <linux/configfs.h>
 
@@ -248,6 +248,9 @@ int usb_function_deactivate(struct usb_function *);
 int usb_function_activate(struct usb_function *);
 
 int usb_interface_id(struct usb_configuration *, struct usb_function *);
+
+int config_ep_by_speed_and_alt(struct usb_gadget *g, struct usb_function *f,
+				struct usb_ep *_ep, u8 alt);
 
 int config_ep_by_speed(struct usb_gadget *g, struct usb_function *f,
 			struct usb_ep *_ep);

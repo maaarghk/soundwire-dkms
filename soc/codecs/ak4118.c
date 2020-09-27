@@ -13,10 +13,10 @@
 #include <linux/regmap.h>
 #include <linux/slab.h>
 
-#include <sound/asoundef.h>
-#include <sound/core.h>
-#include <sound/initval.h>
-#include <sound/soc.h>
+#include <dkms/sound/asoundef.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc.h>
 
 #define AK4118_REG_CLK_PWR_CTL		0x00
 #define AK4118_REG_FORMAT_CTL		0x01

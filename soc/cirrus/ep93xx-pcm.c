@@ -14,9 +14,9 @@
 #include <linux/platform_device.h>
 #include <linux/dmaengine.h>
 
-#include <sound/pcm.h>
-#include <sound/soc.h>
-#include <sound/dmaengine_pcm.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/dmaengine_pcm.h>
 
 #include <linux/platform_data/dma-ep93xx.h>
 

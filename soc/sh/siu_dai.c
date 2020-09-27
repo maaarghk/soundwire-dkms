@@ -14,8 +14,8 @@
 #include <asm/clock.h>
 #include <asm/siu.h>
 
-#include <sound/control.h>
-#include <sound/soc.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/soc.h>
 
 #include "siu.h"
 

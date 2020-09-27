@@ -11,10 +11,10 @@
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/regmap.h>
-#include <sound/core.h>
-#include <sound/control.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 
 #define TDA7419_MAIN_SRC_REG		0x00
 #define TDA7419_LOUDNESS_REG		0x01
@@ -187,18 +187,13 @@ static int tda7419_vol_get(struct snd_kcontrol *kcontrol,
 	int thresh = tvc->thresh;
 	unsigned int invert = tvc->invert;
 	int val;
-	int ret;
 
-	ret = snd_soc_component_read(component, reg, &val);
-	if (ret < 0)
-		return ret;
+	val = snd_soc_component_read(component, reg);
 	ucontrol->value.integer.value[0] =
 		tda7419_vol_get_value(val, mask, min, thresh, invert);
 
 	if (tda7419_vol_is_stereo(tvc)) {
-		ret = snd_soc_component_read(component, rreg, &val);
-		if (ret < 0)
-			return ret;
+		val = snd_soc_component_read(component, rreg);
 		ucontrol->value.integer.value[1] =
 			tda7419_vol_get_value(val, mask, min, thresh, invert);
 	}

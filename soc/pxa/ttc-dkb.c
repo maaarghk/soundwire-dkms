@@ -6,12 +6,12 @@
  */
 #include <linux/module.h>
 #include <linux/moduleparam.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
-#include <sound/jack.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/jack.h>
 #include <asm/mach-types.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/pcm_params.h>
 #include "../codecs/88pm860x-codec.h"
 
 static struct snd_soc_jack hs_jack, mic_jack;
@@ -61,7 +61,7 @@ static const struct snd_soc_dapm_route ttc_audio_map[] = {
 
 static int ttc_pm860x_init(struct snd_soc_pcm_runtime *rtd)
 {
-	struct snd_soc_component *component = rtd->codec_dai->component;
+	struct snd_soc_component *component = asoc_rtd_to_codec(rtd, 0)->component;
 
 	/* Headset jack detection */
 	snd_soc_card_jack_new(rtd->card, "Headphone Jack", SND_JACK_HEADPHONE |

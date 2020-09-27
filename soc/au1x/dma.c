@@ -13,10 +13,10 @@
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 #include <linux/dma-mapping.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 #include <asm/mach-au1x00/au1000.h>
 #include <asm/mach-au1x00/au1000_dma.h>
 
@@ -191,11 +191,11 @@ static int alchemy_pcm_open(struct snd_soc_component *component,
 			    struct snd_pcm_substream *substream)
 {
 	struct alchemy_pcm_ctx *ctx = ss_to_ctx(substream, component);
-	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+	struct snd_soc_pcm_runtime *rtd = asoc_substream_to_rtd(substream);
 	int *dmaids, s = substream->stream;
 	char *name;
 
-	dmaids = snd_soc_dai_get_dma_data(rtd->cpu_dai, substream);
+	dmaids = snd_soc_dai_get_dma_data(asoc_rtd_to_cpu(rtd, 0), substream);
 	if (!dmaids)
 		return -ENODEV;	/* whoa, has ordering changed? */
 

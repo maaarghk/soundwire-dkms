@@ -14,9 +14,9 @@
 #include <linux/regmap.h>
 #include <linux/slab.h>
 
-#include <sound/core.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 
 static const struct reg_default lm4857_default_regs[] = {
 	{ 0x0, 0x00 },

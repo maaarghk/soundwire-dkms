@@ -15,13 +15,13 @@
 #include <linux/pm_runtime.h>
 #include <linux/regmap.h>
 #include <linux/slab.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/jack.h>
-#include <sound/initval.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/tlv.h>
 
 #include <linux/mfd/arizona/core.h>
 #include <linux/mfd/arizona/registers.h>
@@ -1909,10 +1909,9 @@ static struct snd_soc_dai_driver wm5102_dai[] = {
 	},
 };
 
-static int wm5102_open(struct snd_compr_stream *stream)
+static int wm5102_open(struct snd_soc_component *component,
+		       struct snd_compr_stream *stream)
 {
-	struct snd_soc_pcm_runtime *rtd = stream->private_data;
-	struct snd_soc_component *component = snd_soc_rtdcom_lookup(rtd, DRV_NAME);
 	struct wm5102_priv *priv = snd_soc_component_get_drvdata(component);
 
 	return wm_adsp_compr_open(&priv->core.adsp[0], stream);
@@ -1992,7 +1991,7 @@ static unsigned int wm5102_digital_vu[] = {
 	ARIZONA_DAC_DIGITAL_VOLUME_5R,
 };
 
-static struct snd_compr_ops wm5102_compr_ops = {
+static struct snd_compress_ops wm5102_compress_ops = {
 	.open		= wm5102_open,
 	.free		= wm_adsp_compr_free,
 	.set_params	= wm_adsp_compr_set_params,
@@ -2008,7 +2007,7 @@ static const struct snd_soc_component_driver soc_component_dev_wm5102 = {
 	.set_sysclk		= arizona_set_sysclk,
 	.set_pll		= wm5102_set_fll,
 	.name			= DRV_NAME,
-	.compr_ops		= &wm5102_compr_ops,
+	.compress_ops		= &wm5102_compress_ops,
 	.controls		= wm5102_snd_controls,
 	.num_controls		= ARRAY_SIZE(wm5102_snd_controls),
 	.dapm_widgets		= wm5102_dapm_widgets,

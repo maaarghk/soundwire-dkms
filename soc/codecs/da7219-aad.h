@@ -11,9 +11,9 @@
 #define __DA7219_AAD_H
 
 #include <linux/timer.h>
-#include <sound/soc.h>
-#include <sound/jack.h>
-#include <sound/da7219-aad.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/da7219-aad.h>
 
 /*
  * Registers
@@ -211,5 +211,8 @@ void da7219_aad_resume(struct snd_soc_component *component);
 /* Init/Exit */
 int da7219_aad_init(struct snd_soc_component *component);
 void da7219_aad_exit(struct snd_soc_component *component);
+
+/* I2C Probe */
+int da7219_aad_probe(struct i2c_client *i2c);
 
 #endif /* __DA7219_AAD_H */

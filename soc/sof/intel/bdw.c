@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: (GPL-2.0 OR BSD-3-Clause)
+// SPDX-License-Identifier: (GPL-2.0-only OR BSD-3-Clause)
 //
 // This file is provided under a dual BSD/GPLv2 license.  When using or
 // redistributing this file, you may do so under either license.
@@ -567,9 +567,25 @@ static void bdw_set_mach_params(const struct snd_soc_acpi_mach *mach,
 static struct snd_soc_dai_driver bdw_dai[] = {
 {
 	.name = "ssp0-port",
+	.playback = {
+		.channels_min = 1,
+		.channels_max = 8,
+	},
+	.capture = {
+		.channels_min = 1,
+		.channels_max = 8,
+	},
 },
 {
 	.name = "ssp1-port",
+	.playback = {
+		.channels_min = 1,
+		.channels_max = 8,
+	},
+	.capture = {
+		.channels_min = 1,
+		.channels_max = 8,
+	},
 },
 };
 
@@ -635,13 +651,14 @@ const struct snd_sof_dsp_ops sof_bdw_ops = {
 
 	.arch_ops = &sof_xtensa_arch_ops,
 };
-EXPORT_SYMBOL(sof_bdw_ops);
+EXPORT_SYMBOL_NS(sof_bdw_ops, SND_SOC_SOF_BROADWELL);
 
 const struct sof_intel_dsp_desc bdw_chip_info = {
 	.cores_num = 1,
-	.cores_mask = 1,
+	.host_managed_cores_mask = 1,
 };
-EXPORT_SYMBOL(bdw_chip_info);
+EXPORT_SYMBOL_NS(bdw_chip_info, SND_SOC_SOF_BROADWELL);
 
 MODULE_LICENSE("Dual BSD/GPL");
-
+MODULE_IMPORT_NS(SND_SOC_SOF_INTEL_HIFI_EP_IPC);
+MODULE_IMPORT_NS(SND_SOC_SOF_XTENSA);

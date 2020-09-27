@@ -21,12 +21,12 @@
 #include <linux/clk.h>
 #include <linux/platform_data/davinci_asp.h>
 
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/initval.h>
-#include <sound/soc.h>
-#include <sound/dmaengine_pcm.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/dmaengine_pcm.h>
 
 #include "edma-pcm.h"
 #include "davinci-i2s.h"
@@ -289,7 +289,7 @@ static int davinci_i2s_set_dai_fmt(struct snd_soc_dai *cpu_dai,
 		 * rate is lowered.
 		 */
 		inv_fs = true;
-		/* fall through */
+		fallthrough;
 	case SND_SOC_DAIFMT_DSP_A:
 		dev->mode = MOD_DSP_A;
 		break;

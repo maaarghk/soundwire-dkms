@@ -18,14 +18,14 @@
 #include <linux/i2c.h>
 #include <linux/regmap.h>
 #include <linux/slab.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/initval.h>
-#include <sound/tlv.h>
-#include <sound/cs42l73.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/cs42l73.h>
 #include "cs42l73.h"
 
 struct sp_config {
@@ -938,8 +938,8 @@ static int cs42l73_set_dai_fmt(struct snd_soc_dai *codec_dai, unsigned int fmt)
 	unsigned int inv, format;
 	u8 spc, mmcc;
 
-	spc = snd_soc_component_read32(component, CS42L73_SPC(id));
-	mmcc = snd_soc_component_read32(component, CS42L73_MMCC(id));
+	spc = snd_soc_component_read(component, CS42L73_SPC(id));
+	mmcc = snd_soc_component_read(component, CS42L73_MMCC(id));
 
 	switch (fmt & SND_SOC_DAIFMT_MASTER_MASK) {
 	case SND_SOC_DAIFMT_CBM_CFM:

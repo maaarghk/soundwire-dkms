@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: (GPL-2.0 OR BSD-3-Clause)
+// SPDX-License-Identifier: (GPL-2.0-only OR BSD-3-Clause)
 //
 // This file is provided under a dual BSD/GPLv2 license.  When using or
 // redistributing this file, you may do so under either license.
@@ -405,7 +405,7 @@ static ssize_t sof_dfsentry_write(struct file *file, const char __user *buffer,
 	}
 
 	ret = pm_runtime_get_sync(sdev->dev);
-	if (ret < 0) {
+	if (ret < 0 && ret != -EACCES) {
 		dev_err_ratelimited(sdev->dev,
 				    "error: debugfs write failed to resume %d\n",
 				    ret);

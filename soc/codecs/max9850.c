@@ -7,7 +7,7 @@
  * Author: Christian Glindkamp <christian.glindkamp@taskit.de>
  *
  * Initial development of this code was funded by
- * MICRONIC Computer Systeme GmbH, http://www.mcsberlin.de/
+ * MICRONIC Computer Systeme GmbH, https://www.mcsberlin.de/
  */
 
 #include <linux/module.h>
@@ -15,10 +15,10 @@
 #include <linux/i2c.h>
 #include <linux/regmap.h>
 #include <linux/slab.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 
 #include "max9850.h"
 
@@ -121,7 +121,7 @@ static int max9850_hw_params(struct snd_pcm_substream *substream,
 		return -EINVAL;
 
 	/* lrclk_div = 2^22 * rate / iclk with iclk = mclk / sf */
-	sf = (snd_soc_component_read32(component, MAX9850_CLOCK) >> 2) + 1;
+	sf = (snd_soc_component_read(component, MAX9850_CLOCK) >> 2) + 1;
 	lrclk_div = (1 << 22);
 	lrclk_div *= params_rate(params);
 	lrclk_div *= sf;

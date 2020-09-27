@@ -5,7 +5,7 @@
 #define __SDW_INTEL_H
 
 #include <linux/irqreturn.h>
-#include <linux/soundwire/sdw.h>
+#include <dkms/linux/soundwire/sdw.h>
 
 /**
  * struct sdw_intel_stream_params_data: configuration passed during

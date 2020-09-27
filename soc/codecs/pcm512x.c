@@ -15,10 +15,10 @@
 #include <linux/regmap.h>
 #include <linux/regulator/consumer.h>
 #include <linux/gcd.h>
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/pcm_params.h>
-#include <sound/tlv.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/tlv.h>
 
 #include "pcm512x.h"
 
@@ -1394,7 +1394,7 @@ static int pcm512x_set_bclk_ratio(struct snd_soc_dai *dai, unsigned int ratio)
 	return 0;
 }
 
-static int pcm512x_digital_mute(struct snd_soc_dai *dai, int mute)
+static int pcm512x_mute(struct snd_soc_dai *dai, int mute, int direction)
 {
 	struct snd_soc_component *component = dai->component;
 	struct pcm512x_priv *pcm512x = snd_soc_component_get_drvdata(component);
@@ -1445,8 +1445,9 @@ static const struct snd_soc_dai_ops pcm512x_dai_ops = {
 	.startup = pcm512x_dai_startup,
 	.hw_params = pcm512x_hw_params,
 	.set_fmt = pcm512x_set_fmt,
-	.digital_mute = pcm512x_digital_mute,
+	.mute_stream = pcm512x_mute,
 	.set_bclk_ratio = pcm512x_set_bclk_ratio,
+	.no_capture_mute = 1,
 };
 
 static struct snd_soc_dai_driver pcm512x_dai = {

@@ -11,7 +11,7 @@
 #include <linux/interrupt.h>
 #include <linux/uuid.h>
 #include <linux/firmware.h>
-#include <sound/memalloc.h>
+#include <dkms/sound/memalloc.h>
 #include "skl-sst-cldma.h"
 
 struct sst_dsp;

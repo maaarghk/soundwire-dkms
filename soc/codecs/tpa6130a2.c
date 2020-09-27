@@ -14,9 +14,9 @@
 #include <linux/gpio.h>
 #include <linux/regulator/consumer.h>
 #include <linux/slab.h>
-#include <sound/tpa6130a2-plat.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/tpa6130a2-plat.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 #include <linux/of.h>
 #include <linux/of_gpio.h>
 #include <linux/regmap.h>
@@ -261,7 +261,7 @@ static int tpa6130a2_probe(struct i2c_client *client,
 	default:
 		dev_warn(dev, "Unknown TPA model (%d). Assuming 6130A2\n",
 			 data->id);
-		/* fall through */
+		fallthrough;
 	case TPA6130A2:
 		regulator = "Vdd";
 		break;

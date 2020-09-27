@@ -17,14 +17,14 @@
 #include <linux/gpio.h>
 #include <linux/regulator/consumer.h>
 #include <linux/slab.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/initval.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/tlv.h>
 
-#include <sound/tlv320dac33-plat.h>
+#include <dkms/sound/tlv320dac33-plat.h>
 #include "tlv320dac33.h"
 
 /*
@@ -449,7 +449,7 @@ static int dac33_set_fifo_mode(struct snd_kcontrol *kcontrol,
 	if (dac33->fifo_mode == ucontrol->value.enumerated.item[0])
 		return 0;
 	/* Do not allow changes while stream is running*/
-	if (snd_soc_component_is_active(component))
+	if (snd_soc_component_active(component))
 		return -EPERM;
 
 	if (ucontrol->value.enumerated.item[0] >= DAC33_FIFO_LAST_MODE)

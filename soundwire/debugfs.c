@@ -1,9 +1,9 @@
-// SPDX-License-Identifier: GPL-2.0
+// SPDX-License-Identifier: GPL-2.0-only
 // Copyright(c) 2017-2019 Intel Corporation.
 
 #include <linux/device.h>
 #include <linux/debugfs.h>
-#include <linux/mod_devicetable.h>
+#include <dkms/linux/mod_devicetable.h>
 #include <linux/slab.h>
 #include <dkms/linux/soundwire/sdw.h>
 #include <dkms/linux/soundwire/sdw_registers.h>

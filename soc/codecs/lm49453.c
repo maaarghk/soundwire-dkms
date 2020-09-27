@@ -16,14 +16,14 @@
 #include <linux/i2c.h>
 #include <linux/regmap.h>
 #include <linux/slab.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/tlv.h>
-#include <sound/jack.h>
-#include <sound/initval.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/initval.h>
 #include <asm/div64.h>
 #include "lm49453.h"
 
@@ -1218,35 +1218,35 @@ static int lm49453_set_dai_sysclk(struct snd_soc_dai *dai, int clk_id,
 	return 0;
 }
 
-static int lm49453_hp_mute(struct snd_soc_dai *dai, int mute)
+static int lm49453_hp_mute(struct snd_soc_dai *dai, int mute, int direction)
 {
 	snd_soc_component_update_bits(dai->component, LM49453_P0_DAC_DSP_REG, BIT(1)|BIT(0),
 			    (mute ? (BIT(1)|BIT(0)) : 0));
 	return 0;
 }
 
-static int lm49453_lo_mute(struct snd_soc_dai *dai, int mute)
+static int lm49453_lo_mute(struct snd_soc_dai *dai, int mute, int direction)
 {
 	snd_soc_component_update_bits(dai->component, LM49453_P0_DAC_DSP_REG, BIT(3)|BIT(2),
 			    (mute ? (BIT(3)|BIT(2)) : 0));
 	return 0;
 }
 
-static int lm49453_ls_mute(struct snd_soc_dai *dai, int mute)
+static int lm49453_ls_mute(struct snd_soc_dai *dai, int mute, int direction)
 {
 	snd_soc_component_update_bits(dai->component, LM49453_P0_DAC_DSP_REG, BIT(5)|BIT(4),
 			    (mute ? (BIT(5)|BIT(4)) : 0));
 	return 0;
 }
 
-static int lm49453_ep_mute(struct snd_soc_dai *dai, int mute)
+static int lm49453_ep_mute(struct snd_soc_dai *dai, int mute, int direction)
 {
 	snd_soc_component_update_bits(dai->component, LM49453_P0_DAC_DSP_REG, BIT(4),
 			    (mute ? BIT(4) : 0));
 	return 0;
 }
 
-static int lm49453_ha_mute(struct snd_soc_dai *dai, int mute)
+static int lm49453_ha_mute(struct snd_soc_dai *dai, int mute, int direction)
 {
 	snd_soc_component_update_bits(dai->component, LM49453_P0_DAC_DSP_REG, BIT(7)|BIT(6),
 			    (mute ? (BIT(7)|BIT(6)) : 0));
@@ -1288,35 +1288,40 @@ static const struct snd_soc_dai_ops lm49453_headset_dai_ops = {
 	.hw_params	= lm49453_hw_params,
 	.set_sysclk	= lm49453_set_dai_sysclk,
 	.set_fmt	= lm49453_set_dai_fmt,
-	.digital_mute	= lm49453_hp_mute,
+	.mute_stream	= lm49453_hp_mute,
+	.no_capture_mute = 1,
 };
 
 static const struct snd_soc_dai_ops lm49453_speaker_dai_ops = {
 	.hw_params	= lm49453_hw_params,
 	.set_sysclk	= lm49453_set_dai_sysclk,
 	.set_fmt	= lm49453_set_dai_fmt,
-	.digital_mute	= lm49453_ls_mute,
+	.mute_stream	= lm49453_ls_mute,
+	.no_capture_mute = 1,
 };
 
 static const struct snd_soc_dai_ops lm49453_haptic_dai_ops = {
 	.hw_params	= lm49453_hw_params,
 	.set_sysclk	= lm49453_set_dai_sysclk,
 	.set_fmt	= lm49453_set_dai_fmt,
-	.digital_mute	= lm49453_ha_mute,
+	.mute_stream	= lm49453_ha_mute,
+	.no_capture_mute = 1,
 };
 
 static const struct snd_soc_dai_ops lm49453_ep_dai_ops = {
 	.hw_params	= lm49453_hw_params,
 	.set_sysclk	= lm49453_set_dai_sysclk,
 	.set_fmt	= lm49453_set_dai_fmt,
-	.digital_mute	= lm49453_ep_mute,
+	.mute_stream	= lm49453_ep_mute,
+	.no_capture_mute = 1,
 };
 
 static const struct snd_soc_dai_ops lm49453_lineout_dai_ops = {
 	.hw_params	= lm49453_hw_params,
 	.set_sysclk	= lm49453_set_dai_sysclk,
 	.set_fmt	= lm49453_set_dai_fmt,
-	.digital_mute	= lm49453_lo_mute,
+	.mute_stream	= lm49453_lo_mute,
+	.no_capture_mute = 1,
 };
 
 /* LM49453 dai structure. */

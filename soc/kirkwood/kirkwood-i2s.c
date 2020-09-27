@@ -14,9 +14,9 @@
 #include <linux/mbus.h>
 #include <linux/delay.h>
 #include <linux/clk.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 #include <linux/platform_data/asoc-kirkwood.h>
 #include <linux/of.h>
 

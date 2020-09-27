@@ -33,12 +33,12 @@
 #include <linux/of_address.h>
 #include <linux/slab.h>
 
-#include <sound/core.h>
-#include <sound/dmaengine_pcm.h>
-#include <sound/initval.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 
 /* I2S registers */
 #define BCM2835_I2S_CS_A_REG		0x00
@@ -653,7 +653,7 @@ static void bcm2835_i2s_stop(struct bcm2835_i2s_dev *dev,
 			BCM2835_I2S_CS_A_REG, mask, 0);
 
 	/* Stop also the clock when not SND_SOC_DAIFMT_CONT */
-	if (!dai->active && !(dev->fmt & SND_SOC_DAIFMT_CONT))
+	if (!snd_soc_dai_active(dai) && !(dev->fmt & SND_SOC_DAIFMT_CONT))
 		bcm2835_i2s_stop_clock(dev);
 }
 
@@ -695,7 +695,7 @@ static int bcm2835_i2s_startup(struct snd_pcm_substream *substream,
 {
 	struct bcm2835_i2s_dev *dev = snd_soc_dai_get_drvdata(dai);
 
-	if (dai->active)
+	if (snd_soc_dai_active(dai))
 		return 0;
 
 	/* Should this still be running stop it */
@@ -723,7 +723,7 @@ static void bcm2835_i2s_shutdown(struct snd_pcm_substream *substream,
 	bcm2835_i2s_stop(dev, substream, dai);
 
 	/* If both streams are stopped, disable module and clock */
-	if (dai->active)
+	if (snd_soc_dai_active(dai))
 		return;
 
 	/* Disable the module */
@@ -841,9 +841,12 @@ static int bcm2835_i2s_probe(struct platform_device *pdev)
 	dev->clk_prepared = false;
 	dev->clk = devm_clk_get(&pdev->dev, NULL);
 	if (IS_ERR(dev->clk)) {
-		dev_err(&pdev->dev, "could not get clk: %ld\n",
-			PTR_ERR(dev->clk));
-		return PTR_ERR(dev->clk);
+		ret = PTR_ERR(dev->clk);
+		if (ret == -EPROBE_DEFER)
+			dev_dbg(&pdev->dev, "could not get clk: %d\n", ret);
+		else
+			dev_err(&pdev->dev, "could not get clk: %d\n", ret);
+		return ret;
 	}
 
 	/* Request ioarea */

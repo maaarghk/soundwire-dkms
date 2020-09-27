@@ -6,12 +6,12 @@
  * Author: Zheng ShunQian<zhengsq@rock-chips.com>
  */
 
-#include <sound/soc.h>
-#include <sound/tlv.h>
-#include <sound/soc-dapm.h>
-#include <sound/soc-dai.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/soc-dai.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
 
 #include <linux/platform_device.h>
 #include <linux/of.h>
@@ -48,11 +48,9 @@ static int rk3036_codec_antipop_get(struct snd_kcontrol *kcontrol,
 				    struct snd_ctl_elem_value *ucontrol)
 {
 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
-	int val, ret, regval;
+	int val, regval;
 
-	ret = snd_soc_component_read(component, INNO_R09, &regval);
-	if (ret)
-		return ret;
+	regval = snd_soc_component_read(component, INNO_R09);
 	val = ((regval >> INNO_R09_HPL_ANITPOP_SHIFT) &
 	       INNO_R09_HP_ANTIPOP_MSK) == INNO_R09_HP_ANTIPOP_ON;
 	ucontrol->value.integer.value[0] = val;

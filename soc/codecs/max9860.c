@@ -18,10 +18,10 @@
 #include <linux/regmap.h>
 #include <linux/i2c.h>
 #include <linux/regulator/consumer.h>
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/pcm_params.h>
-#include <sound/tlv.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/tlv.h>
 
 #include "max9860.h"
 
@@ -334,7 +334,7 @@ static int max9860_hw_params(struct snd_pcm_substream *substream,
 			return -EINVAL;
 		}
 		ifc1a ^= MAX9860_WCI;
-		/* fall through */
+		fallthrough;
 	case SND_SOC_DAIFMT_IB_NF:
 		ifc1a ^= MAX9860_DBCI;
 		ifc1b ^= MAX9860_ABCI;

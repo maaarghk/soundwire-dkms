@@ -9,7 +9,7 @@
 #include <linux/i2c.h>
 #include <linux/regmap.h>
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include "ssm2602.h"
 

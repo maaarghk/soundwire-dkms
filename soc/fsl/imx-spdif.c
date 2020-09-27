@@ -4,7 +4,7 @@
 
 #include <linux/module.h>
 #include <linux/of_platform.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 struct imx_spdif_data {
 	struct snd_soc_dai_link dai;

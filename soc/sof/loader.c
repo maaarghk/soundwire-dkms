@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: (GPL-2.0 OR BSD-3-Clause)
+// SPDX-License-Identifier: (GPL-2.0-only OR BSD-3-Clause)
 //
 // This file is provided under a dual BSD/GPLv2 license.  When using or
 // redistributing this file, you may do so under either license.
@@ -12,7 +12,7 @@
 
 #include <linux/firmware.h>
 #include <dkms/sound/sof.h>
-#include <dkms/uapi/sound/sof/ext_manifest.h>
+#include <dkms/sound/sof/ext_manifest.h>
 #include "ops.h"
 
 static int get_ext_windows(struct snd_sof_dev *sdev,
@@ -20,21 +20,21 @@ static int get_ext_windows(struct snd_sof_dev *sdev,
 {
 	const struct sof_ipc_window *w =
 		container_of(ext_hdr, struct sof_ipc_window, ext_hdr);
-	size_t w_size = struct_size(w, window, w->num_windows);
+
+	if (w->num_windows == 0 || w->num_windows > SOF_IPC_MAX_ELEMS)
+		return -EINVAL;
 
 	if (sdev->info_window) {
-		if (memcmp(sdev->info_window, w, w_size)) {
-			dev_err(sdev->dev, "error: mistmatch between window descriptor from extended manifest and mailbox");
+		if (memcmp(sdev->info_window, w, ext_hdr->hdr.size)) {
+			dev_err(sdev->dev, "error: mismatch between window descriptor from extended manifest and mailbox");
 			return -EINVAL;
 		}
 		return 0;
 	}
 
-	if (w->num_windows == 0 || w->num_windows > SOF_IPC_MAX_ELEMS)
-		return -EINVAL;
-
 	/* keep a local copy of the data */
-	sdev->info_window = kmemdup(w, w_size, GFP_KERNEL);
+	sdev->info_window = devm_kmemdup(sdev->dev, w, ext_hdr->hdr.size,
+					 GFP_KERNEL);
 	if (!sdev->info_window)
 		return -ENOMEM;
 
@@ -146,9 +146,8 @@ EXPORT_SYMBOL(snd_sof_fw_parse_ext_data);
 static int ext_man_get_fw_version(struct snd_sof_dev *sdev,
 				  const struct sof_ext_man_elem_header *hdr)
 {
-	const struct sof_ext_man_fw_version *v;
-
-	v = container_of(hdr, struct sof_ext_man_fw_version, hdr);
+	const struct sof_ext_man_fw_version *v =
+		container_of(hdr, struct sof_ext_man_fw_version, hdr);
 
 	memcpy(&sdev->fw_ready.version, &v->version, sizeof(v->version));
 	sdev->fw_ready.flags = v->flags;
@@ -160,30 +159,44 @@ static int ext_man_get_fw_version(struct snd_sof_dev *sdev,
 static int ext_man_get_windows(struct snd_sof_dev *sdev,
 			       const struct sof_ext_man_elem_header *hdr)
 {
-	const struct sof_ipc_ext_data_hdr *w_ipc;
 	const struct sof_ext_man_window *w;
 
 	w = container_of(hdr, struct sof_ext_man_window, hdr);
-	w_ipc = (const struct sof_ipc_ext_data_hdr *)&w->ipc_window;
 
-	return get_ext_windows(sdev, w_ipc);
+	return get_ext_windows(sdev, &w->ipc_window.ext_hdr);
 }
 
 static int ext_man_get_cc_info(struct snd_sof_dev *sdev,
 			       const struct sof_ext_man_elem_header *hdr)
 {
 	const struct sof_ext_man_cc_version *cc;
-	const struct sof_ipc_ext_data_hdr *cc_version;
 
 	cc = container_of(hdr, struct sof_ext_man_cc_version, hdr);
-	cc_version = (const struct sof_ipc_ext_data_hdr *)&cc->cc_version;
 
-	return get_cc_info(sdev, cc_version);
+	return get_cc_info(sdev, &cc->cc_version.ext_hdr);
+}
+
+static int ext_man_get_dbg_abi_info(struct snd_sof_dev *sdev,
+				    const struct sof_ext_man_elem_header *hdr)
+{
+	const struct ext_man_dbg_abi *dbg_abi =
+		container_of(hdr, struct ext_man_dbg_abi, hdr);
+
+	if (sdev->first_boot)
+		dev_dbg(sdev->dev,
+			"Firmware: DBG_ABI %d:%d:%d\n",
+			SOF_ABI_VERSION_MAJOR(dbg_abi->dbg_abi.abi_dbg_version),
+			SOF_ABI_VERSION_MINOR(dbg_abi->dbg_abi.abi_dbg_version),
+			SOF_ABI_VERSION_PATCH(dbg_abi->dbg_abi.abi_dbg_version));
+
+	return 0;
 }
 
 static ssize_t snd_sof_ext_man_size(const struct firmware *fw)
 {
-	const struct sof_ext_man_header *head = (void *)fw->data;
+	const struct sof_ext_man_header *head;
+
+	head = (struct sof_ext_man_header *)fw->data;
 
 	/*
 	 * assert fw size is big enough to contain extended manifest header,
@@ -220,14 +233,8 @@ static int snd_sof_fw_ext_man_parse(struct snd_sof_dev *sdev,
 	ext_man_size = snd_sof_ext_man_size(fw);
 
 	/* Assert firmware starts with extended manifest */
-	if (ext_man_size < 0) {
-		dev_err(sdev->dev, "error: exception while reading firmware extended manifest, code %d\n",
-			(int)ext_man_size);
+	if (ext_man_size <= 0)
 		return ext_man_size;
-	} else if (!ext_man_size) {
-		dev_err(sdev->dev, "error: can't parse extended manifest when it's not present\n");
-		return -EINVAL;
-	}
 
 	/* incompatible version */
 	if (SOF_EXT_MAN_VERSION_INCOMPATIBLE(SOF_EXT_MAN_VERSION,
@@ -247,10 +254,10 @@ static int snd_sof_fw_ext_man_parse(struct snd_sof_dev *sdev,
 			elem_hdr->type, elem_hdr->size);
 
 		if (elem_hdr->size < sizeof(*elem_hdr) ||
-		    iptr + elem_hdr->size > fw->size) {
+		    elem_hdr->size > remaining) {
 			dev_err(sdev->dev, "error: invalid sof_ext_man header size, type %d size 0x%X\n",
 				elem_hdr->type, elem_hdr->size);
-			break;
+			return -EINVAL;
 		}
 
 		/* process structure data */
@@ -264,6 +271,9 @@ static int snd_sof_fw_ext_man_parse(struct snd_sof_dev *sdev,
 		case SOF_EXT_MAN_ELEM_CC_VERSION:
 			ret = ext_man_get_cc_info(sdev, elem_hdr);
 			break;
+		case SOF_EXT_MAN_ELEM_DBG_ABI:
+			ret = ext_man_get_dbg_abi_info(sdev, elem_hdr);
+			break;
 		default:
 			dev_warn(sdev->dev, "warning: unknown sof_ext_man header type %d size 0x%X\n",
 				 elem_hdr->type, elem_hdr->size);
@@ -273,7 +283,7 @@ static int snd_sof_fw_ext_man_parse(struct snd_sof_dev *sdev,
 		if (ret < 0) {
 			dev_err(sdev->dev, "error: failed to parse sof_ext_man header type %d size 0x%X\n",
 				elem_hdr->type, elem_hdr->size);
-			break;
+			return ret;
 		}
 
 		remaining -= elem_hdr->size;
@@ -282,10 +292,10 @@ static int snd_sof_fw_ext_man_parse(struct snd_sof_dev *sdev,
 
 	if (remaining) {
 		dev_err(sdev->dev, "error: sof_ext_man header is inconsistent\n");
-		ret = -EINVAL;
+		return -EINVAL;
 	}
 
-	return ret;
+	return ext_man_size;
 }
 
 /*
@@ -300,6 +310,8 @@ static void sof_get_windows(struct snd_sof_dev *sdev)
 	u32 outbox_size = 0;
 	u32 stream_size = 0;
 	u32 inbox_size = 0;
+	u32 debug_size = 0;
+	u32 debug_offset = 0;
 	int window_offset;
 	int bar;
 	int i;
@@ -353,6 +365,8 @@ static void sof_get_windows(struct snd_sof_dev *sdev)
 						SOF_DEBUGFS_ACCESS_D0_ONLY);
 			break;
 		case SOF_IPC_REGION_DEBUG:
+			debug_offset = window_offset + elem->offset;
+			debug_size = elem->size;
 			snd_sof_debugfs_io_item(sdev,
 						sdev->bar[bar] +
 						window_offset +
@@ -402,12 +416,17 @@ static void sof_get_windows(struct snd_sof_dev *sdev)
 	sdev->stream_box.offset = stream_offset;
 	sdev->stream_box.size = stream_size;
 
+	sdev->debug_box.offset = debug_offset;
+	sdev->debug_box.size = debug_size;
+
 	dev_dbg(sdev->dev, " mailbox upstream 0x%x - size 0x%x\n",
 		inbox_offset, inbox_size);
 	dev_dbg(sdev->dev, " mailbox downstream 0x%x - size 0x%x\n",
 		outbox_offset, outbox_size);
 	dev_dbg(sdev->dev, " stream region 0x%x - size 0x%x\n",
 		stream_offset, stream_size);
+	dev_dbg(sdev->dev, " debug region 0x%x - size 0x%x\n",
+		debug_offset, debug_size);
 }
 
 /* check for ABI compatibility and create memory windows on first boot */
@@ -547,7 +566,7 @@ static int check_header(struct snd_sof_dev *sdev, const struct firmware *fw,
 	struct snd_sof_fw_header *header;
 	size_t fw_size = fw->size - fw_offset;
 
-	if (fw->size < fw_offset) {
+	if (fw->size <= fw_offset) {
 		dev_err(sdev->dev, "error: firmware size must be greater than firmware offset\n");
 		return -EINVAL;
 	}
@@ -660,16 +679,10 @@ int snd_sof_load_firmware_raw(struct snd_sof_dev *sdev)
 	}
 
 	/* check for extended manifest */
-	ext_man_size = snd_sof_ext_man_size(plat_data->fw);
+	ext_man_size = snd_sof_fw_ext_man_parse(sdev, plat_data->fw);
 	if (ext_man_size > 0) {
-		ret = snd_sof_fw_ext_man_parse(sdev, plat_data->fw);
-
 		/* when no error occurred, drop extended manifest */
-		if (!ret)
-			plat_data->fw_offset = ext_man_size;
-		else
-			dev_err(sdev->dev, "error: firmware %s contains unsupported or invalid extended manifest: %d\n",
-				fw_filename, ret);
+		plat_data->fw_offset = ext_man_size;
 	} else if (!ext_man_size) {
 		/* No extended manifest, so nothing to skip during FW load */
 		dev_dbg(sdev->dev, "firmware doesn't contain extended manifest\n");
@@ -791,7 +804,7 @@ int snd_sof_run_firmware(struct snd_sof_dev *sdev)
 	}
 
 	if (sdev->fw_state == SOF_FW_BOOT_COMPLETE)
-		dev_info(sdev->dev, "firmware boot complete\n");
+		dev_dbg(sdev->dev, "firmware boot complete\n");
 	else
 		return -EIO; /* FW boots but fw_ready op failed */
 

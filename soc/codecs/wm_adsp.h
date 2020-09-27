@@ -10,9 +10,9 @@
 #ifndef __WM_ADSP_H
 #define __WM_ADSP_H
 
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/compress_driver.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/compress_driver.h>
 
 #include "wmfw.h"
 
@@ -190,16 +190,22 @@ int wm_adsp_fw_put(struct snd_kcontrol *kcontrol,
 		   struct snd_ctl_elem_value *ucontrol);
 
 int wm_adsp_compr_open(struct wm_adsp *dsp, struct snd_compr_stream *stream);
-int wm_adsp_compr_free(struct snd_compr_stream *stream);
-int wm_adsp_compr_set_params(struct snd_compr_stream *stream,
+int wm_adsp_compr_free(struct snd_soc_component *component,
+		       struct snd_compr_stream *stream);
+int wm_adsp_compr_set_params(struct snd_soc_component *component,
+			     struct snd_compr_stream *stream,
 			     struct snd_compr_params *params);
-int wm_adsp_compr_get_caps(struct snd_compr_stream *stream,
+int wm_adsp_compr_get_caps(struct snd_soc_component *component,
+			   struct snd_compr_stream *stream,
 			   struct snd_compr_caps *caps);
-int wm_adsp_compr_trigger(struct snd_compr_stream *stream, int cmd);
+int wm_adsp_compr_trigger(struct snd_soc_component *component,
+			  struct snd_compr_stream *stream, int cmd);
 int wm_adsp_compr_handle_irq(struct wm_adsp *dsp);
-int wm_adsp_compr_pointer(struct snd_compr_stream *stream,
+int wm_adsp_compr_pointer(struct snd_soc_component *component,
+			  struct snd_compr_stream *stream,
 			  struct snd_compr_tstamp *tstamp);
-int wm_adsp_compr_copy(struct snd_compr_stream *stream,
+int wm_adsp_compr_copy(struct snd_soc_component *component,
+		       struct snd_compr_stream *stream,
 		       char __user *buf, size_t count);
 int wm_adsp_write_ctl(struct wm_adsp *dsp, const char *name,  int type,
 		      unsigned int alg, void *buf, size_t len);

@@ -12,10 +12,10 @@
 #include <linux/gpio.h>
 #include <linux/regmap.h>
 
-#include <sound/core.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
-#include <sound/max9768.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/max9768.h>
 
 /* "Registers" */
 #define MAX9768_VOL 0
@@ -220,6 +220,6 @@ static struct i2c_driver max9768_i2c_driver = {
 };
 module_i2c_driver(max9768_i2c_driver);
 
-MODULE_AUTHOR("Wolfram Sang <w.sang@pengutronix.de>");
+MODULE_AUTHOR("Wolfram Sang <kernel@pengutronix.de>");
 MODULE_DESCRIPTION("ASoC MAX9768 amplifier driver");
 MODULE_LICENSE("GPL v2");

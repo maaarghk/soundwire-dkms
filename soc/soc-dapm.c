@@ -423,7 +423,7 @@ static int dapm_kcontrol_data_alloc(struct snd_soc_dapm_widget *widget,
 
 			memset(&template, 0, sizeof(template));
 			template.reg = e->reg;
-			template.mask = e->mask << e->shift_l;
+			template.mask = e->mask;
 			template.shift = e->shift_l;
 			template.off_val = snd_soc_enum_item_to_val(e, 0);
 			template.on_val = template.off_val;
@@ -546,8 +546,22 @@ static bool dapm_kcontrol_set_value(const struct snd_kcontrol *kcontrol,
 	if (data->value == value)
 		return false;
 
-	if (data->widget)
-		data->widget->on_val = value;
+	if (data->widget) {
+		switch (dapm_kcontrol_get_wlist(kcontrol)->widgets[0]->id) {
+		case snd_soc_dapm_switch:
+		case snd_soc_dapm_mixer:
+		case snd_soc_dapm_mixer_named_ctl:
+			data->widget->on_val = value & data->widget->mask;
+			break;
+		case snd_soc_dapm_demux:
+		case snd_soc_dapm_mux:
+			data->widget->on_val = value >> data->widget->shift;
+			break;
+		default:
+			data->widget->on_val = value;
+			break;
+		}
+	}
 
 	data->value = value;
 
@@ -602,12 +616,11 @@ static const char *soc_dapm_prefix(struct snd_soc_dapm_context *dapm)
 	return dapm->component->name_prefix;
 }
 
-static int soc_dapm_read(struct snd_soc_dapm_context *dapm, int reg,
-	unsigned int *value)
+static unsigned int soc_dapm_read(struct snd_soc_dapm_context *dapm, int reg)
 {
 	if (!dapm->component)
 		return -EIO;
-	return snd_soc_component_read(dapm->component, reg, value);
+	return  snd_soc_component_read(dapm->component, reg);
 }
 
 static int soc_dapm_update_bits(struct snd_soc_dapm_context *dapm,
@@ -711,8 +724,7 @@ static int snd_soc_dapm_set_bias_level(struct snd_soc_dapm_context *dapm,
 
 	trace_snd_soc_bias_level_start(card, level);
 
-	if (card && card->set_bias_level)
-		ret = card->set_bias_level(card, dapm, level);
+	ret = snd_soc_card_set_bias_level(card, dapm, level);
 	if (ret != 0)
 		goto out;
 
@@ -722,8 +734,7 @@ static int snd_soc_dapm_set_bias_level(struct snd_soc_dapm_context *dapm,
 	if (ret != 0)
 		goto out;
 
-	if (card && card->set_bias_level_post)
-		ret = card->set_bias_level_post(card, dapm, level);
+	ret = snd_soc_card_set_bias_level_post(card, dapm, level);
 out:
 	trace_snd_soc_bias_level_done(card, level);
 
@@ -741,7 +752,7 @@ static int dapm_connect_mux(struct snd_soc_dapm_context *dapm,
 	int i;
 
 	if (e->reg != SND_SOC_NOPM) {
-		soc_dapm_read(dapm, e->reg, &val);
+		val = soc_dapm_read(dapm, e->reg);
 		val = (val >> e->shift_l) & e->mask;
 		item = snd_soc_enum_val_to_item(e, val);
 	} else {
@@ -778,7 +789,7 @@ static void dapm_set_mixer_path_status(struct snd_soc_dapm_path *p, int i,
 	unsigned int val;
 
 	if (reg != SND_SOC_NOPM) {
-		soc_dapm_read(p->sink->dapm, reg, &val);
+		val = soc_dapm_read(p->sink->dapm, reg);
 		/*
 		 * The nth_path argument allows this function to know
 		 * which path of a kcontrol it is setting the initial
@@ -793,7 +804,7 @@ static void dapm_set_mixer_path_status(struct snd_soc_dapm_path *p, int i,
 		 */
 		if (snd_soc_volsw_is_stereo(mc) && nth_path > 0) {
 			if (reg != mc->rreg)
-				soc_dapm_read(p->sink->dapm, mc->rreg, &val);
+				val = soc_dapm_read(p->sink->dapm, mc->rreg);
 			val = (val >> mc->rshift) & mask;
 		} else {
 			val = (val >> shift) & mask;
@@ -802,7 +813,13 @@ static void dapm_set_mixer_path_status(struct snd_soc_dapm_path *p, int i,
 			val = max - val;
 		p->connect = !!val;
 	} else {
-		p->connect = 0;
+		/* since a virtual mixer has no backing registers to
+		 * decide which path to connect, it will try to match
+		 * with initial state.  This is to ensure
+		 * that the default mixer choice will be
+		 * correctly powered up during initialization.
+		 */
+		p->connect = invert;
 	}
 }
 
@@ -1781,7 +1798,7 @@ static void dapm_pre_sequence_async(void *data, async_cookie_t cookie)
 	/* If we're off and we're not supposed to go into STANDBY */
 	if (d->bias_level == SND_SOC_BIAS_OFF &&
 	    d->target_bias_level != SND_SOC_BIAS_OFF) {
-		if (d->dev)
+		if (d->dev && cookie)
 			pm_runtime_get_sync(d->dev);
 
 		ret = snd_soc_dapm_set_bias_level(d, SND_SOC_BIAS_STANDBY);
@@ -1828,7 +1845,7 @@ static void dapm_post_sequence_async(void *data, async_cookie_t cookie)
 			dev_err(d->dev, "ASoC: Failed to turn off bias: %d\n",
 				ret);
 
-		if (d->dev)
+		if (d->dev && cookie)
 			pm_runtime_put(d->dev);
 	}
 
@@ -2656,7 +2673,7 @@ int snd_soc_dapm_update_dai(struct snd_pcm_substream *substream,
 			    struct snd_pcm_hw_params *params,
 			    struct snd_soc_dai *dai)
 {
-	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+	struct snd_soc_pcm_runtime *rtd = asoc_substream_to_rtd(substream);
 	int ret;
 
 	mutex_lock_nested(&rtd->card->dapm_mutex, SND_SOC_DAPM_CLASS_RUNTIME);
@@ -3228,7 +3245,7 @@ int snd_soc_dapm_new_widgets(struct snd_soc_card *card)
 
 		/* Read the initial power state from the device */
 		if (w->reg >= 0) {
-			soc_dapm_read(w->dapm, w->reg, &val);
+			val = soc_dapm_read(w->dapm, w->reg);
 			val = val >> w->shift;
 			val &= w->mask;
 			if (val == w->on_val)
@@ -3270,15 +3287,14 @@ int snd_soc_dapm_get_volsw(struct snd_kcontrol *kcontrol,
 	unsigned int mask = (1 << fls(max)) - 1;
 	unsigned int invert = mc->invert;
 	unsigned int reg_val, val, rval = 0;
-	int ret = 0;
 
 	mutex_lock_nested(&card->dapm_mutex, SND_SOC_DAPM_CLASS_RUNTIME);
 	if (dapm_kcontrol_is_powered(kcontrol) && reg != SND_SOC_NOPM) {
-		ret = soc_dapm_read(dapm, reg, &reg_val);
+		reg_val = soc_dapm_read(dapm, reg);
 		val = (reg_val >> shift) & mask;
 
-		if (ret == 0 && reg != mc->rreg)
-			ret = soc_dapm_read(dapm, mc->rreg, &reg_val);
+		if (reg != mc->rreg)
+			reg_val = soc_dapm_read(dapm, mc->rreg);
 
 		if (snd_soc_volsw_is_stereo(mc))
 			rval = (reg_val >> mc->rshift) & mask;
@@ -3290,9 +3306,6 @@ int snd_soc_dapm_get_volsw(struct snd_kcontrol *kcontrol,
 			rval = (reg_val >> width) & mask;
 	}
 	mutex_unlock(&card->dapm_mutex);
-
-	if (ret)
-		return ret;
 
 	if (invert)
 		ucontrol->value.integer.value[0] = max - val;
@@ -3306,7 +3319,7 @@ int snd_soc_dapm_get_volsw(struct snd_kcontrol *kcontrol,
 			ucontrol->value.integer.value[1] = rval;
 	}
 
-	return ret;
+	return 0;
 }
 EXPORT_SYMBOL_GPL(snd_soc_dapm_get_volsw);
 
@@ -3421,11 +3434,7 @@ int snd_soc_dapm_get_enum_double(struct snd_kcontrol *kcontrol,
 
 	mutex_lock_nested(&card->dapm_mutex, SND_SOC_DAPM_CLASS_RUNTIME);
 	if (e->reg != SND_SOC_NOPM && dapm_kcontrol_is_powered(kcontrol)) {
-		int ret = soc_dapm_read(dapm, e->reg, &reg_val);
-		if (ret) {
-			mutex_unlock(&card->dapm_mutex);
-			return ret;
-		}
+		reg_val = soc_dapm_read(dapm, e->reg);
 	} else {
 		reg_val = dapm_kcontrol_get_value(kcontrol);
 	}
@@ -3786,7 +3795,7 @@ snd_soc_dai_link_event_pre_pmu(struct snd_soc_dapm_widget *w,
 {
 	struct snd_soc_dapm_path *path;
 	struct snd_soc_dai *source, *sink;
-	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+	struct snd_soc_pcm_runtime *rtd = asoc_substream_to_rtd(substream);
 	struct snd_pcm_hw_params *params = NULL;
 	const struct snd_soc_pcm_stream *config = NULL;
 	struct snd_pcm_runtime *runtime = NULL;
@@ -3815,7 +3824,7 @@ snd_soc_dai_link_event_pre_pmu(struct snd_soc_dapm_widget *w,
 				"ASoC: startup() failed: %d\n", ret);
 			goto out;
 		}
-		source->active++;
+		snd_soc_dai_activate(source, substream->stream);
 	}
 
 	substream->stream = SNDRV_PCM_STREAM_PLAYBACK;
@@ -3828,7 +3837,7 @@ snd_soc_dai_link_event_pre_pmu(struct snd_soc_dapm_widget *w,
 				"ASoC: startup() failed: %d\n", ret);
 			goto out;
 		}
-		sink->active++;
+		snd_soc_dai_activate(sink, substream->stream);
 	}
 
 	substream->hw_opened = 1;
@@ -3958,14 +3967,14 @@ static int snd_soc_dai_link_event(struct snd_soc_dapm_widget *w,
 		substream->stream = SNDRV_PCM_STREAM_CAPTURE;
 		snd_soc_dapm_widget_for_each_source_path(w, path) {
 			source = path->source->priv;
-			source->active--;
+			snd_soc_dai_deactivate(source, substream->stream);
 			snd_soc_dai_shutdown(source, substream);
 		}
 
 		substream->stream = SNDRV_PCM_STREAM_PLAYBACK;
 		snd_soc_dapm_widget_for_each_sink_path(w, path) {
 			sink = path->sink->priv;
-			sink->active--;
+			snd_soc_dai_deactivate(sink, substream->stream);
 			snd_soc_dai_shutdown(sink, substream);
 		}
 		break;
@@ -4108,7 +4117,7 @@ snd_soc_dapm_new_dai(struct snd_soc_card *card,
 		     struct snd_pcm_substream *substream,
 		     char *id)
 {
-	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+	struct snd_soc_pcm_runtime *rtd = asoc_substream_to_rtd(substream);
 	struct snd_soc_dapm_widget template;
 	struct snd_soc_dapm_widget *w;
 	const char **w_param_text;
@@ -4159,6 +4168,8 @@ snd_soc_dapm_new_dai(struct snd_soc_card *card,
 	w = snd_soc_dapm_new_control_unlocked(&card->dapm, &template);
 	if (IS_ERR(w)) {
 		ret = PTR_ERR(w);
+		dev_err(rtd->dev, "ASoC: Failed to create %s widget: %d\n",
+			link_name, ret);
 		goto outfree_kcontrol_news;
 	}
 
@@ -4277,52 +4288,58 @@ int snd_soc_dapm_link_dai_widgets(struct snd_soc_card *card)
 	return 0;
 }
 
-static void dapm_add_valid_dai_widget(struct snd_soc_card *card,
-				      struct snd_soc_pcm_runtime *rtd,
-				      struct snd_soc_dai *codec_dai,
-				      struct snd_soc_dai *cpu_dai)
+static void dapm_connect_dai_routes(struct snd_soc_dapm_context *dapm,
+				    struct snd_soc_dai *src_dai,
+				    struct snd_soc_dapm_widget *src,
+				    struct snd_soc_dapm_widget *dai,
+				    struct snd_soc_dai *sink_dai,
+				    struct snd_soc_dapm_widget *sink)
 {
-	struct snd_soc_dapm_widget *playback = NULL, *capture = NULL;
-	struct snd_soc_dapm_widget *codec, *playback_cpu, *capture_cpu;
+	dev_dbg(dapm->dev, "connected DAI link %s:%s -> %s:%s\n",
+		src_dai->component->name, src->name,
+		sink_dai->component->name, sink->name);
+
+	if (dai) {
+		snd_soc_dapm_add_path(dapm, src, dai, NULL, NULL);
+		src = dai;
+	}
+
+	snd_soc_dapm_add_path(dapm, src, sink, NULL, NULL);
+}
+
+static void dapm_connect_dai_pair(struct snd_soc_card *card,
+				  struct snd_soc_pcm_runtime *rtd,
+				  struct snd_soc_dai *codec_dai,
+				  struct snd_soc_dai *cpu_dai)
+{
+	struct snd_soc_dai_link *dai_link = rtd->dai_link;
+	struct snd_soc_dapm_widget *dai, *codec, *playback_cpu, *capture_cpu;
 	struct snd_pcm_substream *substream;
 	struct snd_pcm_str *streams = rtd->pcm->streams;
 
-	if (rtd->dai_link->params) {
+	if (dai_link->params) {
 		playback_cpu = cpu_dai->capture_widget;
 		capture_cpu = cpu_dai->playback_widget;
 	} else {
-		playback = cpu_dai->playback_widget;
-		capture = cpu_dai->capture_widget;
-		playback_cpu = playback;
-		capture_cpu = capture;
+		playback_cpu = cpu_dai->playback_widget;
+		capture_cpu = cpu_dai->capture_widget;
 	}
 
 	/* connect BE DAI playback if widgets are valid */
 	codec = codec_dai->playback_widget;
 
 	if (playback_cpu && codec) {
-		if (!playback) {
+		if (dai_link->params && !rtd->playback_widget) {
 			substream = streams[SNDRV_PCM_STREAM_PLAYBACK].substream;
-			playback = snd_soc_dapm_new_dai(card, substream,
-							"playback");
-			if (IS_ERR(playback)) {
-				dev_err(rtd->dev,
-					"ASoC: Failed to create DAI %s: %ld\n",
-					codec_dai->name,
-					PTR_ERR(playback));
+			dai = snd_soc_dapm_new_dai(card, substream, "playback");
+			if (IS_ERR(dai))
 				goto capture;
-			}
-
-			snd_soc_dapm_add_path(&card->dapm, playback_cpu,
-					      playback, NULL, NULL);
+			rtd->playback_widget = dai;
 		}
 
-		dev_dbg(rtd->dev, "connected DAI link %s:%s -> %s:%s\n",
-			cpu_dai->component->name, playback_cpu->name,
-			codec_dai->component->name, codec->name);
-
-		snd_soc_dapm_add_path(&card->dapm, playback, codec,
-				      NULL, NULL);
+		dapm_connect_dai_routes(&card->dapm, cpu_dai, playback_cpu,
+					rtd->playback_widget,
+					codec_dai, codec);
 	}
 
 capture:
@@ -4330,50 +4347,18 @@ capture:
 	codec = codec_dai->capture_widget;
 
 	if (codec && capture_cpu) {
-		if (!capture) {
+		if (dai_link->params && !rtd->capture_widget) {
 			substream = streams[SNDRV_PCM_STREAM_CAPTURE].substream;
-			capture = snd_soc_dapm_new_dai(card, substream,
-						       "capture");
-			if (IS_ERR(capture)) {
-				dev_err(rtd->dev,
-					"ASoC: Failed to create DAI %s: %ld\n",
-					codec_dai->name,
-					PTR_ERR(capture));
+			dai = snd_soc_dapm_new_dai(card, substream, "capture");
+			if (IS_ERR(dai))
 				return;
-			}
-
-			snd_soc_dapm_add_path(&card->dapm, capture,
-					      capture_cpu, NULL, NULL);
+			rtd->capture_widget = dai;
 		}
 
-		dev_dbg(rtd->dev, "connected DAI link %s:%s -> %s:%s\n",
-			codec_dai->component->name, codec->name,
-			cpu_dai->component->name, capture_cpu->name);
-
-		snd_soc_dapm_add_path(&card->dapm, codec, capture,
-				      NULL, NULL);
+		dapm_connect_dai_routes(&card->dapm, codec_dai, codec,
+					rtd->capture_widget,
+					cpu_dai, capture_cpu);
 	}
-}
-
-static void dapm_connect_dai_link_widgets(struct snd_soc_card *card,
-					  struct snd_soc_pcm_runtime *rtd)
-{
-	struct snd_soc_dai *codec_dai;
-	int i;
-
-	if (rtd->num_cpus == 1) {
-		for_each_rtd_codec_dais(rtd, i, codec_dai)
-			dapm_add_valid_dai_widget(card, rtd, codec_dai,
-						  rtd->cpu_dais[0]);
-	} else if (rtd->num_codecs == rtd->num_cpus) {
-		for_each_rtd_codec_dais(rtd, i, codec_dai)
-			dapm_add_valid_dai_widget(card, rtd, codec_dai,
-						  rtd->cpu_dais[i]);
-	} else {
-		dev_err(card->dev,
-			"N cpus to M codecs link is not supported yet\n");
-	}
-
 }
 
 static void soc_dapm_dai_stream_event(struct snd_soc_dai *dai, int stream,
@@ -4416,6 +4401,8 @@ static void soc_dapm_dai_stream_event(struct snd_soc_dai *dai, int stream,
 void snd_soc_dapm_connect_dai_link_widgets(struct snd_soc_card *card)
 {
 	struct snd_soc_pcm_runtime *rtd;
+	struct snd_soc_dai *codec_dai;
+	int i;
 
 	/* for each BE DAI link... */
 	for_each_card_rtds(card, rtd)  {
@@ -4426,7 +4413,18 @@ void snd_soc_dapm_connect_dai_link_widgets(struct snd_soc_card *card)
 		if (rtd->dai_link->dynamic)
 			continue;
 
-		dapm_connect_dai_link_widgets(card, rtd);
+		if (rtd->num_cpus == 1) {
+			for_each_rtd_codec_dais(rtd, i, codec_dai)
+				dapm_connect_dai_pair(card, rtd, codec_dai,
+						      asoc_rtd_to_cpu(rtd, 0));
+		} else if (rtd->num_codecs == rtd->num_cpus) {
+			for_each_rtd_codec_dais(rtd, i, codec_dai)
+				dapm_connect_dai_pair(card, rtd, codec_dai,
+						      asoc_rtd_to_cpu(rtd, i));
+		} else {
+			dev_err(card->dev,
+				"N cpus to M codecs link is not supported yet\n");
+		}
 	}
 }
 

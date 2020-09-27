@@ -17,12 +17,12 @@
 #include <linux/regulator/consumer.h>
 #include <linux/slab.h>
 #include <linux/of_device.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/initval.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/tlv.h>
 
 #include "wm8523.h"
 
@@ -147,8 +147,8 @@ static int wm8523_hw_params(struct snd_pcm_substream *substream,
 	struct snd_soc_component *component = dai->component;
 	struct wm8523_priv *wm8523 = snd_soc_component_get_drvdata(component);
 	int i;
-	u16 aifctrl1 = snd_soc_component_read32(component, WM8523_AIF_CTRL1);
-	u16 aifctrl2 = snd_soc_component_read32(component, WM8523_AIF_CTRL2);
+	u16 aifctrl1 = snd_soc_component_read(component, WM8523_AIF_CTRL1);
+	u16 aifctrl2 = snd_soc_component_read(component, WM8523_AIF_CTRL2);
 
 	/* Find a supported LRCLK ratio */
 	for (i = 0; i < ARRAY_SIZE(lrclk_ratios); i++) {
@@ -258,7 +258,7 @@ static int wm8523_set_dai_fmt(struct snd_soc_dai *codec_dai,
 		unsigned int fmt)
 {
 	struct snd_soc_component *component = codec_dai->component;
-	u16 aifctrl1 = snd_soc_component_read32(component, WM8523_AIF_CTRL1);
+	u16 aifctrl1 = snd_soc_component_read(component, WM8523_AIF_CTRL1);
 
 	aifctrl1 &= ~(WM8523_BCLK_INV_MASK | WM8523_LRCLK_INV_MASK |
 		      WM8523_FMT_MASK | WM8523_AIF_MSTR_MASK);

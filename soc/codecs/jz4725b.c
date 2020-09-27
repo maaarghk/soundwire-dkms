@@ -15,12 +15,12 @@
 
 #include <linux/delay.h>
 
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/initval.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 
 #define ICDC_RGADW_OFFSET		0x00
 #define ICDC_RGDATA_OFFSET		0x04
@@ -574,19 +574,17 @@ static int jz4725b_codec_probe(struct platform_device *pdev)
 	return ret;
 }
 
-#ifdef CONFIG_OF
 static const struct of_device_id jz4725b_codec_of_matches[] = {
 	{ .compatible = "ingenic,jz4725b-codec", },
 	{ }
 };
 MODULE_DEVICE_TABLE(of, jz4725b_codec_of_matches);
-#endif
 
 static struct platform_driver jz4725b_codec_driver = {
 	.probe = jz4725b_codec_probe,
 	.driver = {
 		.name = "jz4725b-codec",
-		.of_match_table = of_match_ptr(jz4725b_codec_of_matches),
+		.of_match_table = jz4725b_codec_of_matches,
 	},
 };
 module_platform_driver(jz4725b_codec_driver);

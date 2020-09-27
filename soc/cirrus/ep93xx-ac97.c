@@ -15,10 +15,10 @@
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 
-#include <sound/core.h>
-#include <sound/dmaengine_pcm.h>
-#include <sound/ac97_codec.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/ac97_codec.h>
+#include <dkms/sound/soc.h>
 
 #include <linux/platform_data/dma-ep93xx.h>
 #include <linux/soc/cirrus/ep93xx.h>
@@ -285,7 +285,7 @@ static int ep93xx_ac97_trigger(struct snd_pcm_substream *substream,
 			/*
 			 * As per Cirrus EP93xx errata described below:
 			 *
-			 * http://www.cirrus.com/en/pubs/errata/ER667E2B.pdf
+			 * https://www.cirrus.com/en/pubs/errata/ER667E2B.pdf
 			 *
 			 * we will wait for the TX FIFO to be empty before
 			 * clearing the TEN bit.

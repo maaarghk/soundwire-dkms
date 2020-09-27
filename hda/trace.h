@@ -7,7 +7,7 @@
 
 #include <linux/tracepoint.h>
 #include <linux/device.h>
-#include <sound/hdaudio.h>
+#include <dkms/sound/hdaudio.h>
 
 #ifndef HDAC_MSG_MAX
 #define HDAC_MSG_MAX	500

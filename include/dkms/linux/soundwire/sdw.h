@@ -4,7 +4,8 @@
 #ifndef __SOUNDWIRE_H
 #define __SOUNDWIRE_H
 
-#include <linux/mod_devicetable.h>
+#include <dkms/linux/mod_devicetable.h>
+#include <linux/bitfield.h>
 
 struct sdw_bus;
 struct sdw_slave;
@@ -38,7 +39,8 @@ struct sdw_slave;
 #define SDW_FRAME_CTRL_BITS		48
 #define SDW_MAX_DEVICES			11
 
-#define SDW_VALID_PORT_RANGE(n)		((n) <= 14 && (n) >= 1)
+#define SDW_MAX_PORTS			15
+#define SDW_VALID_PORT_RANGE(n)		((n) < SDW_MAX_PORTS && (n) >= 1)
 
 enum {
 	SDW_PORT_DIRN_SINK = 0,
@@ -88,10 +90,10 @@ enum sdw_slave_status {
  * @SDW_CLK_POST_DEPREPARE: post clock stop de-prepare
  */
 enum sdw_clk_stop_type {
-	       SDW_CLK_PRE_PREPARE = 0,
-	       SDW_CLK_POST_PREPARE,
-	       SDW_CLK_PRE_DEPREPARE,
-	       SDW_CLK_POST_DEPREPARE,
+	SDW_CLK_PRE_PREPARE = 0,
+	SDW_CLK_POST_PREPARE,
+	SDW_CLK_PRE_DEPREPARE,
+	SDW_CLK_POST_DEPREPARE,
 };
 
 /**
@@ -152,19 +154,19 @@ enum sdw_data_direction {
  *
  * @SDW_PORT_DATA_MODE_NORMAL: Normal data mode where audio data is received
  * and transmitted.
+ * @SDW_PORT_DATA_MODE_PRBS: Test mode which uses a PRBS generator to produce
+ * a pseudo random data pattern that is transferred
+ * @SDW_PORT_DATA_MODE_STATIC_0: Simple test mode which uses static value of
+ * logic 0. The encoding will result in no signal transitions
  * @SDW_PORT_DATA_MODE_STATIC_1: Simple test mode which uses static value of
  * logic 1. The encoding will result in signal transitions at every bitslot
  * owned by this Port
- * @SDW_PORT_DATA_MODE_STATIC_0: Simple test mode which uses static value of
- * logic 0. The encoding will result in no signal transitions
- * @SDW_PORT_DATA_MODE_PRBS: Test mode which uses a PRBS generator to produce
- * a pseudo random data pattern that is transferred
  */
 enum sdw_port_data_mode {
 	SDW_PORT_DATA_MODE_NORMAL = 0,
-	SDW_PORT_DATA_MODE_STATIC_1 = 1,
+	SDW_PORT_DATA_MODE_PRBS = 1,
 	SDW_PORT_DATA_MODE_STATIC_0 = 2,
-	SDW_PORT_DATA_MODE_PRBS = 3,
+	SDW_PORT_DATA_MODE_STATIC_1 = 3,
 };
 
 /*
@@ -291,8 +293,8 @@ struct sdw_dpn_audio_mode {
  * implementation-defined interrupts
  * @max_ch: Maximum channels supported
  * @min_ch: Minimum channels supported
- * @num_ch: Number of discrete channels supported
- * @ch: Discrete channels supported
+ * @num_channels: Number of discrete channels supported
+ * @channels: Discrete channels supported
  * @num_ch_combinations: Number of channel combinations supported
  * @ch_combinations: Channel combinations supported
  * @modes: SDW mode supported
@@ -316,8 +318,8 @@ struct sdw_dpn_prop {
 	u32 imp_def_interrupts;
 	u32 max_ch;
 	u32 min_ch;
-	u32 num_ch;
-	u32 *ch;
+	u32 num_channels;
+	u32 *channels;
 	u32 num_ch_combinations;
 	u32 *ch_combinations;
 	u32 modes;
@@ -355,6 +357,9 @@ struct sdw_dpn_prop {
  * @dp0_prop: Data Port 0 properties
  * @src_dpn_prop: Source Data Port N properties
  * @sink_dpn_prop: Sink Data Port N properties
+ * @scp_int1_mask: SCP_INT1_MASK desired settings
+ * @quirks: bitmask identifying deltas from the MIPI specification
+ * @is_sdca: the Slave supports the SDCA specification
  */
 struct sdw_slave_prop {
 	u32 mipi_revision;
@@ -376,7 +381,12 @@ struct sdw_slave_prop {
 	struct sdw_dp0_prop *dp0_prop;
 	struct sdw_dpn_prop *src_dpn_prop;
 	struct sdw_dpn_prop *sink_dpn_prop;
+	u8 scp_int1_mask;
+	u32 quirks;
+	bool is_sdca;
 };
+
+#define SDW_SLAVE_QUIRKS_INVALID_INITIAL_PARITY	BIT(0)
 
 /**
  * struct sdw_master_prop - Master properties
@@ -426,8 +436,7 @@ int sdw_slave_read_prop(struct sdw_slave *slave);
  * struct sdw_slave_id - Slave ID
  * @mfg_id: MIPI Manufacturer ID
  * @part_id: Device Part ID
- * @class_id: MIPI Class ID, unused now.
- * Currently a placeholder in MIPI SoundWire Spec
+ * @class_id: MIPI Class ID (defined starting with SoundWire 1.2 spec)
  * @unique_id: Device unique ID
  * @sdw_version: SDW version implemented
  *
@@ -456,20 +465,28 @@ struct sdw_slave_id {
  *
  * The MIPI DisCo for SoundWire defines in addition the link_id as bits 51:48
  */
+#define SDW_DISCO_LINK_ID_MASK	GENMASK_ULL(51, 48)
+#define SDW_VERSION_MASK	GENMASK_ULL(47, 44)
+#define SDW_UNIQUE_ID_MASK	GENMASK_ULL(43, 40)
+#define SDW_MFG_ID_MASK		GENMASK_ULL(39, 24)
+#define SDW_PART_ID_MASK	GENMASK_ULL(23, 8)
+#define SDW_CLASS_ID_MASK	GENMASK_ULL(7, 0)
 
-#define SDW_DISCO_LINK_ID(adr)	(((adr) >> 48) & GENMASK(3, 0))
-#define SDW_VERSION(adr)	(((adr) >> 44) & GENMASK(3, 0))
-#define SDW_UNIQUE_ID(adr)	(((adr) >> 40) & GENMASK(3, 0))
-#define SDW_MFG_ID(adr)		(((adr) >> 24) & GENMASK(15, 0))
-#define SDW_PART_ID(adr)	(((adr) >> 8) & GENMASK(15, 0))
-#define SDW_CLASS_ID(adr)	((adr) & GENMASK(7, 0))
+#define SDW_DISCO_LINK_ID(addr)	FIELD_GET(SDW_DISCO_LINK_ID_MASK, addr)
+#define SDW_VERSION(addr)	FIELD_GET(SDW_VERSION_MASK, addr)
+#define SDW_UNIQUE_ID(addr)	FIELD_GET(SDW_UNIQUE_ID_MASK, addr)
+#define SDW_MFG_ID(addr)	FIELD_GET(SDW_MFG_ID_MASK, addr)
+#define SDW_PART_ID(addr)	FIELD_GET(SDW_PART_ID_MASK, addr)
+#define SDW_CLASS_ID(addr)	FIELD_GET(SDW_CLASS_ID_MASK, addr)
 
 /**
  * struct sdw_slave_intr_status - Slave interrupt status
+ * @sdca_cascade: set if the Slave device reports an SDCA interrupt
  * @control_port: control port status
  * @port: data port status
  */
 struct sdw_slave_intr_status {
+	bool sdca_cascade;
 	u8 control_port;
 	u8 port[15];
 };
@@ -541,6 +558,10 @@ enum sdw_port_prep_ops {
  * @bandwidth: Current bandwidth
  * @col: Active columns
  * @row: Active rows
+ * @s_data_mode: NORMAL, STATIC or PRBS mode for all Slave ports
+ * @m_data_mode: NORMAL, STATIC or PRBS mode for all Master ports. The value
+ * should be the same to detect transmission issues, but can be different to
+ * test the interrupt reports
  */
 struct sdw_bus_params {
 	enum sdw_reg_bank curr_bank;
@@ -550,6 +571,8 @@ struct sdw_bus_params {
 	unsigned int bandwidth;
 	unsigned int col;
 	unsigned int row;
+	int s_data_mode;
+	int m_data_mode;
 };
 
 /**
@@ -607,6 +630,8 @@ struct sdw_slave_ops {
  * between the Master suspending and the codec resuming, and make sure that
  * when the Master triggered a reset the Slave is properly enumerated and
  * initialized
+ * @first_interrupt_done: status flag tracking if the interrupt handling
+ * for a Slave happens for the first time after enumeration
  */
 struct sdw_slave {
 	struct sdw_slave_id id;
@@ -619,7 +644,7 @@ struct sdw_slave {
 	struct dentry *debugfs;
 #endif
 	struct list_head node;
-	struct completion *port_ready;
+	struct completion port_ready[SDW_MAX_PORTS];
 	enum sdw_clk_stop_mode curr_clk_stop_mode;
 	u16 dev_num;
 	u16 dev_num_sticky;
@@ -628,30 +653,19 @@ struct sdw_slave {
 	struct completion enumeration_complete;
 	struct completion initialization_complete;
 	u32 unattach_request;
+	bool first_interrupt_done;
 };
 
 #define dev_to_sdw_dev(_dev) container_of(_dev, struct sdw_slave, dev)
 
 /**
  * struct sdw_master_device - SoundWire 'Master Device' representation
- *
  * @dev: Linux device for this Master
- * @master_name: Linux driver name
- * @driver: Linux driver for this Master (set by SoundWire core during probe)
- * @probe_complete: used by parent if synchronous probe behavior is needed
- * @link_id: link index as defined by MIPI DisCo specification
- * @pm_runtime_suspended: flag to restore pm_runtime state after system resume
- * @pdata: private data typically provided with sdw_master_device_add()
+ * @bus: Bus handle shortcut
  */
-
 struct sdw_master_device {
 	struct device dev;
-	const char *master_name;
-	struct sdw_master_driver *driver;
-	struct completion probe_complete;
-	int link_id;
-	bool pm_runtime_suspended;
-	void *pdata;
+	struct sdw_bus *bus;
 };
 
 #define dev_to_sdw_master_device(d)	\
@@ -671,29 +685,13 @@ struct sdw_driver {
 	struct device_driver driver;
 };
 
-/**
- * struct sdw_master_driver - SoundWire 'Master Device' driver
- *
- * @probe: initializations and allocation (hardware may not be enabled yet)
- * @startup: initialization handled after the hardware is enabled, all
- * clock/power dependencies are available (optional)
- * @shutdown: cleanups before hardware is disabled (optional)
- * @remove: free all remaining resources
- * @process_wake_event: handle external wake (optional)
- * @driver: baseline structure used for name/PM hooks.
- */
-struct sdw_master_driver {
-	int (*probe)(struct sdw_master_device *md, void *link_ctx);
-	int (*startup)(struct sdw_master_device *md);
-	int (*shutdown)(struct sdw_master_device *md);
-	int (*remove)(struct sdw_master_device *md);
-	int (*process_wake_event)(struct sdw_master_device *md);
-	struct device_driver driver;
-};
-
-#define SDW_SLAVE_ENTRY(_mfg_id, _part_id, _drv_data) \
-	{ .mfg_id = (_mfg_id), .part_id = (_part_id), \
+#define SDW_SLAVE_ENTRY_EXT(_mfg_id, _part_id, _version, _c_id, _drv_data) \
+	{ .mfg_id = (_mfg_id), .part_id = (_part_id),		\
+	  .sdw_version = (_version), .class_id = (_c_id),	\
 	  .driver_data = (unsigned long)(_drv_data) }
+
+#define SDW_SLAVE_ENTRY(_mfg_id, _part_id, _drv_data)	\
+	SDW_SLAVE_ENTRY_EXT((_mfg_id), (_part_id), 0, 0, (_drv_data))
 
 int sdw_handle_slave_status(struct sdw_bus *bus,
 			enum sdw_slave_status status[]);
@@ -832,8 +830,10 @@ struct sdw_master_ops {
 
 /**
  * struct sdw_bus - SoundWire bus
- * @dev: Master linux device
+ * @dev: Shortcut to &bus->md->dev to avoid changing the entire code.
+ * @md: Master device
  * @link_id: Link id number, can be 0 to N, unique for each Master
+ * @id: bus system-wide unique id
  * @slaves: list of Slaves on this bus
  * @assigned: Bitmap for Slave device numbers.
  * Bit set implies used number, bit clear implies unused number.
@@ -862,7 +862,9 @@ struct sdw_master_ops {
  */
 struct sdw_bus {
 	struct device *dev;
+	struct sdw_master_device *md;
 	unsigned int link_id;
+	int id;
 	struct list_head slaves;
 	DECLARE_BITMAP(assigned, SDW_MAX_DEVICES);
 	struct mutex bus_lock;
@@ -883,39 +885,9 @@ struct sdw_bus {
 	int hw_sync_min_links;
 };
 
-int sdw_add_bus_master(struct sdw_bus *bus);
-void sdw_delete_bus_master(struct sdw_bus *bus);
-
-/**
- * sdw_master_device_add() - create a Linux Master Device representation.
- *
- * @master_name: Linux driver name
- * @parent: the parent Linux device (e.g. a PCI device)
- * @fwnode: the parent fwnode (e.g. an ACPI companion device to the parent)
- * @link_id: link index as defined by MIPI DisCo specification
- * @pdata: private data (e.g. register base, offsets, platform quirks, etc).
- */
-struct sdw_master_device
-*sdw_master_device_add(const char *master_name,
-		       struct device *parent,
-		       struct fwnode_handle *fwnode,
-		       int link_id,
-		       void *pdata);
-
-/**
- * sdw_master_device_startup() - startup hardware
- *
- * @md: Linux Soundwire master device
- */
-int sdw_master_device_startup(struct sdw_master_device *md);
-
-/**
- * sdw_master_device_process_wake_event() - handle external wake
- * event, e.g. handled at the PCI level
- *
- * @md: Linux Soundwire master device
- */
-int sdw_master_device_process_wake_event(struct sdw_master_device *md);
+int sdw_bus_master_add(struct sdw_bus *bus, struct device *parent,
+		       struct fwnode_handle *fwnode);
+void sdw_bus_master_delete(struct sdw_bus *bus);
 
 /**
  * sdw_port_config: Master or Slave Port configuration

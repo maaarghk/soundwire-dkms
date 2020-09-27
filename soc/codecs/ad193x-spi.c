@@ -9,7 +9,7 @@
 #include <linux/spi/spi.h>
 #include <linux/regmap.h>
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include "ad193x.h"
 

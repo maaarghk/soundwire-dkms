@@ -96,6 +96,7 @@ void snd_hdac_display_power(struct hdac_bus *bus, unsigned int idx, bool enable)
 
 			if (acomp->ops->put_power)
 				acomp->ops->put_power(acomp->dev, cookie);
+
 			bus->display_power_active = 0;
 		}
 	}

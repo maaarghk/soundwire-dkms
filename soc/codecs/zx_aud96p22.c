@@ -10,11 +10,11 @@
 #include <linux/i2c.h>
 #include <linux/module.h>
 #include <linux/regmap.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
-#include <sound/tlv.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
+#include <dkms/sound/tlv.h>
 
 #define AUD96P22_RESET			0x00
 #define RST_DAC_DPZ			BIT(0)

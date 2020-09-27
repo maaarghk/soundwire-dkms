@@ -19,13 +19,13 @@
 #include <linux/math64.h>
 #include <linux/semaphore.h>
 
-#include <sound/initval.h>
-#include <sound/tlv.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/jack.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/jack.h>
 
 
 #include "nau8825.h"
@@ -251,7 +251,7 @@ static const unsigned short logtable[256] = {
  *
  * Acquires the semaphore without jiffies. Try to acquire the semaphore
  * atomically. Returns 0 if the semaphore has been acquired successfully
- * or 1 if it it cannot be acquired.
+ * or 1 if it cannot be acquired.
  */
 static int nau8825_sema_acquire(struct nau8825 *nau8825, long timeout)
 {

@@ -16,10 +16,10 @@
 #include <linux/mutex.h>
 #include <linux/platform_device.h>
 #include <linux/suspend.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/initval.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc.h>
 #include <asm/mach-au1x00/au1000.h>
 
 #include "psc.h"

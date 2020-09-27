@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: (GPL-2.0 OR BSD-3-Clause)
+// SPDX-License-Identifier: (GPL-2.0-only OR BSD-3-Clause)
 //
 // Copyright 2020 NXP
 //
@@ -12,11 +12,12 @@
 #include <linux/of_irq.h>
 
 #include <linux/module.h>
-#include <sound/sof.h>
-#include <sound/sof/xtensa.h>
+#include <dkms/sound/sof.h>
+#include <dkms/sound/sof/xtensa.h>
 #include <linux/firmware/imx/dsp.h>
 
 #include "../ops.h"
+#include "imx-common.h"
 
 #define MBOX_OFFSET	0x800000
 #define MBOX_SIZE	0x1000
@@ -88,18 +89,26 @@ static void imx8m_dsp_handle_reply(struct imx_dsp_ipc *ipc)
 static void imx8m_dsp_handle_request(struct imx_dsp_ipc *ipc)
 {
 	struct imx8m_priv *priv = imx_dsp_get_data(ipc);
+	u32 p; /* Panic code */
 
-	snd_sof_ipc_msgs_rx(priv->sdev);
+	/* Read the message from the debug box. */
+	sof_mailbox_read(priv->sdev, priv->sdev->debug_box.offset + 4, &p, sizeof(p));
+
+	/* Check to see if the message is a panic code (0x0dead***) */
+	if ((p & SOF_IPC_PANIC_MAGIC_MASK) == SOF_IPC_PANIC_MAGIC)
+		snd_sof_dsp_panic(priv->sdev, p);
+	else
+		snd_sof_ipc_msgs_rx(priv->sdev);
 }
 
-static struct imx_dsp_ops dsp_ops = {
+static struct imx_dsp_ops imx8m_dsp_ops = {
 	.handle_reply		= imx8m_dsp_handle_reply,
 	.handle_request		= imx8m_dsp_handle_request,
 };
 
 static int imx8m_send_msg(struct snd_sof_dev *sdev, struct snd_sof_ipc_msg *msg)
 {
-	struct imx8m_priv *priv = (struct imx8m_priv *)sdev->private;
+	struct imx8m_priv *priv = sdev->pdata->hw_pdata;
 
 	sof_mailbox_write(sdev, sdev->host_box.offset, msg->msg_data,
 			  msg->msg_size);
@@ -133,7 +142,7 @@ static int imx8m_probe(struct snd_sof_dev *sdev)
 	if (!priv)
 		return -ENOMEM;
 
-	sdev->private = priv;
+	sdev->pdata->hw_pdata = priv;
 	priv->dev = sdev->dev;
 	priv->sdev = sdev;
 
@@ -152,7 +161,7 @@ static int imx8m_probe(struct snd_sof_dev *sdev)
 	}
 
 	imx_dsp_set_data(priv->dsp_ipc, priv);
-	priv->dsp_ipc->ops = &dsp_ops;
+	priv->dsp_ipc->ops = &imx8m_dsp_ops;
 
 	/* DSP base */
 	mmio = platform_get_resource(pdev, IORESOURCE_MEM, 0);
@@ -188,8 +197,7 @@ static int imx8m_probe(struct snd_sof_dev *sdev)
 	}
 
 	sdev->bar[SOF_FW_BLK_TYPE_SRAM] = devm_ioremap_wc(sdev->dev, res.start,
-							  res.end - res.start +
-							  1);
+							  resource_size(&res));
 	if (!sdev->bar[SOF_FW_BLK_TYPE_SRAM]) {
 		dev_err(sdev->dev, "failed to ioremap mem 0x%x size 0x%x\n",
 			base, size);
@@ -210,7 +218,7 @@ exit_pdev_unregister:
 
 static int imx8m_remove(struct snd_sof_dev *sdev)
 {
-	struct imx8m_priv *priv = (struct imx8m_priv *)sdev->private;
+	struct imx8m_priv *priv = sdev->pdata->hw_pdata;
 
 	platform_device_unregister(priv->ipc_dev);
 
@@ -239,7 +247,15 @@ static int imx8m_ipc_pcm_params(struct snd_sof_dev *sdev,
 
 static struct snd_soc_dai_driver imx8m_dai[] = {
 {
-	.name = "sai-port",
+	.name = "sai3",
+	.playback = {
+		.channels_min = 1,
+		.channels_max = 32,
+	},
+	.capture = {
+		.channels_min = 1,
+		.channels_max = 32,
+	},
 },
 };
 
@@ -254,6 +270,9 @@ struct snd_sof_dsp_ops sof_imx8m_ops = {
 	/* Block IO */
 	.block_read	= sof_block_read,
 	.block_write	= sof_block_write,
+
+	/* Module IO */
+	.read64	= sof_io_read64,
 
 	/* ipc */
 	.send_msg	= imx8m_send_msg,
@@ -270,10 +289,23 @@ struct snd_sof_dsp_ops sof_imx8m_ops = {
 	/* firmware loading */
 	.load_firmware	= snd_sof_load_firmware_memcpy,
 
+	/* Debug information */
+	.dbg_dump = imx8_dump,
+
+	/* Firmware ops */
+	.arch_ops = &sof_xtensa_arch_ops,
+
 	/* DAI drivers */
 	.drv = imx8m_dai,
-	.num_drv = 1, /* we have only 1 SAI interface on i.MX8M */
+	.num_drv = ARRAY_SIZE(imx8m_dai),
+
+	.hw_info = SNDRV_PCM_INFO_MMAP |
+		SNDRV_PCM_INFO_MMAP_VALID |
+		SNDRV_PCM_INFO_INTERLEAVED |
+		SNDRV_PCM_INFO_PAUSE |
+		SNDRV_PCM_INFO_NO_PERIOD_WAKEUP,
 };
 EXPORT_SYMBOL(sof_imx8m_ops);
 
+MODULE_IMPORT_NS(SND_SOC_SOF_XTENSA);
 MODULE_LICENSE("Dual BSD/GPL");

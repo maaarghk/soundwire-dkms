@@ -10,7 +10,7 @@
 #include <linux/module.h>
 #include <linux/platform_device.h>
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 static struct snd_soc_dai_driver pcm5102a_dai = {
 	.name = "pcm5102a-hifi",

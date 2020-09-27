@@ -8,9 +8,9 @@
 #include <linux/of_irq.h>
 #include <linux/of_platform.h>
 #include <linux/regmap.h>
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
+#include <dkms/sound/pcm_params.h>
 
 #define PDM_CTRL			0x00
 #define  PDM_CTRL_EN			BIT(31)

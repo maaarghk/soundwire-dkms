@@ -10,7 +10,7 @@
 #define _RT5660_H
 
 #include <linux/clk.h>
-#include <sound/rt5660.h>
+#include <dkms/sound/rt5660.h>
 
 /* Info */
 #define RT5660_RESET				0x00

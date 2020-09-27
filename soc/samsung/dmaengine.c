@@ -6,11 +6,11 @@
 // Copyright 2013 Linaro
 
 #include <linux/module.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/dmaengine_pcm.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/soc.h>
 
 #include "dma.h"
 

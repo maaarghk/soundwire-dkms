@@ -12,7 +12,7 @@
 #ifndef __LINUX_USB_ULPI_H
 #define __LINUX_USB_ULPI_H
 
-#include <linux/usb/otg.h>
+#include <dkms/linux/usb/otg.h>
 #include <linux/ulpi/regs.h>
 
 /*-------------------------------------------------------------------------*/

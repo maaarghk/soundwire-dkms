@@ -12,11 +12,11 @@
 #include <linux/slab.h>
 #include <linux/platform_device.h>
 #include <linux/regmap.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 #include "ml26124.h"
 
 #define DVOL_CTL_DVMUTE_ON		BIT(4)	/* Digital volume MUTE On */
@@ -372,7 +372,7 @@ static int ml26124_hw_params(struct snd_pcm_substream *substream,
 	return 0;
 }
 
-static int ml26124_mute(struct snd_soc_dai *dai, int mute)
+static int ml26124_mute(struct snd_soc_dai *dai, int mute, int direction)
 {
 	struct snd_soc_component *component = dai->component;
 	struct ml26124_priv *priv = snd_soc_component_get_drvdata(component);
@@ -492,9 +492,10 @@ static int ml26124_set_bias_level(struct snd_soc_component *component,
 
 static const struct snd_soc_dai_ops ml26124_dai_ops = {
 	.hw_params	= ml26124_hw_params,
-	.digital_mute	= ml26124_mute,
+	.mute_stream	= ml26124_mute,
 	.set_fmt	= ml26124_set_dai_fmt,
 	.set_sysclk	= ml26124_set_dai_sysclk,
+	.no_capture_mute = 1,
 };
 
 static struct snd_soc_dai_driver ml26124_dai = {

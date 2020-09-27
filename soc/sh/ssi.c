@@ -27,10 +27,10 @@
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/platform_device.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/initval.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc.h>
 #include <asm/io.h>
 
 #define SSICR	0x00
@@ -304,7 +304,7 @@ static int ssi_set_fmt(struct snd_soc_dai *dai, unsigned int fmt)
 		ssicr |= CR_SWS_MASTER | CR_SCK_MASTER;
 		break;
 	default:
-		pr_debug("ssi: invalid master/slave configuration\n");
+		pr_debug("ssi: invalid master/secondary configuration\n");
 		return -EINVAL;
 	}
 

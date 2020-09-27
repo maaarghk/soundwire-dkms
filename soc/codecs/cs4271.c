@@ -18,10 +18,10 @@
 #include <linux/of_device.h>
 #include <linux/of_gpio.h>
 #include <linux/regulator/consumer.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
-#include <sound/cs4271.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/cs4271.h>
 #include "cs4271.h"
 
 #define CS4271_PCM_FORMATS (SNDRV_PCM_FMTBIT_S16_LE | \
@@ -356,9 +356,9 @@ static int cs4271_hw_params(struct snd_pcm_substream *substream,
 		 */
 
 		if ((substream->stream == SNDRV_PCM_STREAM_PLAYBACK &&
-		     !dai->stream_active[SNDRV_PCM_STREAM_CAPTURE]) ||
+		     !snd_soc_dai_stream_active(dai, SNDRV_PCM_STREAM_CAPTURE)) ||
 		    (substream->stream == SNDRV_PCM_STREAM_CAPTURE &&
-		     !dai->stream_active[SNDRV_PCM_STREAM_PLAYBACK])) {
+		     !snd_soc_dai_stream_active(dai, SNDRV_PCM_STREAM_PLAYBACK))) {
 			ret = regmap_update_bits(cs4271->regmap, CS4271_MODE2,
 						 CS4271_MODE2_PDN,
 						 CS4271_MODE2_PDN);

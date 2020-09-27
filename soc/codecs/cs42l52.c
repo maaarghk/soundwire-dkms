@@ -21,14 +21,14 @@
 #include <linux/slab.h>
 #include <linux/workqueue.h>
 #include <linux/platform_device.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/initval.h>
-#include <sound/tlv.h>
-#include <sound/cs42l52.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/cs42l52.h>
 #include "cs42l52.h"
 
 struct sp_config {
@@ -784,7 +784,7 @@ static int cs42l52_set_fmt(struct snd_soc_dai *codec_dai, unsigned int fmt)
 	return 0;
 }
 
-static int cs42l52_digital_mute(struct snd_soc_dai *dai, int mute)
+static int cs42l52_mute(struct snd_soc_dai *dai, int mute, int direction)
 {
 	struct snd_soc_component *component = dai->component;
 
@@ -865,9 +865,10 @@ static int cs42l52_set_bias_level(struct snd_soc_component *component,
 
 static const struct snd_soc_dai_ops cs42l52_ops = {
 	.hw_params	= cs42l52_pcm_hw_params,
-	.digital_mute	= cs42l52_digital_mute,
+	.mute_stream	= cs42l52_mute,
 	.set_fmt	= cs42l52_set_fmt,
 	.set_sysclk	= cs42l52_set_sysclk,
+	.no_capture_mute = 1,
 };
 
 static struct snd_soc_dai_driver cs42l52_dai = {

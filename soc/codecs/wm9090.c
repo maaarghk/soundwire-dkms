@@ -14,10 +14,10 @@
 #include <linux/delay.h>
 #include <linux/regmap.h>
 #include <linux/slab.h>
-#include <sound/initval.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
-#include <sound/wm9090.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/wm9090.h>
 
 #include "wm9090.h"
 
@@ -139,7 +139,7 @@ static void wait_for_dc_servo(struct snd_soc_component *component)
 	do {
 		count++;
 		msleep(1);
-		reg = snd_soc_component_read32(component, WM9090_DC_SERVO_READBACK_0);
+		reg = snd_soc_component_read(component, WM9090_DC_SERVO_READBACK_0);
 		dev_dbg(component->dev, "DC servo status: %x\n", reg);
 	} while ((reg & WM9090_DCS_CAL_COMPLETE_MASK)
 		 != WM9090_DCS_CAL_COMPLETE_MASK && count < 1000);
@@ -239,7 +239,7 @@ static int hp_ev(struct snd_soc_dapm_widget *w,
 		 struct snd_kcontrol *kcontrol, int event)
 {
 	struct snd_soc_component *component = snd_soc_dapm_to_component(w->dapm);
-	unsigned int reg = snd_soc_component_read32(component, WM9090_ANALOGUE_HP_0);
+	unsigned int reg = snd_soc_component_read(component, WM9090_ANALOGUE_HP_0);
 
 	switch (event) {
 	case SND_SOC_DAPM_POST_PMU:

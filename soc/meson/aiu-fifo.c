@@ -5,9 +5,9 @@
 
 #include <linux/bitfield.h>
 #include <linux/clk.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
 
 #include "aiu-fifo.h"
 
@@ -26,7 +26,7 @@ static struct snd_soc_dai *aiu_fifo_dai(struct snd_pcm_substream *ss)
 {
 	struct snd_soc_pcm_runtime *rtd = ss->private_data;
 
-	return rtd->cpu_dai;
+	return asoc_rtd_to_cpu(rtd, 0);
 }
 
 snd_pcm_uframes_t aiu_fifo_pointer(struct snd_soc_component *component,
@@ -37,8 +37,7 @@ snd_pcm_uframes_t aiu_fifo_pointer(struct snd_soc_component *component,
 	struct snd_pcm_runtime *runtime = substream->runtime;
 	unsigned int addr;
 
-	snd_soc_component_read(component, fifo->mem_offset + AIU_MEM_RD,
-			       &addr);
+	addr = snd_soc_component_read(component, fifo->mem_offset + AIU_MEM_RD);
 
 	return bytes_to_frames(runtime, addr - (unsigned int)runtime->dma_addr);
 }

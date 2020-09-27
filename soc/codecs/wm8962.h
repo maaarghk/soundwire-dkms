@@ -11,7 +11,7 @@
 #define _WM8962_H
 
 #include <asm/types.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #define WM8962_SYSCLK_MCLK 0
 #define WM8962_SYSCLK_FLL  1

@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: (GPL-2.0 OR BSD-3-Clause)
+// SPDX-License-Identifier: (GPL-2.0-only OR BSD-3-Clause)
 //
 // This file is provided under a dual BSD/GPLv2 license.  When using or
 // redistributing this file, you may do so under either license.
@@ -123,13 +123,13 @@ const struct snd_sof_dsp_ops sof_apl_ops = {
 
 	.arch_ops = &sof_xtensa_arch_ops,
 };
-EXPORT_SYMBOL(sof_apl_ops);
+EXPORT_SYMBOL_NS(sof_apl_ops, SND_SOC_SOF_INTEL_HDA_COMMON);
 
 const struct sof_intel_dsp_desc apl_chip_info = {
 	/* Apollolake */
 	.cores_num = 2,
 	.init_core_mask = 1,
-	.cores_mask = HDA_DSP_CORE_MASK(0) | HDA_DSP_CORE_MASK(1),
+	.host_managed_cores_mask = GENMASK(1, 0),
 	.ipc_req = HDA_DSP_REG_HIPCI,
 	.ipc_req_mask = HDA_DSP_REG_HIPCI_BUSY,
 	.ipc_ack = HDA_DSP_REG_HIPCIE,
@@ -139,4 +139,4 @@ const struct sof_intel_dsp_desc apl_chip_info = {
 	.ssp_count = APL_SSP_COUNT,
 	.ssp_base_offset = APL_SSP_BASE_OFFSET,
 };
-EXPORT_SYMBOL(apl_chip_info);
+EXPORT_SYMBOL_NS(apl_chip_info, SND_SOC_SOF_INTEL_HDA_COMMON);

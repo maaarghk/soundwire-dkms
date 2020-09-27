@@ -13,9 +13,9 @@
 #include <linux/of_irq.h>
 #include <linux/sizes.h>
 
-#include <sound/asoundef.h>
-#include <sound/soc.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/asoundef.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/pcm_params.h>
 
 #define DRV_NAME "xlnx_formatter_pcm"
 

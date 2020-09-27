@@ -10,10 +10,10 @@
 #include <linux/mfd/wl1273-core.h>
 #include <linux/slab.h>
 #include <linux/module.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/initval.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/initval.h>
 
 #include "wl1273.h"
 
@@ -183,7 +183,7 @@ static int snd_wl1273_set_audio_route(struct snd_kcontrol *kcontrol,
 		return 0;
 
 	/* Do not allow changes while stream is running */
-	if (snd_soc_component_is_active(component))
+	if (snd_soc_component_active(component))
 		return -EPERM;
 
 	if (ucontrol->value.enumerated.item[0] >=  ARRAY_SIZE(wl1273_audio_route))

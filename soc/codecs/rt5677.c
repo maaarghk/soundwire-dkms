@@ -24,13 +24,13 @@
 #include <linux/interrupt.h>
 #include <linux/irqdomain.h>
 #include <linux/workqueue.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/initval.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/tlv.h>
 
 #include "rl6231.h"
 #include "rt5677.h"
@@ -4609,7 +4609,7 @@ static int rt5677_set_tdm_slot(struct snd_soc_dai *dai, unsigned int tx_mask,
 		break;
 	case 25:
 		slot_width_25 = 0x8080;
-		/* fall through */
+		fallthrough;
 	case 24:
 		val |= (2 << 8);
 		break;

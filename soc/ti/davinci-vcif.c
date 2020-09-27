@@ -15,12 +15,12 @@
 #include <linux/io.h>
 #include <linux/mfd/davinci_voicecodec.h>
 
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/initval.h>
-#include <sound/soc.h>
-#include <sound/dmaengine_pcm.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/dmaengine_pcm.h>
 
 #include "edma-pcm.h"
 #include "davinci-i2s.h"
@@ -41,9 +41,9 @@ struct davinci_vcif_dev {
 
 static void davinci_vcif_start(struct snd_pcm_substream *substream)
 {
-	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+	struct snd_soc_pcm_runtime *rtd = asoc_substream_to_rtd(substream);
 	struct davinci_vcif_dev *davinci_vcif_dev =
-			snd_soc_dai_get_drvdata(rtd->cpu_dai);
+			snd_soc_dai_get_drvdata(asoc_rtd_to_cpu(rtd, 0));
 	struct davinci_vc *davinci_vc = davinci_vcif_dev->davinci_vc;
 	u32 w;
 
@@ -60,9 +60,9 @@ static void davinci_vcif_start(struct snd_pcm_substream *substream)
 
 static void davinci_vcif_stop(struct snd_pcm_substream *substream)
 {
-	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+	struct snd_soc_pcm_runtime *rtd = asoc_substream_to_rtd(substream);
 	struct davinci_vcif_dev *davinci_vcif_dev =
-			snd_soc_dai_get_drvdata(rtd->cpu_dai);
+			snd_soc_dai_get_drvdata(asoc_rtd_to_cpu(rtd, 0));
 	struct davinci_vc *davinci_vc = davinci_vcif_dev->davinci_vc;
 	u32 w;
 

@@ -15,12 +15,12 @@
 #include <linux/i2c.h>
 #include <linux/regmap.h>
 #include <linux/slab.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/initval.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/tlv.h>
 
 #define SSM4567_REG_POWER_CTRL		0x00
 #define SSM4567_REG_AMP_SNS_CTRL		0x01
@@ -220,7 +220,7 @@ static int ssm4567_hw_params(struct snd_pcm_substream *substream,
 				SSM4567_DAC_FS_MASK, dacfs);
 }
 
-static int ssm4567_mute(struct snd_soc_dai *dai, int mute)
+static int ssm4567_mute(struct snd_soc_dai *dai, int mute, int direction)
 {
 	struct ssm4567 *ssm4567 = snd_soc_component_get_drvdata(dai->component);
 	unsigned int val;
@@ -390,9 +390,10 @@ static int ssm4567_set_bias_level(struct snd_soc_component *component,
 
 static const struct snd_soc_dai_ops ssm4567_dai_ops = {
 	.hw_params	= ssm4567_hw_params,
-	.digital_mute	= ssm4567_mute,
+	.mute_stream	= ssm4567_mute,
 	.set_fmt	= ssm4567_set_dai_fmt,
 	.set_tdm_slot	= ssm4567_set_tdm_slot,
+	.no_capture_mute = 1,
 };
 
 static struct snd_soc_dai_driver ssm4567_dai = {

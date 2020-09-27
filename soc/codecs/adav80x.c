@@ -12,10 +12,10 @@
 #include <linux/regmap.h>
 #include <linux/slab.h>
 
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 
 #include "adav80x.h"
 
@@ -647,7 +647,7 @@ static int adav80x_set_pll(struct snd_soc_component *component, int pll_id,
 			pll_ctrl1 |= ADAV80X_PLL_CTRL1_PLLDIV;
 			break;
 		}
-		/* fall through */
+		fallthrough;
 	default:
 		return -EINVAL;
 	}
@@ -725,7 +725,7 @@ static int adav80x_dai_startup(struct snd_pcm_substream *substream,
 	struct snd_soc_component *component = dai->component;
 	struct adav80x *adav80x = snd_soc_component_get_drvdata(component);
 
-	if (!snd_soc_component_is_active(component) || !adav80x->rate)
+	if (!snd_soc_component_active(component) || !adav80x->rate)
 		return 0;
 
 	return snd_pcm_hw_constraint_single(substream->runtime,
@@ -738,7 +738,7 @@ static void adav80x_dai_shutdown(struct snd_pcm_substream *substream,
 	struct snd_soc_component *component = dai->component;
 	struct adav80x *adav80x = snd_soc_component_get_drvdata(component);
 
-	if (!snd_soc_component_is_active(component))
+	if (!snd_soc_component_active(component))
 		adav80x->rate = 0;
 }
 

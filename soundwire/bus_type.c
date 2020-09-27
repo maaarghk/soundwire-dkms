@@ -2,11 +2,12 @@
 // Copyright(c) 2015-17 Intel Corporation.
 
 #include <linux/module.h>
-#include <linux/mod_devicetable.h>
+#include <dkms/linux/mod_devicetable.h>
 #include <linux/pm_domain.h>
 #include <dkms/linux/soundwire/sdw.h>
 #include <dkms/linux/soundwire/sdw_type.h>
 #include "bus.h"
+#include "sysfs_local.h"
 
 /**
  * sdw_get_device_id - find the matching SoundWire device id
@@ -19,14 +20,16 @@
 static const struct sdw_device_id *
 sdw_get_device_id(struct sdw_slave *slave, struct sdw_driver *drv)
 {
-	const struct sdw_device_id *id = drv->id_table;
+	const struct sdw_device_id *id;
 
-	while (id && id->mfg_id) {
+	for (id = drv->id_table; id && id->mfg_id; id++)
 		if (slave->id.mfg_id == id->mfg_id &&
-		    slave->id.part_id == id->part_id)
+		    slave->id.part_id == id->part_id  &&
+		    (!id->sdw_version ||
+		     slave->id.sdw_version == id->sdw_version) &&
+		    (!id->class_id ||
+		     slave->id.class_id == id->class_id))
 			return id;
-		id++;
-	}
 
 	return NULL;
 }
@@ -35,8 +38,6 @@ static int sdw_bus_match(struct device *dev, struct device_driver *ddrv)
 {
 	struct sdw_slave *slave;
 	struct sdw_driver *drv;
-	struct sdw_master_device *md;
-	struct sdw_master_driver *mdrv;
 	int ret = 0;
 
 	if (is_sdw_slave(dev)) {
@@ -44,54 +45,25 @@ static int sdw_bus_match(struct device *dev, struct device_driver *ddrv)
 		drv = drv_to_sdw_driver(ddrv);
 
 		ret = !!sdw_get_device_id(slave, drv);
-	} else {
-		md = dev_to_sdw_master_device(dev);
-		mdrv = drv_to_sdw_master_driver(ddrv);
-
-		/*
-		 * we don't have any hardware information so
-		 * match with a hopefully unique string
-		 */
-		ret = !strncmp(md->master_name, mdrv->driver.name,
-			       strlen(md->master_name));
 	}
 	return ret;
 }
 
-static int sdw_slave_modalias(const struct sdw_slave *slave, char *buf,
-			      size_t size)
+int sdw_slave_modalias(const struct sdw_slave *slave, char *buf, size_t size)
 {
-	/* modalias is sdw:m<mfg_id>p<part_id> */
+	/* modalias is sdw:m<mfg_id>p<part_id>v<version>c<class_id> */
 
-	return snprintf(buf, size, "sdw:m%04Xp%04X\n",
-			slave->id.mfg_id, slave->id.part_id);
+	return snprintf(buf, size, "sdw:m%04Xp%04Xv%02Xc%02X\n",
+			slave->id.mfg_id, slave->id.part_id,
+			slave->id.sdw_version, slave->id.class_id);
 }
 
-static int sdw_master_modalias(const struct sdw_master_device *md,
-			       char *buf, size_t size)
+int sdw_slave_uevent(struct device *dev, struct kobj_uevent_env *env)
 {
-	/* modalias is sdw:<string> since we don't have any hardware info */
-
-	return snprintf(buf, size, "sdw:%s\n",
-			md->master_name);
-}
-
-static int sdw_uevent(struct device *dev, struct kobj_uevent_env *env)
-{
-	struct sdw_slave *slave;
-	struct sdw_master_device *md;
+	struct sdw_slave *slave = dev_to_sdw_dev(dev);
 	char modalias[32];
 
-	if (is_sdw_slave(dev)) {
-		slave = dev_to_sdw_dev(dev);
-
-		sdw_slave_modalias(slave, modalias, sizeof(modalias));
-
-	} else {
-		md = dev_to_sdw_master_device(dev);
-
-		sdw_master_modalias(md, modalias, sizeof(modalias));
-	}
+	sdw_slave_modalias(slave, modalias, sizeof(modalias));
 
 	if (add_uevent_var(env, "MODALIAS=%s", modalias))
 		return -ENOMEM;
@@ -102,7 +74,6 @@ static int sdw_uevent(struct device *dev, struct kobj_uevent_env *env)
 struct bus_type sdw_bus_type = {
 	.name = "soundwire",
 	.match = sdw_bus_match,
-	.uevent = sdw_uevent,
 };
 EXPORT_SYMBOL_GPL(sdw_bus_type);
 
@@ -137,6 +108,11 @@ static int sdw_drv_probe(struct device *dev)
 	if (slave->ops && slave->ops->read_prop)
 		slave->ops->read_prop(slave);
 
+	/* init the sysfs as we have properties now */
+	ret = sdw_slave_sysfs_init(slave);
+	if (ret < 0)
+		dev_warn(dev, "Slave sysfs init failed:%d\n", ret);
+
 	/*
 	 * Check for valid clk_stop_timeout, use DisCo worst case value of
 	 * 300ms
@@ -151,6 +127,8 @@ static int sdw_drv_probe(struct device *dev)
 
 	slave->probed = true;
 	complete(&slave->probe_complete);
+
+	dev_dbg(dev, "probe complete\n");
 
 	return 0;
 }
@@ -217,94 +195,6 @@ void sdw_unregister_driver(struct sdw_driver *drv)
 	driver_unregister(&drv->driver);
 }
 EXPORT_SYMBOL_GPL(sdw_unregister_driver);
-
-static int sdw_master_drv_probe(struct device *dev)
-{
-	struct sdw_master_device *md = dev_to_sdw_master_device(dev);
-	struct sdw_master_driver *mdrv = drv_to_sdw_master_driver(dev->driver);
-	int ret;
-
-	/*
-	 * attach to power domain but don't turn on (last arg)
-	 */
-	ret = dev_pm_domain_attach(dev, false);
-	if (ret)
-		return ret;
-
-	ret = mdrv->probe(md, md->pdata);
-	if (ret) {
-		dev_err(dev, "Probe of %s failed: %d\n",
-			mdrv->driver.name, ret);
-		dev_pm_domain_detach(dev, false);
-		return ret;
-	}
-
-	return 0;
-}
-
-static int sdw_master_drv_remove(struct device *dev)
-{
-	struct sdw_master_device *md = dev_to_sdw_master_device(dev);
-	struct sdw_master_driver *mdrv = drv_to_sdw_master_driver(dev->driver);
-	int ret = 0;
-
-	if (mdrv->remove)
-		ret = mdrv->remove(md);
-
-	dev_pm_domain_detach(dev, false);
-
-	return ret;
-}
-
-static void sdw_master_drv_shutdown(struct device *dev)
-{
-	struct sdw_master_device *md = dev_to_sdw_master_device(dev);
-	struct sdw_master_driver *mdrv = drv_to_sdw_master_driver(dev->driver);
-
-	if (mdrv->shutdown)
-		mdrv->shutdown(md);
-}
-
-/**
- * __sdw_register_master_driver() - register a SoundWire Master driver
- * @mdrv: 'Master driver' to register
- * @owner: owning module/driver
- *
- * Return: zero on success, else a negative error code.
- */
-int __sdw_register_master_driver(struct sdw_master_driver *mdrv,
-				 struct module *owner)
-{
-	mdrv->driver.bus = &sdw_bus_type;
-
-	if (!mdrv->probe) {
-		pr_err("driver %s didn't provide SDW probe routine\n",
-		       mdrv->driver.name);
-		return -EINVAL;
-	}
-
-	mdrv->driver.owner = owner;
-	mdrv->driver.probe = sdw_master_drv_probe;
-
-	if (mdrv->remove)
-		mdrv->driver.remove = sdw_master_drv_remove;
-
-	if (mdrv->shutdown)
-		mdrv->driver.shutdown = sdw_master_drv_shutdown;
-
-	return driver_register(&mdrv->driver);
-}
-EXPORT_SYMBOL_GPL(__sdw_register_master_driver);
-
-/**
- * sdw_unregister_master_driver() - unregisters the SoundWire Master driver
- * @mdrv: driver to unregister
- */
-void sdw_unregister_master_driver(struct sdw_master_driver *mdrv)
-{
-	driver_unregister(&mdrv->driver);
-}
-EXPORT_SYMBOL_GPL(sdw_unregister_master_driver);
 
 static int __init sdw_bus_init(void)
 {

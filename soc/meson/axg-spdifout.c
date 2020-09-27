@@ -7,10 +7,10 @@
 #include <linux/module.h>
 #include <linux/of_platform.h>
 #include <linux/regmap.h>
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
-#include <sound/pcm_params.h>
-#include <sound/pcm_iec958.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/pcm_iec958.h>
 
 /*
  * NOTE:
@@ -108,7 +108,7 @@ static int axg_spdifout_trigger(struct snd_pcm_substream *substream, int cmd,
 	}
 }
 
-static int axg_spdifout_digital_mute(struct snd_soc_dai *dai, int mute)
+static int axg_spdifout_mute(struct snd_soc_dai *dai, int mute, int direction)
 {
 	struct axg_spdifout *priv = snd_soc_dai_get_drvdata(dai);
 
@@ -285,10 +285,11 @@ static void axg_spdifout_shutdown(struct snd_pcm_substream *substream,
 
 static const struct snd_soc_dai_ops axg_spdifout_ops = {
 	.trigger	= axg_spdifout_trigger,
-	.digital_mute	= axg_spdifout_digital_mute,
+	.mute_stream	= axg_spdifout_mute,
 	.hw_params	= axg_spdifout_hw_params,
 	.startup	= axg_spdifout_startup,
 	.shutdown	= axg_spdifout_shutdown,
+	.no_capture_mute = 1,
 };
 
 static struct snd_soc_dai_driver axg_spdifout_dai_drv[] = {

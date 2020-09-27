@@ -11,9 +11,9 @@
 
 #include <linux/slab.h>
 #include <linux/pci.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <uapi/sound/skl-tplg-interface.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/uapi/sound/skl-tplg-interface.h>
 #include "skl-sst-dsp.h"
 #include "cnl-sst-dsp.h"
 #include "skl-sst-ipc.h"

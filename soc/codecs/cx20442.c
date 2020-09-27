@@ -14,9 +14,9 @@
 #include <linux/module.h>
 #include <linux/regulator/consumer.h>
 
-#include <sound/core.h>
-#include <sound/initval.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc.h>
 
 #include "cx20442.h"
 

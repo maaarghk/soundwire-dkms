@@ -13,7 +13,7 @@
 #include <linux/i2c.h>
 #include <linux/module.h>
 #include <linux/pm_runtime.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include "cs42xx8.h"
 

@@ -14,8 +14,8 @@
 #ifndef __SST_ATOM_CONTROLS_H__
 #define __SST_ATOM_CONTROLS_H__
 
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 
 enum {
 	MERR_DPCM_AUDIO = 0,
@@ -410,7 +410,7 @@ struct sst_cmd_set_gain_dual {
 struct sst_cmd_set_params {
 	struct sst_destination_id dst;
 	u16 command_id;
-	char params[0];
+	char params[];
 } __packed;
 
 

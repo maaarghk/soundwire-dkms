@@ -6,11 +6,11 @@
 #include <linux/bitfield.h>
 #include <linux/clk.h>
 #include <linux/module.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/pcm_params.h>
 #include <linux/regmap.h>
 #include <linux/reset.h>
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
 
 #include <dt-bindings/sound/meson-g12a-tohdmitx.h>
 #include "meson-codec-glue.h"

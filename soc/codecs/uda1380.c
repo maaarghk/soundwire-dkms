@@ -20,12 +20,12 @@
 #include <linux/delay.h>
 #include <linux/i2c.h>
 #include <linux/workqueue.h>
-#include <sound/core.h>
-#include <sound/control.h>
-#include <sound/initval.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
-#include <sound/uda1380.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/uda1380.h>
 
 #include "uda1380.h"
 
@@ -110,7 +110,7 @@ static int uda1380_write(struct snd_soc_component *component, unsigned int reg,
 	/* the interpolator & decimator regs must only be written when the
 	 * codec DAI is active.
 	 */
-	if (!snd_soc_component_is_active(component) && (reg >= UDA1380_MVOL))
+	if (!snd_soc_component_active(component) && (reg >= UDA1380_MVOL))
 		return 0;
 	pr_debug("uda1380: hw write %x val %x\n", reg, value);
 	if (i2c_master_send(uda1380->i2c, data, 3) == 3) {

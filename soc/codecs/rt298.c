@@ -16,16 +16,16 @@
 #include <linux/spi/spi.h>
 #include <linux/dmi.h>
 #include <linux/acpi.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/initval.h>
-#include <sound/tlv.h>
-#include <sound/jack.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/jack.h>
 #include <linux/workqueue.h>
-#include <sound/rt298.h>
+#include <dkms/sound/rt298.h>
 
 #include "rl6347a.h"
 #include "rt298.h"
@@ -508,7 +508,7 @@ static int rt298_adc_event(struct snd_soc_dapm_widget *w,
 			VERB_CMD(AC_VERB_SET_AMP_GAIN_MUTE, nid, 0),
 			0x7080, 0x7000);
 		 /* If MCLK doesn't exist, reset AD filter */
-		if (!(snd_soc_component_read32(component, RT298_VAD_CTRL) & 0x200)) {
+		if (!(snd_soc_component_read(component, RT298_VAD_CTRL) & 0x200)) {
 			pr_info("NO MCLK\n");
 			switch (nid) {
 			case RT298_ADC_IN1:
@@ -1145,11 +1145,13 @@ static const struct i2c_device_id rt298_i2c_id[] = {
 };
 MODULE_DEVICE_TABLE(i2c, rt298_i2c_id);
 
+#ifdef CONFIG_ACPI
 static const struct acpi_device_id rt298_acpi_match[] = {
 	{ "INT343A", 0 },
 	{},
 };
 MODULE_DEVICE_TABLE(acpi, rt298_acpi_match);
+#endif
 
 static const struct dmi_system_id force_combo_jack_table[] = {
 	{

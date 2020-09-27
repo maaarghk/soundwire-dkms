@@ -9,9 +9,8 @@
 #include <linux/module.h>
 #include <linux/gpio.h>
 #include <linux/of_gpio.h>
-#include <sound/soc.h>
-#include <sound/jack.h>
-#include <sound/hdmi-codec.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/jack.h>
 #include "../../codecs/rt5645.h"
 
 #define MCLK_FOR_CODECS		12288000
@@ -58,7 +57,7 @@ static const struct snd_kcontrol_new mt8173_rt5650_controls[] = {
 static int mt8173_rt5650_hw_params(struct snd_pcm_substream *substream,
 				   struct snd_pcm_hw_params *params)
 {
-	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+	struct snd_soc_pcm_runtime *rtd = asoc_substream_to_rtd(substream);
 	unsigned int mclk_clock;
 	struct snd_soc_dai *codec_dai;
 	int i, ret;
@@ -104,8 +103,8 @@ static struct snd_soc_jack mt8173_rt5650_jack, mt8173_rt5650_hdmi_jack;
 static int mt8173_rt5650_init(struct snd_soc_pcm_runtime *runtime)
 {
 	struct snd_soc_card *card = runtime->card;
-	struct snd_soc_component *component = runtime->codec_dais[0]->component;
-	const char *codec_capture_dai = runtime->codec_dais[1]->name;
+	struct snd_soc_component *component = asoc_rtd_to_codec(runtime, 0)->component;
+	const char *codec_capture_dai = asoc_rtd_to_codec(runtime, 1)->name;
 	int ret;
 
 	rt5645_sel_asrc_clk_src(component,
@@ -154,8 +153,8 @@ static int mt8173_rt5650_hdmi_init(struct snd_soc_pcm_runtime *rtd)
 	if (ret)
 		return ret;
 
-	return hdmi_codec_set_jack_detect(rtd->codec_dai->component,
-					  &mt8173_rt5650_hdmi_jack);
+	return snd_soc_component_set_jack(asoc_rtd_to_codec(rtd, 0)->component,
+					  &mt8173_rt5650_hdmi_jack, NULL);
 }
 
 enum {

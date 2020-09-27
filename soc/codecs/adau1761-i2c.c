@@ -7,10 +7,10 @@
  */
 
 #include <linux/i2c.h>
-#include <linux/mod_devicetable.h>
+#include <dkms/linux/mod_devicetable.h>
 #include <linux/module.h>
 #include <linux/regmap.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include "adau1761.h"
 

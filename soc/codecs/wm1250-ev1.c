@@ -11,9 +11,9 @@
 #include <linux/i2c.h>
 #include <linux/gpio.h>
 
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/wm1250-ev1.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/wm1250-ev1.h>
 
 static const char *wm1250_gpio_names[WM1250_EV1_NUM_GPIOS] = {
 	"WM1250 CLK_ENA",

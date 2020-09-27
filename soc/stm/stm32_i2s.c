@@ -16,8 +16,8 @@
 #include <linux/reset.h>
 #include <linux/spinlock.h>
 
-#include <sound/dmaengine_pcm.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/pcm_params.h>
 
 #define STM32_I2S_CR1_REG	0x0
 #define STM32_I2S_CFG1_REG	0x08

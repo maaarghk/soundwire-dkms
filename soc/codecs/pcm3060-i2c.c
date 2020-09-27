@@ -6,7 +6,7 @@
 
 #include <linux/i2c.h>
 #include <linux/module.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include "pcm3060.h"
 

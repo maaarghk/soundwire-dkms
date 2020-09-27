@@ -11,7 +11,7 @@
 #ifndef __OMAP_MCBSP_H__
 #define __OMAP_MCBSP_H__
 
-#include <sound/dmaengine_pcm.h>
+#include <dkms/sound/dmaengine_pcm.h>
 
 /* Source clocks for McBSP sample rate generator */
 enum omap_mcbsp_clksrg_clk {

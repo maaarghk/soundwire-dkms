@@ -15,7 +15,7 @@
 #include <linux/clk-provider.h>
 #include <linux/regmap.h>
 #include <linux/regulator/consumer.h>
-#include <sound/da7219.h>
+#include <dkms/sound/da7219.h>
 
 /*
  * Registers
@@ -817,6 +817,7 @@ struct da7219_priv {
 
 #ifdef CONFIG_COMMON_CLK
 	struct clk_hw dai_clks_hw[DA7219_DAI_NUM_CLKS];
+	struct clk_hw_onecell_data *clk_hw_data;
 #endif
 	struct clk_lookup *dai_clks_lookup[DA7219_DAI_NUM_CLKS];
 	struct clk *dai_clks[DA7219_DAI_NUM_CLKS];

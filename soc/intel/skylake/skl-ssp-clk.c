@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-2.0
+// SPDX-License-Identifier: GPL-2.0-only
 // Copyright(c) 2015-17 Intel Corporation
 
 /*
@@ -11,7 +11,7 @@
 #include <linux/platform_device.h>
 #include <linux/clk-provider.h>
 #include <linux/clkdev.h>
-#include <sound/intel-nhlt.h>
+#include <dkms/sound/intel-nhlt.h>
 #include "skl.h"
 #include "skl-ssp-clk.h"
 #include "skl-topology.h"
