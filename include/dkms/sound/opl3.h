@@ -35,14 +35,14 @@
  *      in the second half of the voice.
  */
 
-#include <dkms/sound/core.h>
-#include <dkms/sound/hwdep.h>
-#include <dkms/sound/timer.h>
-#include <dkms/sound/seq_midi_emul.h>
-#include <dkms/sound/seq_oss.h>
-#include <dkms/sound/seq_oss_legacy.h>
-#include <dkms/sound/seq_device.h>
-#include <dkms/sound/asound_fm.h>
+#include <sound/core.h>
+#include <sound/hwdep.h>
+#include <sound/timer.h>
+#include <sound/seq_midi_emul.h>
+#include <sound/seq_oss.h>
+#include <sound/seq_oss_legacy.h>
+#include <sound/seq_device.h>
+#include <sound/asound_fm.h>
 
 /*
  *    Register numbers for the global registers

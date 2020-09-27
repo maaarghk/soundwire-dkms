@@ -7,7 +7,7 @@
  *  Copyright (c) 2006 by Jaroslav Kysela <perex@perex.cz>
  */
 
-#include <dkms/uapi/sound/tlv.h>
+#include <uapi/sound/tlv.h>
 
 /* For historical reasons, these macros are aliases to the ones in UAPI. */
 #define TLV_ITEM			SNDRV_CTL_TLVD_ITEM

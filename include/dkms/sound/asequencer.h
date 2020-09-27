@@ -8,8 +8,8 @@
 #define __SOUND_ASEQUENCER_H
 
 #include <linux/ioctl.h>
-#include <dkms/sound/asound.h>
-#include <dkms/uapi/sound/asequencer.h>
+#include <sound/asound.h>
+#include <uapi/sound/asequencer.h>
 
 /* helper macro */
 #define snd_seq_event_bounce_ext_data(ev) ((void*)((char *)(ev)->data.ext.ptr + sizeof(struct snd_seq_event_bounce)))

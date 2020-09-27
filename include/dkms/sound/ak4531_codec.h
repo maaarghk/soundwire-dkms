@@ -10,8 +10,8 @@
  *  by Intel Corporation (http://developer.intel.com).
  */
 
-#include <dkms/sound/info.h>
-#include <dkms/sound/control.h>
+#include <sound/info.h>
+#include <sound/control.h>
 
 /*
  *  ASAHI KASEI - AK4531 codec

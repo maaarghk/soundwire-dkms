@@ -9,8 +9,8 @@
 #ifndef __SIMPLE_CARD_H
 #define __SIMPLE_CARD_H
 
-#include <dkms/sound/soc.h>
-#include <dkms/sound/simple_card_utils.h>
+#include <sound/soc.h>
+#include <sound/simple_card_utils.h>
 
 struct asoc_simple_card_info {
 	const char *name;

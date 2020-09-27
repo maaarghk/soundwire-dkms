@@ -7,7 +7,7 @@
  *  Copyright (c) by Jaroslav Kysela <perex@perex.cz>,
  */
 
-#include <dkms/sound/i2c.h>
+#include <sound/i2c.h>
 
 #define CS8427_BASE_ADDR	0x10	/* base I2C address */
 

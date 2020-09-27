@@ -8,8 +8,6 @@
 #ifndef __INTEL_DSP_CONFIG_H__
 #define __INTEL_DSP_CONFIG_H__
 
-#define CONFIG_SND_INTEL_DSP_CONFIG 1
-
 struct pci_dev;
 
 enum {

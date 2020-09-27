@@ -9,7 +9,7 @@
 #ifndef _UDA134X_H
 #define _UDA134X_H
 
-#include <dkms/sound/l3.h>
+#include <sound/l3.h>
 
 struct uda134x_platform_data {
 	struct l3_pins l3;

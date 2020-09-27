@@ -13,7 +13,7 @@
 #include <linux/extcon.h>
 #include <linux/notifier.h>
 #include <linux/usb.h>
-#include <dkms/uapi/linux/usb/charger.h>
+#include <uapi/linux/usb/charger.h>
 
 enum usb_phy_interface {
 	USBPHY_INTERFACE_MODE_UNKNOWN,

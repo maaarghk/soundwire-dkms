@@ -2,10 +2,10 @@
 #ifndef __SOUND_SND_WAVEFRONT_H__
 #define __SOUND_SND_WAVEFRONT_H__
 
-#include <dkms/sound/mpu401.h>
-#include <dkms/sound/hwdep.h>
-#include <dkms/sound/rawmidi.h>
-#include <dkms/sound/wavefront.h>  /* generic OSS/ALSA/user-level wavefront header */
+#include <sound/mpu401.h>
+#include <sound/hwdep.h>
+#include <sound/rawmidi.h>
+#include <sound/wavefront.h>  /* generic OSS/ALSA/user-level wavefront header */
 
 /* MIDI interface */
 

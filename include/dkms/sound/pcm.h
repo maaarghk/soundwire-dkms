@@ -8,9 +8,9 @@
  *                   Abramo Bagnara <abramo@alsa-project.org>
  */
 
-#include <dkms/sound/asound.h>
-#include <dkms/sound/memalloc.h>
-#include <dkms/sound/minors.h>
+#include <sound/asound.h>
+#include <sound/memalloc.h>
+#include <sound/minors.h>
 #include <linux/poll.h>
 #include <linux/mm.h>
 #include <linux/bitops.h>
@@ -21,7 +21,7 @@
 #define snd_pcm_chip(pcm) ((pcm)->private_data)
 
 #if IS_ENABLED(CONFIG_SND_PCM_OSS)
-#include <dkms/sound/pcm_oss.h>
+#include <sound/pcm_oss.h>
 #endif
 
 /*

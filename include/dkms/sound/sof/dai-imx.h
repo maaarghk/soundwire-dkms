@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: (GPL-2.0 OR BSD-3-Clause) */
+/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-3-Clause) */
 /*
  * Copyright 2019 NXP
  *
@@ -8,7 +8,7 @@
 #ifndef __INCLUDE_SOUND_SOF_DAI_IMX_H__
 #define __INCLUDE_SOUND_SOF_DAI_IMX_H__
 
-#include <dkms/sound/sof/header.h>
+#include <sound/sof/header.h>
 
 /* ESAI Configuration Request - SOF_IPC_DAI_ESAI_CONFIG */
 struct sof_ipc_dai_esai_params {

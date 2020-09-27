@@ -8,19 +8,19 @@
 #define __SOUND_EMU10K1_H
 
 
-#include <dkms/sound/pcm.h>
-#include <dkms/sound/rawmidi.h>
-#include <dkms/sound/hwdep.h>
-#include <dkms/sound/ac97_codec.h>
-#include <dkms/sound/util_mem.h>
-#include <dkms/sound/pcm-indirect.h>
-#include <dkms/sound/timer.h>
+#include <sound/pcm.h>
+#include <sound/rawmidi.h>
+#include <sound/hwdep.h>
+#include <sound/ac97_codec.h>
+#include <sound/util_mem.h>
+#include <sound/pcm-indirect.h>
+#include <sound/timer.h>
 #include <linux/interrupt.h>
 #include <linux/mutex.h>
 #include <linux/firmware.h>
 #include <linux/io.h>
 
-#include <dkms/uapi/sound/emu10k1.h>
+#include <uapi/sound/emu10k1.h>
 
 /* ------------------- DEFINES -------------------- */
 

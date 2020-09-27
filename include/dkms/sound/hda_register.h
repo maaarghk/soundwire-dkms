@@ -9,7 +9,7 @@
 #define __SOUND_HDA_REGISTER_H
 
 #include <linux/io.h>
-#include <dkms/sound/hdaudio.h>
+#include <sound/hdaudio.h>
 
 #define AZX_REG_GCAP			0x00
 #define   AZX_GCAP_64OK		(1 << 0)   /* 64bit address support */
@@ -119,7 +119,7 @@ enum { SDI0, SDI1, SDI2, SDI3, SDO0, SDO1, SDO2, SDO3 };
 #define AZX_REG_VS_EM3U			0x103C
 #define AZX_REG_VS_EM4L			0x1040
 #define AZX_REG_VS_EM4U			0x1044
-#define AZX_REG_VS_LTRC			0x1048
+#define AZX_REG_VS_LTRP			0x1048
 #define AZX_REG_VS_D0I3C		0x104A
 #define AZX_REG_VS_PCE			0x104B
 #define AZX_REG_VS_L2MAGC		0x1050

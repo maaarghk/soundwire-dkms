@@ -10,8 +10,8 @@
 #ifndef __SOUND_VX_COMMON_H
 #define __SOUND_VX_COMMON_H
 
-#include <dkms/sound/pcm.h>
-#include <dkms/sound/hwdep.h>
+#include <sound/pcm.h>
+#include <sound/hwdep.h>
 #include <linux/interrupt.h>
 
 struct firmware;

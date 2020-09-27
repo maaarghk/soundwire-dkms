@@ -8,7 +8,7 @@
  *  Definitions of OSS compatible headers for Emu8000 device informations
  */
 
-#include <dkms/sound/seq_oss_legacy.h>
+#include <sound/seq_oss_legacy.h>
 
 /*
  * awe hardware controls

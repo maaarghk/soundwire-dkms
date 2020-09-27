@@ -8,7 +8,7 @@
  *  Copyright 2008 Wolfson Microelectronics plc
  */
 
-#include <dkms/sound/core.h>
+#include <sound/core.h>
 
 struct input_dev;
 

@@ -23,7 +23,7 @@
  *
  */
 
-#include <dkms/sound/asound.h>
+#include <sound/asound.h>
 
 /*
  * patch information record

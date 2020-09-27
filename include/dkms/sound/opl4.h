@@ -7,7 +7,7 @@
  * Copyright (c) 2003 by Clemens Ladisch <clemens@ladisch.de>
  */
 
-#include <dkms/sound/opl3.h>
+#include <sound/opl3.h>
 
 struct snd_opl4;
 

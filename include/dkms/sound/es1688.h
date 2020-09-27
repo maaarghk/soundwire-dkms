@@ -7,8 +7,8 @@
  *  Copyright (c) by Jaroslav Kysela <perex@perex.cz>
  */
 
-#include <dkms/sound/control.h>
-#include <dkms/sound/pcm.h>
+#include <sound/control.h>
+#include <sound/pcm.h>
 #include <linux/interrupt.h>
 
 #define ES1688_HW_AUTO		0x0000

@@ -8,10 +8,10 @@
 #ifndef __SOUND_SB16_CSP_H
 #define __SOUND_SB16_CSP_H
 
-#include <dkms/sound/sb.h>
-#include <dkms/sound/hwdep.h>
+#include <sound/sb.h>
+#include <sound/hwdep.h>
 #include <linux/firmware.h>
-#include <dkms/uapi/sound/sb16_csp.h>
+#include <uapi/sound/sb16_csp.h>
 
 struct snd_sb_csp;
 

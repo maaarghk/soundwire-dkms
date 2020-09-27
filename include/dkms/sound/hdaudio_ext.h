@@ -2,7 +2,7 @@
 #ifndef __SOUND_HDAUDIO_EXT_H
 #define __SOUND_HDAUDIO_EXT_H
 
-#include <dkms/sound/hdaudio.h>
+#include <sound/hdaudio.h>
 
 int snd_hdac_ext_bus_init(struct hdac_bus *bus, struct device *dev,
 		      const struct hdac_bus_ops *ops,
@@ -10,7 +10,7 @@ int snd_hdac_ext_bus_init(struct hdac_bus *bus, struct device *dev,
 
 void snd_hdac_ext_bus_exit(struct hdac_bus *bus);
 int snd_hdac_ext_bus_device_init(struct hdac_bus *bus, int addr,
-						struct hdac_device *hdev);
+				struct hdac_device *hdev, int type);
 void snd_hdac_ext_bus_device_exit(struct hdac_device *hdev);
 void snd_hdac_ext_bus_device_remove(struct hdac_bus *bus);
 

@@ -7,7 +7,7 @@
  *  Copyright (c) by Jaroslav Kysela <perex@perex.cz>
  */
 
-#include <dkms/sound/rawmidi.h>
+#include <sound/rawmidi.h>
 #include <linux/interrupt.h>
 
 #define MPU401_HW_MPU401		1	/* native MPU401 */

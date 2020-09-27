@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: (GPL-2.0 OR BSD-3-Clause) */
+/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-3-Clause) */
 /*
  * This file is provided under a dual BSD/GPLv2 license.  When using or
  * redistributing this file, you may do so under either license.
@@ -9,8 +9,8 @@
 #ifndef __INCLUDE_SOUND_SOF_CONTROL_H__
 #define __INCLUDE_SOUND_SOF_CONTROL_H__
 
-#include <dkms/uapi/sound/sof/header.h>
-#include <dkms/sound/sof/header.h>
+#include <uapi/sound/sof/header.h>
+#include <sound/sof/header.h>
 
 /*
  * Component Mixers and Controls

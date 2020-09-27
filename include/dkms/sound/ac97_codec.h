@@ -13,10 +13,10 @@
 #include <linux/bitops.h>
 #include <linux/device.h>
 #include <linux/workqueue.h>
-#include <dkms/sound/ac97/regs.h>
-#include <dkms/sound/pcm.h>
-#include <dkms/sound/control.h>
-#include <dkms/sound/info.h>
+#include <sound/ac97/regs.h>
+#include <sound/pcm.h>
+#include <sound/control.h>
+#include <sound/info.h>
 
 /* maximum number of devices on the AC97 bus */
 #define	AC97_BUS_MAX_DEVICES	4

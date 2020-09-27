@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: (GPL-2.0 OR BSD-3-Clause) */
+/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-3-Clause) */
 /*
  * This file is provided under a dual BSD/GPLv2 license.  When using or
  * redistributing this file, you may do so under either license.
@@ -12,8 +12,8 @@
 #define __INCLUDE_SOUND_SOF_H
 
 #include <linux/pci.h>
-#include <dkms/sound/soc.h>
-#include <dkms/sound/soc-acpi.h>
+#include <sound/soc.h>
+#include <sound/soc-acpi.h>
 
 struct snd_sof_dsp_ops;
 
@@ -65,6 +65,8 @@ struct sof_dev_desc {
 
 	/* alternate list of machines using this configuration */
 	struct snd_soc_acpi_mach *alt_machines;
+
+	bool use_acpi_target_states;
 
 	/* Platform resource indexes in BAR / ACPI resources. */
 	/* Must set to -1 if not used - add new items to end */

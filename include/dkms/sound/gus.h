@@ -7,11 +7,11 @@
  *  Copyright (c) by Jaroslav Kysela <perex@perex.cz>
  */
 
-#include <dkms/sound/pcm.h>
-#include <dkms/sound/rawmidi.h>
-#include <dkms/sound/timer.h>
-#include <dkms/sound/seq_midi_emul.h>
-#include <dkms/sound/seq_device.h>
+#include <sound/pcm.h>
+#include <sound/rawmidi.h>
+#include <sound/timer.h>
+#include <sound/seq_midi_emul.h>
+#include <sound/seq_device.h>
 #include <linux/io.h>
 
 /* IO ports */
@@ -612,5 +612,9 @@ int snd_gus_dram_write(struct snd_gus_card *gus, char __user *ptr,
 		       unsigned int addr, unsigned int size);
 int snd_gus_dram_read(struct snd_gus_card *gus, char __user *ptr,
 		      unsigned int addr, unsigned int size, int rom);
+
+/* gus_timer.c */
+void snd_gf1_timers_init(struct snd_gus_card *gus);
+void snd_gf1_timers_done(struct snd_gus_card *gus);
 
 #endif /* __SOUND_GUS_H */

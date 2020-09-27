@@ -9,7 +9,7 @@
 
 #include <linux/poll.h>
 #include <linux/seq_file.h>
-#include <dkms/sound/core.h>
+#include <sound/core.h>
 
 /* buffer for information */
 struct snd_info_buffer {

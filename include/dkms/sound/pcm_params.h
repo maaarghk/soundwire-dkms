@@ -7,7 +7,7 @@
  *  Copyright (c) by Abramo Bagnara <abramo@alsa-project.org>
  */
 
-#include <dkms/sound/pcm.h>
+#include <sound/pcm.h>
 
 int snd_pcm_hw_param_first(struct snd_pcm_substream *pcm, 
 			   struct snd_pcm_hw_params *params,
@@ -22,11 +22,6 @@ int snd_pcm_hw_param_value(const struct snd_pcm_hw_params *params,
 #define SNDRV_MASK_SIZE	(SNDRV_MASK_BITS / 32)
 #define MASK_OFS(i)	((i) >> 5)
 #define MASK_BIT(i)	(1U << ((i) & 31))
-
-static inline size_t snd_mask_sizeof(void)
-{
-	return sizeof(struct snd_mask);
-}
 
 static inline void snd_mask_none(struct snd_mask *mask)
 {

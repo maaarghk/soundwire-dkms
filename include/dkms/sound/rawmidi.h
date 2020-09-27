@@ -7,7 +7,7 @@
  *  Copyright (c) by Jaroslav Kysela <perex@perex.cz>
  */
 
-#include <dkms/sound/asound.h>
+#include <sound/asound.h>
 #include <linux/interrupt.h>
 #include <linux/spinlock.h>
 #include <linux/wait.h>
@@ -16,7 +16,7 @@
 #include <linux/device.h>
 
 #if IS_ENABLED(CONFIG_SND_SEQUENCER)
-#include <dkms/sound/seq_device.h>
+#include <sound/seq_device.h>
 #endif
 
 /*
@@ -61,6 +61,7 @@ struct snd_rawmidi_runtime {
 	size_t avail_min;	/* min avail for wakeup */
 	size_t avail;		/* max used buffer for wakeup */
 	size_t xruns;		/* over/underruns counter */
+	int buffer_ref;		/* buffer reference count */
 	/* misc */
 	spinlock_t lock;
 	wait_queue_head_t sleep;
