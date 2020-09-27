@@ -13,9 +13,9 @@
 #include <linux/init.h>
 #include <linux/gfp.h>
 #include <linux/usb.h>
-#include <dkms/sound/initval.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/pcm.h>
+#include <sound/initval.h>
+#include <sound/core.h>
+#include <sound/pcm.h>
 
 #include "device.h"
 #include "audio.h"
@@ -187,7 +187,7 @@ static void usb_ep1_command_reply_dispatch (struct urb* urb)
 			break;
 		}
 #ifdef CONFIG_SND_USB_CAIAQ_INPUT
-		/* fall through */
+		fallthrough;
 	case EP1_CMD_READ_ERP:
 	case EP1_CMD_READ_ANALOG:
 		snd_usb_caiaq_input_dispatch(cdev, buf, urb->actual_length);

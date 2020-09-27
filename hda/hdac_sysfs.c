@@ -6,8 +6,8 @@
 #include <linux/slab.h>
 #include <linux/sysfs.h>
 #include <linux/device.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/hdaudio.h>
+#include <sound/core.h>
+#include <sound/hdaudio.h>
 #include "local.h"
 
 struct hdac_widget_tree {

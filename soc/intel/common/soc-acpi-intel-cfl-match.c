@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-2.0
+// SPDX-License-Identifier: GPL-2.0-only
 /*
  * soc-apci-intel-cfl-match.c - tables and support for CFL ACPI enumeration.
  *
@@ -6,8 +6,8 @@
  *
  */
 
-#include <dkms/sound/soc-acpi.h>
-#include <dkms/sound/soc-acpi-intel-match.h>
+#include <sound/soc-acpi.h>
+#include <sound/soc-acpi-intel-match.h>
 
 struct snd_soc_acpi_mach snd_soc_acpi_intel_cfl_machines[] = {
 	{},

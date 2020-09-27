@@ -9,9 +9,9 @@
 
 #include <linux/init.h>
 #include <linux/slab.h>
-#include <dkms/sound/core.h>
+#include <sound/core.h>
 #include <linux/module.h>
-#include <dkms/sound/hda_codec.h>
+#include <sound/hda_codec.h>
 #include "hda_local.h"
 
 static int dump_coef = -1;

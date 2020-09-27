@@ -12,7 +12,7 @@
 #ifndef PCM_H
 #define PCM_H
 
-#include <dkms/sound/pcm.h>
+#include <sound/pcm.h>
 
 #include "driver.h"
 

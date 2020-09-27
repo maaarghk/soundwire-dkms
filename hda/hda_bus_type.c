@@ -7,7 +7,7 @@
 #include <linux/module.h>
 #include <linux/mod_devicetable.h>
 #include <linux/export.h>
-#include <dkms/sound/hdaudio.h>
+#include <sound/hdaudio.h>
 
 MODULE_DESCRIPTION("HD-audio bus");
 MODULE_LICENSE("GPL");

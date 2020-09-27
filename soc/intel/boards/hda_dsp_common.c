@@ -1,21 +1,23 @@
-// SPDX-License-Identifier: GPL-2.0
+// SPDX-License-Identifier: GPL-2.0-only
 //
 // Copyright(c) 2019 Intel Corporation. All rights reserved.
 
-#include <dkms/sound/pcm.h>
-#include <dkms/sound/soc.h>
-#include <dkms/sound/hda_codec.h>
-#include <dkms/sound/hda_i915.h>
+#include <sound/pcm.h>
+#include <sound/soc.h>
+#include <sound/hda_codec.h>
+#include <sound/hda_i915.h>
 #include "../../codecs/hdac_hda.h"
 
 #include "hda_dsp_common.h"
+
+#if IS_ENABLED(CONFIG_SND_SOC_SOF_HDA_AUDIO_CODEC)
 
 /*
  * Search card topology and return PCM device number
  * matching Nth HDMI device (zero-based index).
  */
-struct snd_pcm *hda_dsp_hdmi_pcm_handle(struct snd_soc_card *card,
-					int hdmi_idx)
+static struct snd_pcm *hda_dsp_hdmi_pcm_handle(struct snd_soc_card *card,
+					       int hdmi_idx)
 {
 	struct snd_soc_pcm_runtime *rtd;
 	struct snd_pcm *spcm;
@@ -34,7 +36,6 @@ struct snd_pcm *hda_dsp_hdmi_pcm_handle(struct snd_soc_card *card,
 	return NULL;
 }
 
-#if IS_ENABLED(CONFIG_SND_SOC_SOF_HDA_AUDIO_CODEC)
 /*
  * Search card topology and register HDMI PCM related controls
  * to codec driver.

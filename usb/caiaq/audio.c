@@ -8,8 +8,8 @@
 #include <linux/slab.h>
 #include <linux/init.h>
 #include <linux/usb.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/pcm.h>
+#include <sound/core.h>
+#include <sound/pcm.h>
 
 #include "device.h"
 #include "audio.h"
@@ -820,7 +820,7 @@ int snd_usb_caiaq_audio_init(struct snd_usb_caiaqdev *cdev)
 	case USB_ID(USB_VID_NATIVEINSTRUMENTS, USB_PID_SESSIONIO):
 	case USB_ID(USB_VID_NATIVEINSTRUMENTS, USB_PID_GUITARRIGMOBILE):
 		cdev->samplerates |= SNDRV_PCM_RATE_192000;
-		/* fall thru */
+		fallthrough;
 	case USB_ID(USB_VID_NATIVEINSTRUMENTS, USB_PID_AUDIO2DJ):
 	case USB_ID(USB_VID_NATIVEINSTRUMENTS, USB_PID_AUDIO4DJ):
 	case USB_ID(USB_VID_NATIVEINSTRUMENTS, USB_PID_AUDIO8DJ):

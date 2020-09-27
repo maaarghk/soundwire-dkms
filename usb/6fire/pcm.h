@@ -10,7 +10,7 @@
 #ifndef USB6FIRE_PCM_H
 #define USB6FIRE_PCM_H
 
-#include <dkms/sound/pcm.h>
+#include <sound/pcm.h>
 #include <linux/mutex.h>
 
 #include "common.h"

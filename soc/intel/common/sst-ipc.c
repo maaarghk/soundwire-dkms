@@ -17,7 +17,7 @@
 #include <linux/sched.h>
 #include <linux/delay.h>
 #include <linux/platform_device.h>
-#include <dkms/sound/asound.h>
+#include <sound/asound.h>
 
 #include "sst-dsp.h"
 #include "sst-dsp-priv.h"

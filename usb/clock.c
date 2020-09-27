@@ -7,13 +7,13 @@
 #include <linux/init.h>
 #include <linux/string.h>
 #include <linux/usb.h>
-#include <dkms/linux/usb/audio.h>
-#include <dkms/linux/usb/audio-v2.h>
-#include <dkms/linux/usb/audio-v3.h>
+#include <linux/usb/audio.h>
+#include <linux/usb/audio-v2.h>
+#include <linux/usb/audio-v3.h>
 
-#include <dkms/sound/core.h>
-#include <dkms/sound/info.h>
-#include <dkms/sound/pcm.h>
+#include <sound/core.h>
+#include <sound/info.h>
+#include <sound/pcm.h>
 
 #include "usbaudio.h"
 #include "card.h"
@@ -670,7 +670,7 @@ int snd_usb_init_sample_rate(struct snd_usb_audio *chip, int iface,
 			else
 				return 0;
 		}
-	/* fall through */
+		fallthrough;
 	case UAC_VERSION_2:
 		return set_sample_rate_v2v3(chip, iface, alts, fmt, rate);
 	}

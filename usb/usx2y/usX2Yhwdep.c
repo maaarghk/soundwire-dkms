@@ -10,10 +10,10 @@
 #include <linux/interrupt.h>
 #include <linux/slab.h>
 #include <linux/usb.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/memalloc.h>
-#include <dkms/sound/pcm.h>
-#include <dkms/sound/hwdep.h>
+#include <sound/core.h>
+#include <sound/memalloc.h>
+#include <sound/pcm.h>
+#include <sound/hwdep.h>
 #include "usx2y.h"
 #include "usbusx2y.h"
 #include "usX2Yhwdep.h"

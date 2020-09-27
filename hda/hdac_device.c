@@ -10,9 +10,9 @@
 #include <linux/module.h>
 #include <linux/export.h>
 #include <linux/pm_runtime.h>
-#include <dkms/sound/hdaudio.h>
-#include <dkms/sound/hda_regmap.h>
-#include <dkms/sound/pcm.h>
+#include <sound/hdaudio.h>
+#include <sound/hda_regmap.h>
+#include <sound/pcm.h>
 #include "local.h"
 
 static void setup_fg_nodes(struct hdac_device *codec);
@@ -20,7 +20,7 @@ static int get_codec_vendor_name(struct hdac_device *codec);
 
 static void default_release(struct device *dev)
 {
-	snd_hdac_device_exit(container_of(dev, struct hdac_device, dev));
+	snd_hdac_device_exit(dev_to_hdac_dev(dev));
 }
 
 /**
@@ -127,6 +127,8 @@ EXPORT_SYMBOL_GPL(snd_hdac_device_init);
 void snd_hdac_device_exit(struct hdac_device *codec)
 {
 	pm_runtime_put_noidle(&codec->dev);
+	/* keep balance of runtime PM child_count in parent device */
+	pm_runtime_set_suspended(&codec->dev);
 	snd_hdac_bus_remove_device(codec->bus, codec);
 	kfree(codec->vendor_name);
 	kfree(codec->chip_name);

@@ -7,10 +7,10 @@
 #include <linux/init.h>
 #include <linux/slab.h>
 #include <linux/module.h>
-#include <dkms/sound/core.h>
+#include <sound/core.h>
 #include "seq_clientmgr.h"
-#include <dkms/sound/initval.h>
-#include <dkms/sound/asoundef.h>
+#include <sound/initval.h>
+#include <sound/asoundef.h>
 
 /*
 

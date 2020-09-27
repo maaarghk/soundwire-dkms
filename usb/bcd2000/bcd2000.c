@@ -12,10 +12,10 @@
 #include <linux/module.h>
 #include <linux/bitmap.h>
 #include <linux/usb.h>
-#include <dkms/linux/usb/audio.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/initval.h>
-#include <dkms/sound/rawmidi.h>
+#include <linux/usb/audio.h>
+#include <sound/core.h>
+#include <sound/initval.h>
+#include <sound/rawmidi.h>
 
 #define PREFIX "snd-bcd2000: "
 #define BUFSIZE 64

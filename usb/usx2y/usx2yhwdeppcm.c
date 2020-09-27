@@ -44,7 +44,7 @@
 
 #if defined(USX2Y_NRPACKS_VARIABLE) || USX2Y_NRPACKS == 1
 
-#include <dkms/sound/hwdep.h>
+#include <sound/hwdep.h>
 
 
 static int usX2Y_usbpcm_urb_capt_retire(struct snd_usX2Y_substream *subs)

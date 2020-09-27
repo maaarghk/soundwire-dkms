@@ -6,9 +6,9 @@
  */
 
 #include <linux/slab.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/pcm.h>
-#include <dkms/sound/pcm_params.h>
+#include <sound/core.h>
+#include <sound/pcm.h>
+#include <sound/pcm_params.h>
 
 #include "capture.h"
 #include "driver.h"
@@ -286,6 +286,8 @@ int line6_create_audio_in_urbs(struct snd_line6_pcm *line6pcm)
 		urb->interval = LINE6_ISO_INTERVAL;
 		urb->error_count = 0;
 		urb->complete = audio_in_callback;
+		if (usb_urb_ep_type_check(urb))
+			return -EINVAL;
 	}
 
 	return 0;

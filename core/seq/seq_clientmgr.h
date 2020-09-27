@@ -6,7 +6,7 @@
 #ifndef __SND_SEQ_CLIENTMGR_H
 #define __SND_SEQ_CLIENTMGR_H
 
-#include <dkms/sound/seq_kernel.h>
+#include <sound/seq_kernel.h>
 #include <linux/bitops.h>
 #include "seq_fifo.h"
 #include "seq_ports.h"

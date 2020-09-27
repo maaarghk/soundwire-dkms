@@ -18,9 +18,9 @@
 #include <linux/export.h>
 #include <linux/pm.h>
 #include <linux/pm_runtime.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/hdaudio.h>
-#include <dkms/sound/hda_regmap.h>
+#include <sound/core.h>
+#include <sound/hdaudio.h>
+#include <sound/hda_regmap.h>
 #include "local.h"
 
 static int codec_pm_lock(struct hdac_device *codec)

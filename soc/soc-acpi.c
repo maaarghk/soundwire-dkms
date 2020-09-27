@@ -6,7 +6,7 @@
 
 #include <linux/export.h>
 #include <linux/module.h>
-#include <dkms/sound/soc-acpi.h>
+#include <sound/soc-acpi.h>
 
 struct snd_soc_acpi_mach *
 snd_soc_acpi_find_machine(struct snd_soc_acpi_mach *machines)

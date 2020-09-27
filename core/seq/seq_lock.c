@@ -5,7 +5,7 @@
  */
 
 #include <linux/export.h>
-#include <dkms/sound/core.h>
+#include <sound/core.h>
 #include "seq_lock.h"
 
 /* wait until all locks are released */

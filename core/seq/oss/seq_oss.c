@@ -11,9 +11,9 @@
 #include <linux/module.h>
 #include <linux/mutex.h>
 #include <linux/compat.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/minors.h>
-#include <dkms/sound/initval.h>
+#include <sound/core.h>
+#include <sound/minors.h>
+#include <sound/initval.h>
 #include "seq_oss_device.h"
 #include "seq_oss_synth.h"
 
@@ -168,10 +168,19 @@ static long
 odev_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 {
 	struct seq_oss_devinfo *dp;
+	long rc;
+
 	dp = file->private_data;
 	if (snd_BUG_ON(!dp))
 		return -ENXIO;
-	return snd_seq_oss_ioctl(dp, cmd, arg);
+
+	if (cmd != SNDCTL_SEQ_SYNC &&
+	    mutex_lock_interruptible(&register_mutex))
+		return -ERESTARTSYS;
+	rc = snd_seq_oss_ioctl(dp, cmd, arg);
+	if (cmd != SNDCTL_SEQ_SYNC)
+		mutex_unlock(&register_mutex);
+	return rc;
 }
 
 #ifdef CONFIG_COMPAT

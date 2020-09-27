@@ -12,9 +12,9 @@
 #include <linux/interrupt.h>
 #include <linux/io.h>
 #include <linux/module.h>
-#include <dkms/linux/soundwire/sdw.h>
-#include <dkms/linux/soundwire/sdw_intel.h>
+#include <linux/platform_device.h>
 #include <linux/pm_runtime.h>
+#include <linux/soundwire/sdw_intel.h>
 #include "cadence_master.h"
 #include "intel.h"
 
@@ -66,22 +66,17 @@ static int sdw_intel_cleanup(struct sdw_intel_ctx *ctx)
 	link_mask = ctx->link_mask;
 
 	for (i = 0; i < ctx->count; i++, link++) {
-		if (link_mask && !(link_mask & BIT(i)))
+		if (!(link_mask & BIT(i)))
 			continue;
 
-		if (!IS_ERR_OR_NULL(link->md)) {
-			pm_runtime_disable(&link->md->dev);
-			device_unregister(&link->md->dev);
+		if (link->pdev) {
+			pm_runtime_disable(&link->pdev->dev);
+			platform_device_unregister(link->pdev);
 		}
 
 		if (!link->clock_stop_quirks)
 			pm_runtime_put_noidle(link->dev);
 	}
-
-	kfree(ctx->links);
-	ctx->links = NULL;
-	kfree(ctx->ids);
-	ctx->ids = NULL;
 
 	return 0;
 }
@@ -124,13 +119,16 @@ sdw_intel_scan_controller(struct sdw_intel_acpi_info *info)
 		dev_err(&adev->dev, "Link count %d exceeds max %d\n",
 			count, SDW_MAX_LINKS);
 		return -EINVAL;
-	} else if (!count) {
+	}
+
+	if (!count) {
 		dev_warn(&adev->dev, "No SoundWire links detected\n");
 		return -EINVAL;
 	}
 	dev_dbg(&adev->dev, "ACPI reports %d SDW Link devices\n", count);
 
 	info->count = count;
+	info->link_mask = 0;
 
 	for (i = 0; i < count; i++) {
 		if (ctrl_link_mask && !(ctrl_link_mask & BIT(i))) {
@@ -173,7 +171,7 @@ void sdw_intel_enable_irq(void __iomem *mmio_base, bool enable)
 
 	writel(val, mmio_base + HDA_DSP_REG_ADSPIC2);
 }
-EXPORT_SYMBOL(sdw_intel_enable_irq);
+EXPORT_SYMBOL_NS(sdw_intel_enable_irq, SOUNDWIRE_INTEL_INIT);
 
 irqreturn_t sdw_intel_thread(int irq, void *dev_id)
 {
@@ -186,16 +184,16 @@ irqreturn_t sdw_intel_thread(int irq, void *dev_id)
 	sdw_intel_enable_irq(ctx->mmio_base, true);
 	return IRQ_HANDLED;
 }
-EXPORT_SYMBOL(sdw_intel_thread);
+EXPORT_SYMBOL_NS(sdw_intel_thread, SOUNDWIRE_INTEL_INIT);
 
 static struct sdw_intel_ctx
 *sdw_intel_probe_controller(struct sdw_intel_res *res)
 {
+	struct platform_device_info pdevinfo;
+	struct platform_device *pdev;
 	struct sdw_intel_link_res *link;
 	struct sdw_intel_ctx *ctx;
 	struct acpi_device *adev;
-	struct sdw_master_device *md;
-	unsigned long time;
 	struct sdw_slave *slave;
 	struct list_head *node;
 	struct sdw_bus *bus;
@@ -216,13 +214,15 @@ static struct sdw_intel_ctx
 	count = res->count;
 	dev_dbg(&adev->dev, "Creating %d SDW Link devices\n", count);
 
-	ctx = kzalloc(sizeof(*ctx), GFP_KERNEL);
+	ctx = devm_kzalloc(&adev->dev, sizeof(*ctx), GFP_KERNEL);
 	if (!ctx)
 		return NULL;
 
-	ctx->links = kcalloc(count, sizeof(*ctx->links), GFP_KERNEL);
+	ctx->count = count;
+	ctx->links = devm_kcalloc(&adev->dev, ctx->count,
+				  sizeof(*ctx->links), GFP_KERNEL);
 	if (!ctx->links)
-		goto link_err;
+		return NULL;
 
 	ctx->count = count;
 	ctx->mmio_base = res->mmio_base;
@@ -237,44 +237,44 @@ static struct sdw_intel_ctx
 
 	/* Create SDW Master devices */
 	for (i = 0; i < count; i++, link++) {
-		if (link_mask && !(link_mask & BIT(i)))
+		if (!(link_mask & BIT(i))) {
+			dev_dbg(&adev->dev,
+				"Link %d masked, will not be enabled\n", i);
 			continue;
+		}
 
 		link->mmio_base = res->mmio_base;
 		link->registers = res->mmio_base + SDW_LINK_BASE
 			+ (SDW_LINK_SIZE * i);
 		link->shim = res->mmio_base + SDW_SHIM_BASE;
 		link->alh = res->mmio_base + SDW_ALH_BASE;
+
 		link->ops = res->ops;
 		link->dev = res->dev;
+
 		link->clock_stop_quirks = res->clock_stop_quirks;
 		link->shim_lock = &ctx->shim_lock;
 		link->shim_mask = &ctx->shim_mask;
 		link->link_mask = link_mask;
 
-		md = sdw_master_device_add("intel-master",
-					   res->parent,
-					   acpi_fwnode_handle(adev),
-					   i,
-					   link);
+		memset(&pdevinfo, 0, sizeof(pdevinfo));
 
-		if (IS_ERR(md)) {
-			dev_err(&adev->dev, "Could not create link %d\n", i);
+		pdevinfo.parent = res->parent;
+		pdevinfo.name = "intel-sdw";
+		pdevinfo.id = i;
+		pdevinfo.fwnode = acpi_fwnode_handle(adev);
+		pdevinfo.data = link;
+		pdevinfo.size_data = sizeof(*link);
+
+		pdev = platform_device_register_full(&pdevinfo);
+		if (IS_ERR(pdev)) {
+			dev_err(&adev->dev,
+				"platform device creation failed: %ld\n",
+				PTR_ERR(pdev));
 			goto err;
 		}
-
-		/*
-		 * we need to wait for the bus to be probed so that we
-		 * can report ACPI information to the upper layers
-		 */
-		time = wait_for_completion_timeout(&md->probe_complete,
-				msecs_to_jiffies(SDW_INTEL_MASTER_PROBE_TIMEOUT));
-		if (!time) {
-			dev_err(&adev->dev, "Master %d probe timed out\n", i);
-			goto err;
-		}
-
-		link->md = md;
+		link->pdev = pdev;
+		link->cdns = platform_get_drvdata(pdev);
 
 		list_add_tail(&link->list, &ctx->link_list);
 		bus = &link->cdns->bus;
@@ -283,7 +283,8 @@ static struct sdw_intel_ctx
 			num_slaves++;
 	}
 
-	ctx->ids = kcalloc(num_slaves, sizeof(*ctx->ids), GFP_KERNEL);
+	ctx->ids = devm_kcalloc(&adev->dev, num_slaves,
+				sizeof(*ctx->ids), GFP_KERNEL);
 	if (!ctx->ids)
 		goto err;
 
@@ -303,8 +304,6 @@ static struct sdw_intel_ctx
 err:
 	ctx->count = i;
 	sdw_intel_cleanup(ctx);
-link_err:
-	kfree(ctx);
 	return NULL;
 }
 
@@ -313,7 +312,6 @@ sdw_intel_startup_controller(struct sdw_intel_ctx *ctx)
 {
 	struct acpi_device *adev;
 	struct sdw_intel_link_res *link;
-	struct sdw_master_device *md;
 	u32 caps;
 	u32 link_mask;
 	int i;
@@ -340,12 +338,10 @@ sdw_intel_startup_controller(struct sdw_intel_ctx *ctx)
 
 	/* Startup SDW Master devices */
 	for (i = 0; i < ctx->count; i++, link++) {
-		if (link_mask && !(link_mask & BIT(i)))
+		if (!(link_mask & BIT(i)))
 			continue;
 
-		md = link->md;
-
-		sdw_master_device_startup(md);
+		intel_master_startup(link->pdev);
 
 		if (!link->clock_stop_quirks) {
 			/*
@@ -387,7 +383,7 @@ static acpi_status sdw_intel_acpi_cb(acpi_handle handle, u32 level,
 	 * Name(_ADR, 0x40000000), with bits 31..28 representing the
 	 * SoundWire link so filter accordingly
 	 */
-	if ((adr & GENMASK(31, 28)) >> 28 != SDW_LINK_TYPE)
+	if (FIELD_GET(GENMASK(31, 28), adr) != SDW_LINK_TYPE)
 		return AE_OK; /* keep going */
 
 	/* device found, stop namespace walk */
@@ -418,33 +414,37 @@ int sdw_intel_acpi_scan(acpi_handle *parent_handle,
 
 	return sdw_intel_scan_controller(info);
 }
-EXPORT_SYMBOL(sdw_intel_acpi_scan);
+EXPORT_SYMBOL_NS(sdw_intel_acpi_scan, SOUNDWIRE_INTEL_INIT);
 
 /**
  * sdw_intel_probe() - SoundWire Intel probe routine
  * @res: resource data
  *
- * This creates SoundWire Master and Slave devices below the controller.
- * All the information necessary is stored in the context, and the res
- * argument pointer can be freed after this step.
+ * This registers a platform device for each Master handled by the controller,
+ * and SoundWire Master and Slave devices will be created by the platform
+ * device probe. All the information necessary is stored in the context, and
+ * the res argument pointer can be freed after this step.
+ * This function will be called after sdw_intel_acpi_scan() by SOF probe.
  */
 struct sdw_intel_ctx
 *sdw_intel_probe(struct sdw_intel_res *res)
 {
 	return sdw_intel_probe_controller(res);
 }
-EXPORT_SYMBOL(sdw_intel_probe);
+EXPORT_SYMBOL_NS(sdw_intel_probe, SOUNDWIRE_INTEL_INIT);
 
 /**
  * sdw_intel_startup() - SoundWire Intel startup
  * @ctx: SoundWire context allocated in the probe
  *
+ * Startup Intel SoundWire controller. This function will be called after
+ * Intel Audio DSP is powered up.
  */
 int sdw_intel_startup(struct sdw_intel_ctx *ctx)
 {
 	return sdw_intel_startup_controller(ctx);
 }
-EXPORT_SYMBOL(sdw_intel_startup);
+EXPORT_SYMBOL_NS(sdw_intel_startup, SOUNDWIRE_INTEL_INIT);
 /**
  * sdw_intel_exit() - SoundWire Intel exit
  * @ctx: SoundWire context allocated in the probe
@@ -454,21 +454,30 @@ EXPORT_SYMBOL(sdw_intel_startup);
 void sdw_intel_exit(struct sdw_intel_ctx *ctx)
 {
 	sdw_intel_cleanup(ctx);
-	kfree(ctx);
 }
-EXPORT_SYMBOL(sdw_intel_exit);
+EXPORT_SYMBOL_NS(sdw_intel_exit, SOUNDWIRE_INTEL_INIT);
 
 void sdw_intel_process_wakeen_event(struct sdw_intel_ctx *ctx)
 {
 	struct sdw_intel_link_res *link;
+	u32 link_mask;
+	int i;
 
 	if (!ctx->links)
 		return;
 
-	list_for_each_entry(link, &ctx->link_list, list)
-		sdw_master_device_process_wake_event(link->md);
+	link = ctx->links;
+	link_mask = ctx->link_mask;
+
+	/* Startup SDW Master devices */
+	for (i = 0; i < ctx->count; i++, link++) {
+		if (!(link_mask & BIT(i)))
+			continue;
+
+		intel_master_process_wakeen_event(link->pdev);
+	}
 }
-EXPORT_SYMBOL(sdw_intel_process_wakeen_event);
+EXPORT_SYMBOL_NS(sdw_intel_process_wakeen_event, SOUNDWIRE_INTEL_INIT);
 
 MODULE_LICENSE("Dual BSD/GPL");
 MODULE_DESCRIPTION("Intel Soundwire Init Library");

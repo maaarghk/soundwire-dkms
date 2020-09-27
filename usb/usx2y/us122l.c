@@ -5,12 +5,12 @@
 
 #include <linux/slab.h>
 #include <linux/usb.h>
-#include <dkms/linux/usb/audio.h>
+#include <linux/usb/audio.h>
 #include <linux/module.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/hwdep.h>
-#include <dkms/sound/pcm.h>
-#include <dkms/sound/initval.h>
+#include <sound/core.h>
+#include <sound/hwdep.h>
+#include <sound/pcm.h>
+#include <sound/initval.h>
 #define MODNAME "US122L"
 #include "usb_stream.c"
 #include "../usbaudio.h"

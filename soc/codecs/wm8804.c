@@ -17,13 +17,13 @@
 #include <linux/of_device.h>
 #include <linux/regulator/consumer.h>
 #include <linux/slab.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/pcm.h>
-#include <dkms/sound/pcm_params.h>
-#include <dkms/sound/soc.h>
-#include <dkms/sound/initval.h>
-#include <dkms/sound/tlv.h>
-#include <dkms/sound/soc-dapm.h>
+#include <sound/core.h>
+#include <sound/pcm.h>
+#include <sound/pcm_params.h>
+#include <sound/soc.h>
+#include <sound/initval.h>
+#include <sound/tlv.h>
+#include <sound/soc-dapm.h>
 
 #include "wm8804.h"
 
@@ -172,7 +172,7 @@ static int txsrc_put(struct snd_kcontrol *kcontrol,
 
 	if (snd_soc_component_test_bits(component, e->reg, mask, val)) {
 		/* save the current power state of the transmitter */
-		txpwr = snd_soc_component_read32(component, WM8804_PWRDN) & 0x4;
+		txpwr = snd_soc_component_read(component, WM8804_PWRDN) & 0x4;
 
 		/* power down the transmitter */
 		snd_soc_component_update_bits(component, WM8804_PWRDN, 0x4, 0x4);

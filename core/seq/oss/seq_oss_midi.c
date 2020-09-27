@@ -7,12 +7,12 @@
  * Copyright (C) 1998,99 Takashi Iwai <tiwai@suse.de>
  */
 
-#include <dkms/sound/asoundef.h>
+#include <sound/asoundef.h>
 #include "seq_oss_midi.h"
 #include "seq_oss_readq.h"
 #include "seq_oss_timer.h"
 #include "seq_oss_event.h"
-#include <dkms/sound/seq_midi_event.h>
+#include <sound/seq_midi_event.h>
 #include "../seq_lock.h"
 #include <linux/init.h>
 #include <linux/slab.h>
@@ -602,6 +602,7 @@ send_midi_event(struct seq_oss_devinfo *dp, struct snd_seq_event *ev, struct seq
 		len = snd_seq_oss_timer_start(dp->timer);
 	if (ev->type == SNDRV_SEQ_EVENT_SYSEX) {
 		snd_seq_oss_readq_sysex(dp->readq, mdev->seq_device, ev);
+		snd_midi_event_reset_decode(mdev->coder);
 	} else {
 		len = snd_midi_event_decode(mdev->coder, msg, sizeof(msg), ev);
 		if (len > 0)

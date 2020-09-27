@@ -13,11 +13,11 @@
 #include <linux/init.h>
 #include <linux/dmaengine.h>
 #include <linux/slab.h>
-#include <dkms/sound/pcm.h>
-#include <dkms/sound/pcm_params.h>
-#include <dkms/sound/soc.h>
+#include <sound/pcm.h>
+#include <sound/pcm_params.h>
+#include <sound/soc.h>
 
-#include <dkms/sound/dmaengine_pcm.h>
+#include <sound/dmaengine_pcm.h>
 
 struct dmaengine_pcm_runtime_data {
 	struct dma_chan *dma_chan;
@@ -252,8 +252,8 @@ snd_pcm_uframes_t snd_dmaengine_pcm_pointer(struct snd_pcm_substream *substream)
 		if (state.residue > 0 && state.residue <= buf_size)
 			pos = buf_size - state.residue;
 
-		//		runtime->delay = bytes_to_frames(runtime,
-		//				 state.in_flight_bytes);
+		runtime->delay = bytes_to_frames(runtime,
+						 state.in_flight_bytes);
 	}
 
 	return bytes_to_frames(runtime, pos);

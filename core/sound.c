@@ -9,11 +9,11 @@
 #include <linux/time.h>
 #include <linux/device.h>
 #include <linux/module.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/minors.h>
-#include <dkms/sound/info.h>
-#include <dkms/sound/control.h>
-#include <dkms/sound/initval.h>
+#include <sound/core.h>
+#include <sound/minors.h>
+#include <sound/info.h>
+#include <sound/control.h>
+#include <sound/initval.h>
 #include <linux/kmod.h>
 #include <linux/mutex.h>
 

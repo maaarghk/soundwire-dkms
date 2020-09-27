@@ -15,9 +15,9 @@
 #include <linux/pm.h>
 #include <linux/completion.h>
 
-#include <dkms/sound/core.h>
-#include <dkms/sound/control.h>
-#include <dkms/sound/info.h>
+#include <sound/core.h>
+#include <sound/control.h>
+#include <sound/info.h>
 
 /* monitor files for graceful shutdown (hotplug) */
 struct snd_monitor_file {
@@ -203,7 +203,10 @@ int snd_card_new(struct device *parent, int idx, const char *xid,
 	mutex_unlock(&snd_card_mutex);
 	card->dev = parent;
 	card->number = idx;
+#ifdef MODULE
+	WARN_ON(!module);
 	card->module = module;
+#endif
 	INIT_LIST_HEAD(&card->devices);
 	init_rwsem(&card->controls_rwsem);
 	rwlock_init(&card->ctl_files_rwlock);
@@ -516,10 +519,9 @@ EXPORT_SYMBOL(snd_card_free_when_closed);
  */
 int snd_card_free(struct snd_card *card)
 {
-	struct completion released;
+	DECLARE_COMPLETION_ONSTACK(released);
 	int ret;
 
-	init_completion(&released);
 	card->release_completion = &released;
 	ret = snd_card_free_when_closed(card);
 	if (ret)
@@ -695,21 +697,9 @@ card_number_show_attr(struct device *dev,
 
 static DEVICE_ATTR(number, 0444, card_number_show_attr, NULL);
 
-static ssize_t
-components_show(struct device *dev,
-		struct device_attribute *attr, char *buf)
-{
-	struct snd_card *card = container_of(dev, struct snd_card, card_dev);
-
-	return scnprintf(buf, PAGE_SIZE, "%s\n", card->components);
-}
-
-static DEVICE_ATTR_RO(components);
-
 static struct attribute *card_dev_attrs[] = {
 	&dev_attr_id.attr,
 	&dev_attr_number.attr,
-	&dev_attr_components.attr,
 	NULL
 };
 

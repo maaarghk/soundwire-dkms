@@ -11,12 +11,12 @@
 #include <linux/mutex.h>
 #include <linux/device.h>
 #include <linux/nospec.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/minors.h>
-#include <dkms/sound/pcm.h>
-#include <dkms/sound/timer.h>
-#include <dkms/sound/control.h>
-#include <dkms/sound/info.h>
+#include <sound/core.h>
+#include <sound/minors.h>
+#include <sound/pcm.h>
+#include <sound/timer.h>
+#include <sound/control.h>
+#include <sound/info.h>
 
 #include "pcm_local.h"
 
@@ -991,11 +991,13 @@ void snd_pcm_detach_substream(struct snd_pcm_substream *substream)
 		       PAGE_ALIGN(sizeof(struct snd_pcm_mmap_control)));
 	kfree(runtime->hw_constraints.rules);
 	/* Avoid concurrent access to runtime via PCM timer interface */
-	if (substream->timer)
+	if (substream->timer) {
 		spin_lock_irq(&substream->timer->lock);
-	substream->runtime = NULL;
-	if (substream->timer)
+		substream->runtime = NULL;
 		spin_unlock_irq(&substream->timer->lock);
+	} else {
+		substream->runtime = NULL;
+	}
 	kfree(runtime);
 	put_pid(substream->pid);
 	substream->pid = NULL;

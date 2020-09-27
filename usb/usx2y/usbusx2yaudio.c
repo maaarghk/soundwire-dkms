@@ -21,10 +21,10 @@
 #include <linux/slab.h>
 #include <linux/usb.h>
 #include <linux/moduleparam.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/info.h>
-#include <dkms/sound/pcm.h>
-#include <dkms/sound/pcm_params.h>
+#include <sound/core.h>
+#include <sound/info.h>
+#include <sound/pcm.h>
+#include <sound/pcm_params.h>
 #include "usx2y.h"
 #include "usbusx2y.h"
 
@@ -681,6 +681,8 @@ static int usX2Y_rate_set(struct usX2Ydev *usX2Y, int rate)
 			us->submitted =	2*NOOF_SETRATE_URBS;
 			for (i = 0; i < NOOF_SETRATE_URBS; ++i) {
 				struct urb *urb = us->urb[i];
+				if (!urb)
+					continue;
 				if (urb->status) {
 					if (!err)
 						err = -ENODEV;

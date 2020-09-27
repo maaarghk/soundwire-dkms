@@ -1,6 +1,0 @@
-DEBIAN_PACKAGE-dkms (MODULE_VERSION) maverick; urgency=low
-
-  [ David Henningsson ]
-  * Initial release. 
-
- -- David Henningsson <david.henningsson@canonical.com>  Mon, 07 Mar 2011 17:00:37 +0100

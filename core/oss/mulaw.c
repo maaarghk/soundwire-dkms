@@ -22,8 +22,8 @@
  */
   
 #include <linux/time.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/pcm.h>
+#include <sound/core.h>
+#include <sound/pcm.h>
 #include "pcm_plugin.h"
 
 #define	SIGN_BIT	(0x80)		/* Sign bit for a u-law byte. */
@@ -329,8 +329,8 @@ int snd_pcm_plugin_build_mulaw(struct snd_pcm_substream *plug,
 		snd_BUG();
 		return -EINVAL;
 	}
-	if (snd_BUG_ON(!snd_pcm_format_linear(format->format)))
-		return -ENXIO;
+	if (!snd_pcm_format_linear(format->format))
+		return -EINVAL;
 
 	err = snd_pcm_plugin_build(plug, "Mu-Law<->linear conversion",
 				   src_format, dst_format,

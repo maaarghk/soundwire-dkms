@@ -1,12 +1,13 @@
-// SPDX-License-Identifier: GPL-2.0
+// SPDX-License-Identifier: GPL-2.0-only
 // Copyright (c) 2020 Intel Corporation
 
 /*
  *  sof_sdw_dmic - Helpers to handle dmic from generic machine driver
  */
 
-#include <dkms/sound/soc.h>
-#include <dkms/sound/soc-acpi.h>
+#include <sound/soc.h>
+#include <sound/soc-acpi.h>
+#include <sound/soc-dapm.h>
 #include "sof_sdw_common.h"
 
 static const struct snd_soc_dapm_widget dmic_widgets[] = {

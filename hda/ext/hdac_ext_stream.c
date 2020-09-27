@@ -11,9 +11,9 @@
 
 #include <linux/delay.h>
 #include <linux/slab.h>
-#include <dkms/sound/pcm.h>
-#include <dkms/sound/hda_register.h>
-#include <dkms/sound/hdaudio_ext.h>
+#include <sound/pcm.h>
+#include <sound/hda_register.h>
+#include <sound/hdaudio_ext.h>
 
 /**
  * snd_hdac_ext_stream_init - initialize each stream (aka device)

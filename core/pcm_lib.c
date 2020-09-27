@@ -10,13 +10,13 @@
 #include <linux/time.h>
 #include <linux/math64.h>
 #include <linux/export.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/control.h>
-#include <dkms/sound/tlv.h>
-#include <dkms/sound/info.h>
-#include <dkms/sound/pcm.h>
-#include <dkms/sound/pcm_params.h>
-#include <dkms/sound/timer.h>
+#include <sound/core.h>
+#include <sound/control.h>
+#include <sound/tlv.h>
+#include <sound/info.h>
+#include <sound/pcm.h>
+#include <sound/pcm_params.h>
+#include <sound/timer.h>
 
 #include "pcm_local.h"
 
@@ -433,6 +433,7 @@ static int snd_pcm_update_hw_ptr0(struct snd_pcm_substream *substream,
 
  no_delta_check:
 	if (runtime->status->hw_ptr == new_hw_ptr) {
+		runtime->hw_ptr_jiffies = curr_jiffies;
 		update_audio_tstamp(substream, &curr_tstamp, &audio_tstamp);
 		return 0;
 	}

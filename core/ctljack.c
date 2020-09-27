@@ -7,8 +7,8 @@
 
 #include <linux/kernel.h>
 #include <linux/export.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/control.h>
+#include <sound/core.h>
+#include <sound/control.h>
 
 #define jack_detect_kctl_info	snd_ctl_boolean_mono_info
 

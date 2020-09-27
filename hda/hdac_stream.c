@@ -7,10 +7,10 @@
 #include <linux/delay.h>
 #include <linux/export.h>
 #include <linux/clocksource.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/pcm.h>
-#include <dkms/sound/hdaudio.h>
-#include <dkms/sound/hda_register.h>
+#include <sound/core.h>
+#include <sound/pcm.h>
+#include <sound/hdaudio.h>
+#include <sound/hda_register.h>
 #include "trace.h"
 
 /**
@@ -38,7 +38,7 @@ int snd_hdac_get_stream_stripe_ctl(struct hdac_bus *bus,
 		else
 			value = (channels * bits_per_sample) / sdo_line;
 
-		if (value >= 8)
+		if (value >= bus->sdo_limit)
 			break;
 	}
 
@@ -150,8 +150,11 @@ void snd_hdac_stream_reset(struct hdac_stream *azx_dev)
 {
 	unsigned char val;
 	int timeout;
+	int dma_run_state;
 
 	snd_hdac_stream_clear(azx_dev);
+
+	dma_run_state = snd_hdac_stream_readb(azx_dev, SD_CTL) & SD_CTL_DMA_START;
 
 	snd_hdac_stream_updateb(azx_dev, SD_CTL, 0, SD_CTL_STREAM_RESET);
 	udelay(3);
@@ -162,6 +165,10 @@ void snd_hdac_stream_reset(struct hdac_stream *azx_dev)
 		if (val)
 			break;
 	} while (--timeout);
+
+	if (azx_dev->bus->dma_stop_delay && dma_run_state)
+		udelay(azx_dev->bus->dma_stop_delay);
+
 	val &= ~SD_CTL_STREAM_RESET;
 	snd_hdac_stream_writeb(azx_dev, SD_CTL, val);
 	udelay(3);

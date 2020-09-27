@@ -6,7 +6,7 @@
 #ifndef __SND_SEQ_MEMORYMGR_H
 #define __SND_SEQ_MEMORYMGR_H
 
-#include <dkms/sound/seq_kernel.h>
+#include <sound/seq_kernel.h>
 #include <linux/poll.h>
 
 struct snd_info_buffer;

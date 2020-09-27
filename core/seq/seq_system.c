@@ -7,7 +7,7 @@
 #include <linux/init.h>
 #include <linux/export.h>
 #include <linux/slab.h>
-#include <dkms/sound/core.h>
+#include <sound/core.h>
 #include "seq_system.h"
 #include "seq_timer.h"
 #include "seq_queue.h"

@@ -8,7 +8,7 @@
 #ifndef PLAYBACK_H
 #define PLAYBACK_H
 
-#include <dkms/sound/pcm.h>
+#include <sound/pcm.h>
 
 #include "driver.h"
 

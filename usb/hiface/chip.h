@@ -14,7 +14,7 @@
 #define HIFACE_CHIP_H
 
 #include <linux/usb.h>
-#include <dkms/sound/core.h>
+#include <sound/core.h>
 
 struct pcm_runtime;
 

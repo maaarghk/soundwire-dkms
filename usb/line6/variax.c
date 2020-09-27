@@ -10,7 +10,7 @@
 #include <linux/usb.h>
 #include <linux/wait.h>
 #include <linux/module.h>
-#include <dkms/sound/core.h>
+#include <sound/core.h>
 
 #include "driver.h"
 

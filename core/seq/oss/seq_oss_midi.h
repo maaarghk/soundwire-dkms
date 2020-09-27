@@ -11,7 +11,7 @@
 #define __SEQ_OSS_MIDI_H
 
 #include "seq_oss_device.h"
-#include <dkms/sound/seq_oss_legacy.h>
+#include <sound/seq_oss_legacy.h>
 
 int snd_seq_oss_midi_lookup_ports(int client);
 int snd_seq_oss_midi_check_new_port(struct snd_seq_port_info *pinfo);

@@ -10,7 +10,7 @@
 #include "seq_oss_midi.h"
 #include "seq_oss_event.h"
 #include "seq_oss_timer.h"
-#include <dkms/sound/seq_oss_legacy.h>
+#include <sound/seq_oss_legacy.h>
 #include "seq_oss_readq.h"
 #include "seq_oss_writeq.h"
 #include <linux/nospec.h>

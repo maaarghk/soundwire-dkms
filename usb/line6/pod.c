@@ -11,8 +11,8 @@
 #include <linux/module.h>
 #include <linux/usb.h>
 
-#include <dkms/sound/core.h>
-#include <dkms/sound/control.h>
+#include <sound/core.h>
+#include <sound/control.h>
 
 #include "capture.h"
 #include "driver.h"

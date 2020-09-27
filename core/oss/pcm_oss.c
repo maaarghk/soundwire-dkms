@@ -20,15 +20,15 @@
 #include <linux/math64.h>
 #include <linux/string.h>
 #include <linux/compat.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/minors.h>
-#include <dkms/sound/pcm.h>
-#include <dkms/sound/pcm_params.h>
+#include <sound/core.h>
+#include <sound/minors.h>
+#include <sound/pcm.h>
+#include <sound/pcm_params.h>
 #include "pcm_plugin.h"
-#include <dkms/sound/info.h>
+#include <sound/info.h>
 #include <linux/soundcard.h>
-#include <dkms/sound/initval.h>
-#include <dkms/sound/mixer_oss.h>
+#include <sound/initval.h>
+#include <sound/mixer_oss.h>
 
 #define OSS_ALSAEMULVER		_SIOR ('M', 249, int)
 
@@ -2851,7 +2851,7 @@ static int snd_pcm_oss_mmap(struct file *file, struct vm_area_struct *area)
 		substream = pcm_oss_file->streams[SNDRV_PCM_STREAM_PLAYBACK];
 		if (substream)
 			break;
-		/* Fall through */
+		fallthrough;
 	case VM_READ:
 		substream = pcm_oss_file->streams[SNDRV_PCM_STREAM_CAPTURE];
 		break;
@@ -2876,7 +2876,7 @@ static int snd_pcm_oss_mmap(struct file *file, struct vm_area_struct *area)
 	
 	if (runtime->oss.params) {
 		/* use mutex_trylock() for params_lock for avoiding a deadlock
-		 * between mmap_sem and params_lock taken by
+		 * between mmap_lock and params_lock taken by
 		 * copy_from/to_user() in snd_pcm_oss_write/read()
 		 */
 		err = snd_pcm_oss_change_params(substream, true);

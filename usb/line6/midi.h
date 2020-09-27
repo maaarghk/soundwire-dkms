@@ -8,7 +8,7 @@
 #ifndef MIDI_H
 #define MIDI_H
 
-#include <dkms/sound/rawmidi.h>
+#include <sound/rawmidi.h>
 
 #include "midibuf.h"
 

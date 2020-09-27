@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-2.0 */
+/* SPDX-License-Identifier: GPL-2.0-only */
 /*
  * Copyright(c) 2019 Intel Corporation.
  */
@@ -11,12 +11,9 @@
 #ifndef __HDA_DSP_COMMON_H
 #define __HDA_DSP_COMMON_H
 
-#include <dkms/sound/hda_codec.h>
-#include <dkms/sound/hda_i915.h>
+#include <sound/hda_codec.h>
+#include <sound/hda_i915.h>
 #include "../../codecs/hdac_hda.h"
-
-struct snd_pcm *hda_dsp_hdmi_pcm_handle(struct snd_soc_card *card,
-					int hdmi_idx);
 
 #if IS_ENABLED(CONFIG_SND_SOC_SOF_HDA_AUDIO_CODEC)
 int hda_dsp_hdmi_build_controls(struct snd_soc_card *card,

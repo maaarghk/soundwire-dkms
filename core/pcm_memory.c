@@ -11,11 +11,10 @@
 #include <linux/moduleparam.h>
 #include <linux/vmalloc.h>
 #include <linux/export.h>
-#include <linux/version.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/pcm.h>
-#include <dkms/sound/info.h>
-#include <dkms/sound/initval.h>
+#include <sound/core.h>
+#include <sound/pcm.h>
+#include <sound/info.h>
+#include <sound/initval.h>
 #include "pcm_local.h"
 
 static int preallocate_dma = 1;
@@ -40,6 +39,7 @@ static int do_alloc_pages(struct snd_card *card, int type, struct device *dev,
 	if (max_alloc_per_card &&
 	    card->total_pcm_alloc_bytes + size > max_alloc_per_card)
 		return -ENOMEM;
+
 	err = snd_dma_alloc_pages(type, dev, size, dmab);
 	if (!err) {
 		mutex_lock(&card->memory_mutex);
@@ -377,7 +377,7 @@ struct page *snd_pcm_sgbuf_ops_page(struct snd_pcm_substream *substream, unsigne
  */
 int snd_pcm_lib_malloc_pages(struct snd_pcm_substream *substream, size_t size)
 {
-	struct snd_card *card = substream->pcm->card;
+	struct snd_card *card;
 	struct snd_pcm_runtime *runtime;
 	struct snd_dma_buffer *dmab = NULL;
 
@@ -387,6 +387,7 @@ int snd_pcm_lib_malloc_pages(struct snd_pcm_substream *substream, size_t size)
 		       SNDRV_DMA_TYPE_UNKNOWN))
 		return -EINVAL;
 	runtime = substream->runtime;
+	card = substream->pcm->card;
 
 	if (runtime->dma_buffer_p) {
 		/* perphaps, we might free the large DMA memory region
@@ -461,11 +462,7 @@ int _snd_pcm_lib_alloc_vmalloc_buffer(struct snd_pcm_substream *substream,
 			return 0; /* already large enough */
 		vfree(runtime->dma_area);
 	}
-	#if LINUX_VERSION_CODE < KERNEL_VERSION(5,8,0)
-	runtime->dma_area = __vmalloc(size, gfp_flags, PAGE_KERNEL);
-	#else
 	runtime->dma_area = __vmalloc(size, gfp_flags);
-	#endif
 	if (!runtime->dma_area)
 		return -ENOMEM;
 	runtime->dma_bytes = size;

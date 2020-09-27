@@ -5,10 +5,10 @@
 #include <linux/module.h>
 #include <linux/pci.h>
 #include <linux/component.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/hdaudio.h>
-#include <dkms/sound/hda_component.h>
-#include <dkms/sound/hda_register.h>
+#include <sound/core.h>
+#include <sound/hdaudio.h>
+#include <sound/hda_component.h>
+#include <sound/hda_register.h>
 
 static void hdac_acomp_release(struct device *dev, void *res)
 {
@@ -96,6 +96,7 @@ void snd_hdac_display_power(struct hdac_bus *bus, unsigned int idx, bool enable)
 
 			if (acomp->ops->put_power)
 				acomp->ops->put_power(acomp->dev, cookie);
+
 			bus->display_power_active = 0;
 		}
 	}

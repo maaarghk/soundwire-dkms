@@ -9,10 +9,10 @@
 
 #include <linux/platform_device.h>
 #include <linux/export.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/pcm.h>
-#include <dkms/sound/pcm_params.h>
-#include <dkms/sound/soc.h>
+#include <sound/core.h>
+#include <sound/pcm.h>
+#include <sound/pcm_params.h>
+#include <sound/soc.h>
 
 int snd_soc_calc_frame_size(int sample_size, int channels, int tdm_slots)
 {
@@ -66,7 +66,7 @@ static const struct snd_pcm_hardware dummy_dma_hardware = {
 static int dummy_dma_open(struct snd_soc_component *component,
 			  struct snd_pcm_substream *substream)
 {
-	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+	struct snd_soc_pcm_runtime *rtd = asoc_substream_to_rtd(substream);
 
 	/* BE's dont need dummy params */
 	if (!rtd->dai_link->no_pcm)
@@ -86,12 +86,13 @@ static const struct snd_soc_component_driver dummy_codec = {
 	.non_legacy_dai_naming	= 1,
 };
 
-#define STUB_RATES	SNDRV_PCM_RATE_8000_192000
+#define STUB_RATES	SNDRV_PCM_RATE_8000_384000
 #define STUB_FORMATS	(SNDRV_PCM_FMTBIT_S8 | \
 			SNDRV_PCM_FMTBIT_U8 | \
 			SNDRV_PCM_FMTBIT_S16_LE | \
 			SNDRV_PCM_FMTBIT_U16_LE | \
 			SNDRV_PCM_FMTBIT_S24_LE | \
+			SNDRV_PCM_FMTBIT_S24_3LE | \
 			SNDRV_PCM_FMTBIT_U24_LE | \
 			SNDRV_PCM_FMTBIT_S32_LE | \
 			SNDRV_PCM_FMTBIT_U32_LE | \

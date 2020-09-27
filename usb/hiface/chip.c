@@ -12,7 +12,7 @@
 
 #include <linux/module.h>
 #include <linux/slab.h>
-#include <dkms/sound/initval.h>
+#include <sound/initval.h>
 
 #include "chip.h"
 #include "pcm.h"

@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-2.0
+// SPDX-License-Identifier: GPL-2.0-only
 /*
  * soc-acpi-intel-glk-match.c - tables and support for GLK ACPI enumeration.
  *
@@ -6,8 +6,8 @@
  *
  */
 
-#include <dkms/sound/soc-acpi.h>
-#include <dkms/sound/soc-acpi-intel-match.h>
+#include <sound/soc-acpi.h>
+#include <sound/soc-acpi-intel-match.h>
 
 static struct snd_soc_acpi_codecs glk_codecs = {
 	.num_codecs = 1,

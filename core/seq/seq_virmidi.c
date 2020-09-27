@@ -25,14 +25,14 @@
 #include <linux/wait.h>
 #include <linux/module.h>
 #include <linux/slab.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/rawmidi.h>
-#include <dkms/sound/info.h>
-#include <dkms/sound/control.h>
-#include <dkms/sound/minors.h>
-#include <dkms/sound/seq_kernel.h>
-#include <dkms/sound/seq_midi_event.h>
-#include <dkms/sound/seq_virmidi.h>
+#include <sound/core.h>
+#include <sound/rawmidi.h>
+#include <sound/info.h>
+#include <sound/control.h>
+#include <sound/minors.h>
+#include <sound/seq_kernel.h>
+#include <sound/seq_midi_event.h>
+#include <sound/seq_virmidi.h>
 
 MODULE_AUTHOR("Takashi Iwai <tiwai@suse.de>");
 MODULE_DESCRIPTION("Virtual Raw MIDI client on Sequencer");
@@ -81,6 +81,7 @@ static int snd_virmidi_dev_receive_event(struct snd_virmidi_dev *rdev,
 			if ((ev->flags & SNDRV_SEQ_EVENT_LENGTH_MASK) != SNDRV_SEQ_EVENT_LENGTH_VARIABLE)
 				continue;
 			snd_seq_dump_var_event(ev, (snd_seq_dump_func_t)snd_rawmidi_receive, vmidi->substream);
+			snd_midi_event_reset_decode(vmidi->parser);
 		} else {
 			len = snd_midi_event_decode(vmidi->parser, msg, sizeof(msg), ev);
 			if (len > 0)

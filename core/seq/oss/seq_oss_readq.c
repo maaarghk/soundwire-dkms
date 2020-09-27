@@ -9,7 +9,7 @@
 
 #include "seq_oss_readq.h"
 #include "seq_oss_event.h"
-#include <dkms/sound/seq_oss_legacy.h>
+#include <sound/seq_oss_legacy.h>
 #include "../seq_lock.h"
 #include <linux/wait.h>
 #include <linux/slab.h>

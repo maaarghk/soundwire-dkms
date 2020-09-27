@@ -2,9 +2,10 @@
 // Copyright(c) 2015-17 Intel Corporation.
 
 #include <linux/device.h>
-#include <linux/mod_devicetable.h>
+#include <linux/errno.h>
 #include <linux/module.h>
-#include <dkms/linux/soundwire/sdw.h>
+#include <linux/regmap.h>
+#include <linux/soundwire/sdw.h>
 #include "internal.h"
 
 static int regmap_sdw_write(void *context, unsigned int reg, unsigned int val)

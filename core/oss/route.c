@@ -20,8 +20,8 @@
  */
 
 #include <linux/time.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/pcm.h>
+#include <sound/core.h>
+#include <sound/pcm.h>
 #include "pcm_plugin.h"
 
 static void zero_areas(struct snd_pcm_plugin_channel *dvp, int ndsts,

@@ -11,10 +11,10 @@
 
 #include <linux/init.h>
 #include <linux/slab.h>
-#include <dkms/sound/core.h>
+#include <sound/core.h>
 #include <asm/unaligned.h>
-#include <dkms/sound/hda_chmap.h>
-#include <dkms/sound/hda_codec.h>
+#include <sound/hda_chmap.h>
+#include <sound/hda_codec.h>
 #include "hda_local.h"
 
 enum eld_versions {

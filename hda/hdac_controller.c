@@ -6,9 +6,10 @@
 #include <linux/kernel.h>
 #include <linux/delay.h>
 #include <linux/export.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/hdaudio.h>
-#include <dkms/sound/hda_register.h>
+#include <sound/core.h>
+#include <sound/hdaudio.h>
+#include <sound/hda_register.h>
+#include "local.h"
 
 /* clear CORB read pointer properly */
 static void azx_clear_corbrp(struct hdac_bus *bus)
@@ -527,6 +528,7 @@ bool snd_hdac_bus_init_chip(struct hdac_bus *bus, bool full_reset)
 	}
 
 	bus->chip_init = true;
+
 	return true;
 }
 EXPORT_SYMBOL_GPL(snd_hdac_bus_init_chip);

@@ -10,9 +10,9 @@
 #include <linux/slab.h>
 #include <linux/string.h>
 #include <linux/module.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/minors.h>
-#include <dkms/sound/info.h>
+#include <sound/core.h>
+#include <sound/minors.h>
+#include <sound/info.h>
 #include <linux/utsname.h>
 #include <linux/proc_fs.h>
 #include <linux/mutex.h>
@@ -606,7 +606,9 @@ int snd_info_get_line(struct snd_info_buffer *buffer, char *line, int len)
 {
 	int c;
 
-	if (snd_BUG_ON(!buffer || !buffer->buffer))
+	if (snd_BUG_ON(!buffer))
+		return 1;
+	if (!buffer->buffer)
 		return 1;
 	if (len <= 0 || buffer->stop || buffer->error)
 		return 1;

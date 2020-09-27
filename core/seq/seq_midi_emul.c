@@ -19,11 +19,11 @@
 #include <linux/slab.h>
 #include <linux/string.h>
 #include <linux/module.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/seq_kernel.h>
-#include <dkms/sound/seq_midi_emul.h>
-#include <dkms/sound/initval.h>
-#include <dkms/sound/asoundef.h>
+#include <sound/core.h>
+#include <sound/seq_kernel.h>
+#include <sound/seq_midi_emul.h>
+#include <sound/initval.h>
+#include <sound/asoundef.h>
 
 MODULE_AUTHOR("Takashi Iwai / Steve Ratcliffe");
 MODULE_DESCRIPTION("Advanced Linux Sound Architecture sequencer MIDI emulation.");
@@ -309,7 +309,7 @@ do_control(const struct snd_midi_op *ops, void *drv,
 		break;
 	case MIDI_CTL_MSB_DATA_ENTRY:
 		chan->control[MIDI_CTL_LSB_DATA_ENTRY] = 0;
-		/* fall through */
+		fallthrough;
 	case MIDI_CTL_LSB_DATA_ENTRY:
 		if (chan->param_type == SNDRV_MIDI_PARAM_TYPE_REGISTERED)
 			rpn(ops, drv, chan, chset);

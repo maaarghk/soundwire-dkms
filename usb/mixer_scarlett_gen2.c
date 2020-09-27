@@ -96,8 +96,8 @@
 #include <linux/usb.h>
 #include <linux/moduleparam.h>
 
-#include <dkms/sound/control.h>
-#include <dkms/sound/tlv.h>
+#include <sound/control.h>
+#include <sound/tlv.h>
 
 #include "usbaudio.h"
 #include "mixer.h"
@@ -332,7 +332,7 @@ static const struct scarlett2_device_info s18i8_gen2_info = {
 		},
 		[SCARLETT2_PORT_TYPE_SPDIF] = {
 			.id = 0x180,
-			/* S/PDIF outputs aren't available at 192KHz
+			/* S/PDIF outputs aren't available at 192kHz
 			 * but are included in the USB mux I/O
 			 * assignment message anyway
 			 */
@@ -401,7 +401,7 @@ static const struct scarlett2_device_info s18i20_gen2_info = {
 			.dst_descr = "Analogue Output %02d Playback"
 		},
 		[SCARLETT2_PORT_TYPE_SPDIF] = {
-			/* S/PDIF outputs aren't available at 192KHz
+			/* S/PDIF outputs aren't available at 192kHz
 			 * but are included in the USB mux I/O
 			 * assignment message anyway
 			 */
@@ -1946,7 +1946,7 @@ static void scarlett2_mixer_interrupt(struct urb *urb)
 		goto requeue;
 
 	if (len == 8) {
-		data = le32_to_cpu(*(u32 *)urb->transfer_buffer);
+		data = le32_to_cpu(*(__le32 *)urb->transfer_buffer);
 		if (data & SCARLETT2_USB_INTERRUPT_VOL_CHANGE)
 			scarlett2_mixer_interrupt_vol_change(mixer);
 		if (data & SCARLETT2_USB_INTERRUPT_BUTTON_CHANGE)

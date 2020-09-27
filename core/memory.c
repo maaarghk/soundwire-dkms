@@ -8,7 +8,7 @@
 #include <linux/export.h>
 #include <linux/io.h>
 #include <linux/uaccess.h>
-#include <dkms/sound/core.h>
+#include <sound/core.h>
 
 /**
  * copy_to_user_fromio - copy data from mmio-space to user-space

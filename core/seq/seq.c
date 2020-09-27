@@ -7,10 +7,10 @@
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/device.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/initval.h>
+#include <sound/core.h>
+#include <sound/initval.h>
 
-#include <dkms/sound/seq_kernel.h>
+#include <sound/seq_kernel.h>
 #include "seq_clientmgr.h"
 #include "seq_memory.h"
 #include "seq_queue.h"
@@ -18,8 +18,8 @@
 #include "seq_timer.h"
 #include "seq_system.h"
 #include "seq_info.h"
-#include <dkms/sound/minors.h>
-#include <dkms/sound/seq_device.h>
+#include <sound/minors.h>
+#include <sound/seq_device.h>
 
 #if defined(CONFIG_SND_SEQ_DUMMY_MODULE)
 int seq_client_load[15] = {[0] = SNDRV_SEQ_CLIENT_DUMMY, [1 ... 14] = -1};

@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-2.0 */
+/* SPDX-License-Identifier: GPL-2.0-only */
 /*
  * Copyright(c) 2015-18 Intel Corporation.
  */
@@ -12,9 +12,9 @@
 #define __SKL_HDA_DSP_COMMON_H
 #include <linux/module.h>
 #include <linux/platform_device.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/jack.h>
-#include <dkms/sound/hda_codec.h>
+#include <sound/core.h>
+#include <sound/jack.h>
+#include <sound/hda_codec.h>
 #include "../../codecs/hdac_hda.h"
 #include "hda_dsp_common.h"
 
@@ -33,6 +33,7 @@ struct skl_hda_private {
 	int dai_index;
 	const char *platform_name;
 	bool common_hdmi_codec_drv;
+	bool idisp_codec;
 };
 
 extern struct snd_soc_dai_link skl_hda_be_dai_links[HDA_DSP_MAX_BE_DAI_LINKS];

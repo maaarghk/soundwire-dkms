@@ -4,10 +4,10 @@
  */
 #include <linux/export.h>
 #include <linux/types.h>
-#include <dkms/sound/asoundef.h>
-#include <dkms/sound/pcm.h>
-#include <dkms/sound/pcm_params.h>
-#include <dkms/sound/pcm_iec958.h>
+#include <sound/asoundef.h>
+#include <sound/pcm.h>
+#include <sound/pcm_params.h>
+#include <sound/pcm_iec958.h>
 
 static int create_iec958_consumer(uint rate, uint sample_width,
 				  u8 *cs, size_t len)
@@ -103,7 +103,7 @@ EXPORT_SYMBOL(snd_pcm_create_iec958_consumer);
 
 /**
  * snd_pcm_create_iec958_consumer_hw_params - create IEC958 channel status
- * @hw_params: the hw_params instance for extracting rate and sample format
+ * @params: the hw_params instance for extracting rate and sample format
  * @cs: channel status buffer, at least four bytes
  * @len: length of channel status buffer
  *

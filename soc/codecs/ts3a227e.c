@@ -14,9 +14,9 @@
 #include <linux/regmap.h>
 #include <linux/acpi.h>
 
-#include <dkms/sound/core.h>
-#include <dkms/sound/jack.h>
-#include <dkms/sound/soc.h>
+#include <sound/core.h>
+#include <sound/jack.h>
+#include <sound/soc.h>
 
 #include "ts3a227e.h"
 

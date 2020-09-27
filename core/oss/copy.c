@@ -20,8 +20,8 @@
  */
 
 #include <linux/time.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/pcm.h>
+#include <sound/core.h>
+#include <sound/pcm.h>
 #include "pcm_plugin.h"
 
 static snd_pcm_sframes_t copy_transfer(struct snd_pcm_plugin *plugin,

@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: (GPL-2.0 OR BSD-3-Clause)
+// SPDX-License-Identifier: (GPL-2.0-only OR BSD-3-Clause)
 //
 // This file is provided under a dual BSD/GPLv2 license.  When using or
 // redistributing this file, you may do so under either license.
@@ -8,7 +8,7 @@
 // Authors: Keyon Jie <yang.jie@linux.intel.com>
 
 #include <linux/io.h>
-#include <dkms/sound/hdaudio.h>
+#include <sound/hdaudio.h>
 #include "../sof-priv.h"
 #include "hda.h"
 

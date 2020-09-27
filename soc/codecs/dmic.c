@@ -11,10 +11,10 @@
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 #include <linux/module.h>
-#include <dkms/sound/core.h>
-#include <dkms/sound/pcm.h>
-#include <dkms/sound/soc.h>
-#include <dkms/sound/soc-dapm.h>
+#include <sound/core.h>
+#include <sound/pcm.h>
+#include <sound/soc.h>
+#include <sound/soc-dapm.h>
 
 #define MAX_MODESWITCH_DELAY 70
 static int modeswitch_delay;
@@ -59,14 +59,14 @@ static int dmic_aif_event(struct snd_soc_dapm_widget *w,
 	switch (event) {
 	case SND_SOC_DAPM_POST_PMU:
 		if (dmic->gpio_en)
-			gpiod_set_value(dmic->gpio_en, 1);
+			gpiod_set_value_cansleep(dmic->gpio_en, 1);
 
 		if (dmic->wakeup_delay)
 			msleep(dmic->wakeup_delay);
 		break;
 	case SND_SOC_DAPM_POST_PMD:
 		if (dmic->gpio_en)
-			gpiod_set_value(dmic->gpio_en, 0);
+			gpiod_set_value_cansleep(dmic->gpio_en, 0);
 		break;
 	}
 

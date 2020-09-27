@@ -6,8 +6,8 @@
  */
 
 #include <linux/dmi.h>
-#include <dkms/sound/soc-acpi.h>
-#include <dkms/sound/soc-acpi-intel-match.h>
+#include <sound/soc-acpi.h>
+#include <sound/soc-acpi-intel-match.h>
 
 struct snd_soc_acpi_mach snd_soc_acpi_intel_haswell_machines[] = {
 	{

@@ -1,5 +1,5 @@
-// SPDX-License-Identifier: (GPL-2.0 OR BSD-3-Clause)
-// Copyright(c) 2015-2019 Intel Corporation.
+// SPDX-License-Identifier: (GPL-2.0-only OR BSD-3-Clause)
+// Copyright(c) 2015-2020 Intel Corporation.
 
 /*
  * Bandwidth management algorithm based on 2^n gears
@@ -10,7 +10,7 @@
 #include <linux/module.h>
 #include <linux/mod_devicetable.h>
 #include <linux/slab.h>
-#include <dkms/linux/soundwire/sdw.h>
+#include <linux/soundwire/sdw.h>
 #include "bus.h"
 
 #define SDW_STRM_RATE_GROUPING		1
@@ -43,6 +43,7 @@ static void sdw_compute_slave_ports(struct sdw_master_runtime *m_rt,
 	int port_bo, sample_int;
 	unsigned int rate, bps, ch = 0;
 	unsigned int slave_total_ch;
+	struct sdw_bus_params *b_params = &m_rt->bus->params;
 
 	port_bo = t_data->block_offset;
 
@@ -66,7 +67,7 @@ static void sdw_compute_slave_ports(struct sdw_master_runtime *m_rt,
 			sdw_fill_port_params(&p_rt->port_params,
 					     p_rt->num, bps,
 					     SDW_PORT_FLOW_MODE_ISOCH,
-					     SDW_PORT_DATA_MODE_NORMAL);
+					     b_params->s_data_mode);
 
 			port_bo += bps * ch;
 			slave_total_ch += ch;
@@ -92,6 +93,7 @@ static void sdw_compute_master_ports(struct sdw_master_runtime *m_rt,
 	struct sdw_transport_data t_data = {0};
 	struct sdw_port_runtime *p_rt;
 	struct sdw_bus *bus = m_rt->bus;
+	struct sdw_bus_params *b_params = &bus->params;
 	int sample_int, hstart = 0;
 	unsigned int rate, bps, ch, no_ch;
 
@@ -118,7 +120,7 @@ static void sdw_compute_master_ports(struct sdw_master_runtime *m_rt,
 		sdw_fill_port_params(&p_rt->port_params,
 				     p_rt->num, bps,
 				     SDW_PORT_FLOW_MODE_ISOCH,
-				     SDW_PORT_DATA_MODE_NORMAL);
+				     b_params->m_data_mode);
 
 		/* Check for first entry */
 		if (!(p_rt == list_first_entry(&m_rt->port_list,
@@ -217,12 +219,15 @@ static int sdw_add_element_group_count(struct sdw_group *group,
 			continue;
 
 		if (group->count >= group->max_size) {
+			unsigned int *rates;
+
 			group->max_size += 1;
-			group->rates = krealloc(group->rates,
-						(sizeof(int) * group->max_size),
-						GFP_KERNEL);
-			if (!group->rates)
+			rates = krealloc(group->rates,
+					 (sizeof(int) * group->max_size),
+					 GFP_KERNEL);
+			if (!rates)
 				return -ENOMEM;
+			group->rates = rates;
 		}
 
 		group->rates[group->count++] = rate;
@@ -339,14 +344,10 @@ static int sdw_select_row_col(struct sdw_bus *bus, int clk_freq)
 static int sdw_compute_bus_params(struct sdw_bus *bus)
 {
 	unsigned int max_dr_freq, curr_dr_freq = 0;
-	struct sdw_master_prop *mstr_prop = NULL;
+	struct sdw_master_prop *mstr_prop = &bus->prop;
 	int i, clk_values, ret;
 	bool is_gear = false;
 	u32 *clk_buf;
-
-	mstr_prop = &bus->prop;
-	if (!mstr_prop)
-		return -EINVAL;
 
 	if (mstr_prop->num_clk_gears) {
 		clk_values = mstr_prop->num_clk_gears;
