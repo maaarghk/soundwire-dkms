@@ -9,8 +9,8 @@
 #include <linux/of_platform.h>
 #include <linux/regmap.h>
 #include <linux/reset.h>
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
 
 #include <dt-bindings/sound/meson-aiu.h>
 #include "aiu.h"

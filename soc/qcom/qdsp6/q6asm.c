@@ -11,8 +11,8 @@
 #include <linux/spinlock.h>
 #include <linux/kref.h>
 #include <linux/of.h>
-#include <uapi/sound/asound.h>
-#include <uapi/sound/compress_params.h>
+#include <dkms/uapi/sound/asound.h>
+#include <dkms/uapi/sound/compress_params.h>
 #include <linux/delay.h>
 #include <linux/slab.h>
 #include <linux/mm.h>

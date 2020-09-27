@@ -9,8 +9,8 @@
  *  Copyright (c) 1999-2000 Takashi iwai <tiwai@suse.de>
  */
 
-#include <sound/sfnt_info.h>
-#include <sound/util_mem.h>
+#include <dkms/sound/sfnt_info.h>
+#include <dkms/sound/util_mem.h>
 
 #define SF_MAX_INSTRUMENTS	128	/* maximum instrument number */
 #define SF_MAX_PRESETS  256	/* drums are mapped from 128 to 256 */

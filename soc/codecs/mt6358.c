@@ -14,8 +14,8 @@
 #include <linux/mfd/mt6397/core.h>
 #include <linux/regulator/consumer.h>
 
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 
 #include "mt6358.h"
 

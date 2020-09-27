@@ -11,9 +11,9 @@
 #include <linux/module.h>
 #include <linux/mutex.h>
 #include <linux/compat.h>
-#include <sound/core.h>
-#include <sound/minors.h>
-#include <sound/initval.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/minors.h>
+#include <dkms/sound/initval.h>
 #include "seq_oss_device.h"
 #include "seq_oss_synth.h"
 

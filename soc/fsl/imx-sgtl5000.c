@@ -8,7 +8,7 @@
 #include <linux/of_platform.h>
 #include <linux/i2c.h>
 #include <linux/clk.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include "../codecs/sgtl5000.h"
 #include "imx-audmux.h"

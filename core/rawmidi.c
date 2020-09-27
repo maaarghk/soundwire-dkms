@@ -4,7 +4,7 @@
  *  Copyright (c) by Jaroslav Kysela <perex@perex.cz>
  */
 
-#include <sound/core.h>
+#include <dkms/sound/core.h>
 #include <linux/major.h>
 #include <linux/init.h>
 #include <linux/sched/signal.h>
@@ -16,11 +16,11 @@
 #include <linux/delay.h>
 #include <linux/mm.h>
 #include <linux/nospec.h>
-#include <sound/rawmidi.h>
-#include <sound/info.h>
-#include <sound/control.h>
-#include <sound/minors.h>
-#include <sound/initval.h>
+#include <dkms/sound/rawmidi.h>
+#include <dkms/sound/info.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/minors.h>
+#include <dkms/sound/initval.h>
 
 MODULE_AUTHOR("Jaroslav Kysela <perex@perex.cz>");
 MODULE_DESCRIPTION("Midlevel RawMidi code for ALSA.");

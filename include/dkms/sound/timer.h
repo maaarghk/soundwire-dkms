@@ -8,7 +8,7 @@
  *		     Abramo Bagnara <abramo@alsa-project.org>
  */
 
-#include <sound/asound.h>
+#include <dkms/sound/asound.h>
 #include <linux/interrupt.h>
 
 #define snd_timer_chip(timer) ((timer)->private_data)

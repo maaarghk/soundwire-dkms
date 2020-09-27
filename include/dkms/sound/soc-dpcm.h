@@ -10,7 +10,7 @@
 
 #include <linux/slab.h>
 #include <linux/list.h>
-#include <sound/pcm.h>
+#include <dkms/sound/pcm.h>
 
 struct snd_soc_pcm_runtime;
 

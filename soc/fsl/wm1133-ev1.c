@@ -10,11 +10,11 @@
 #include <linux/platform_device.h>
 #include <linux/clk.h>
 #include <linux/module.h>
-#include <sound/core.h>
-#include <sound/jack.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 
 #include "imx-ssi.h"
 #include "../codecs/wm8350.h"

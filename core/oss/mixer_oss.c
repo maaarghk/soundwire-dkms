@@ -10,11 +10,11 @@
 #include <linux/string.h>
 #include <linux/module.h>
 #include <linux/compat.h>
-#include <sound/core.h>
-#include <sound/minors.h>
-#include <sound/control.h>
-#include <sound/info.h>
-#include <sound/mixer_oss.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/minors.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/info.h>
+#include <dkms/sound/mixer_oss.h>
 #include <linux/soundcard.h>
 
 #define OSS_ALSAEMULVER         _SIOR ('M', 249, int)

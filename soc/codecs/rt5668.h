@@ -9,7 +9,7 @@
 #ifndef __RT5668_H__
 #define __RT5668_H__
 
-#include <sound/rt5668.h>
+#include <dkms/sound/rt5668.h>
 
 #define DEVICE_ID 0x6530
 

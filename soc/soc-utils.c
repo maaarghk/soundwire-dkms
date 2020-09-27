@@ -9,10 +9,10 @@
 
 #include <linux/platform_device.h>
 #include <linux/export.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 
 int snd_soc_calc_frame_size(int sample_size, int channels, int tdm_slots)
 {

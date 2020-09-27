@@ -22,10 +22,10 @@
 #include <linux/string.h>
 #include <linux/pm_runtime.h>
 
-#include <sound/core.h>
-#include <sound/initval.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/initval.h>
 
-#include <sound/hda_codec.h>
+#include <dkms/sound/hda_codec.h>
 #include "hda_controller.h"
 
 /* Defines for Nvidia Tegra HDA support */

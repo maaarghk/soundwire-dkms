@@ -11,15 +11,15 @@
 #include <linux/module.h>
 #include <linux/pm_runtime.h>
 #include <linux/slab.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/tlv.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/tlv.h>
 
 #include <linux/irqchip/irq-madera.h>
 #include <linux/mfd/madera/core.h>
 #include <linux/mfd/madera/registers.h>
 #include <linux/mfd/madera/pdata.h>
-#include <sound/madera-pdata.h>
+#include <dkms/sound/madera-pdata.h>
 
 #include <dt-bindings/sound/madera.h>
 

@@ -14,10 +14,10 @@
 #include <linux/module.h>
 #include <linux/dmaengine.h>
 #include <linux/platform_device.h>
-#include <sound/dmaengine_pcm.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
-#include <sound/spear_dma.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/spear_dma.h>
 #include "spear_pcm.h"
 
 static const struct snd_pcm_hardware spear_pcm_hardware = {

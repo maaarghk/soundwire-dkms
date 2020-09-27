@@ -16,13 +16,13 @@
 #include <linux/pm_runtime.h>
 #include <linux/hdmi.h>
 #include <drm/drm_edid.h>
-#include <sound/pcm_params.h>
-#include <sound/jack.h>
-#include <sound/soc.h>
-#include <sound/hdaudio_ext.h>
-#include <sound/hda_i915.h>
-#include <sound/pcm_drm_eld.h>
-#include <sound/hda_chmap.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/hdaudio_ext.h>
+#include <dkms/sound/hda_i915.h>
+#include <dkms/sound/pcm_drm_eld.h>
+#include <dkms/sound/hda_chmap.h>
 #include "../../hda/local.h"
 #include "hdac_hdmi.h"
 

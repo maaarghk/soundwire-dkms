@@ -14,7 +14,7 @@
 #include <linux/interrupt.h>
 #include <linux/dma-mapping.h>
 #include <linux/mbus.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 #include "kirkwood.h"
 
 static struct kirkwood_dma_data *kirkwood_priv(struct snd_pcm_substream *subs)

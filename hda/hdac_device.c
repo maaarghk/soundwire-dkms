@@ -10,9 +10,9 @@
 #include <linux/module.h>
 #include <linux/export.h>
 #include <linux/pm_runtime.h>
-#include <sound/hdaudio.h>
-#include <sound/hda_regmap.h>
-#include <sound/pcm.h>
+#include <dkms/sound/hdaudio.h>
+#include <dkms/sound/hda_regmap.h>
+#include <dkms/sound/pcm.h>
 #include "local.h"
 
 static void setup_fg_nodes(struct hdac_device *codec);

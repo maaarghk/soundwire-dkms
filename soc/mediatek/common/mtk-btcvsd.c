@@ -10,7 +10,7 @@
 #include <linux/of_address.h>
 #include <linux/sched/clock.h>
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #define BTCVSD_SND_NAME "mtk-btcvsd-snd"
 

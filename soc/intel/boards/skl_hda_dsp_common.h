@@ -12,9 +12,9 @@
 #define __SKL_HDA_DSP_COMMON_H
 #include <linux/module.h>
 #include <linux/platform_device.h>
-#include <sound/core.h>
-#include <sound/jack.h>
-#include <sound/hda_codec.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/hda_codec.h>
 #include "../../codecs/hdac_hda.h"
 #include "hda_dsp_common.h"
 

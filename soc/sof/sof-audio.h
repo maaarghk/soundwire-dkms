@@ -13,12 +13,12 @@
 
 #include <linux/workqueue.h>
 
-#include <sound/soc.h>
-#include <sound/control.h>
-#include <sound/sof/stream.h> /* needs to be included before control.h */
-#include <sound/sof/control.h>
-#include <sound/sof/dai.h>
-#include <sound/sof/topology.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/sof/stream.h> /* needs to be included before control.h */
+#include <dkms/sound/sof/control.h>
+#include <dkms/sound/sof/dai.h>
+#include <dkms/sound/sof/topology.h>
 #include "sof-priv.h"
 
 #define SOF_AUDIO_PCM_DRV_NAME	"sof-audio-component"

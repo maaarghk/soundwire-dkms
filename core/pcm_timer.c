@@ -6,9 +6,9 @@
 
 #include <linux/time.h>
 #include <linux/gcd.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/timer.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/timer.h>
 
 #include "pcm_local.h"
 

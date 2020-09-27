@@ -9,11 +9,11 @@
 #include <linux/slab.h>
 #include <linux/compat.h>
 #include <linux/nospec.h>
-#include <sound/core.h>
-#include <sound/hda_codec.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/hda_codec.h>
 #include "hda_local.h"
-#include <sound/hda_hwdep.h>
-#include <sound/minors.h>
+#include <dkms/sound/hda_hwdep.h>
+#include <dkms/sound/minors.h>
 
 /*
  * write/read an out-of-bound verb

@@ -9,7 +9,7 @@
 #define __SIMPLE_CARD_UTILS_H
 
 #include <linux/clk.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #define asoc_simple_init_hp(card, sjack, prefix) \
 	asoc_simple_init_jack(card, sjack, 1, prefix, NULL)

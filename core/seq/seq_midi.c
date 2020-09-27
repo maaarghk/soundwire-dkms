@@ -18,12 +18,12 @@ Possible options for midisynth module:
 #include <linux/string.h>
 #include <linux/module.h>
 #include <linux/mutex.h>
-#include <sound/core.h>
-#include <sound/rawmidi.h>
-#include <sound/seq_kernel.h>
-#include <sound/seq_device.h>
-#include <sound/seq_midi_event.h>
-#include <sound/initval.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/rawmidi.h>
+#include <dkms/sound/seq_kernel.h>
+#include <dkms/sound/seq_device.h>
+#include <dkms/sound/seq_midi_event.h>
+#include <dkms/sound/initval.h>
 
 MODULE_AUTHOR("Frank van de Pol <fvdpol@coil.demon.nl>, Jaroslav Kysela <perex@perex.cz>");
 MODULE_DESCRIPTION("Advanced Linux Sound Architecture sequencer MIDI synth.");

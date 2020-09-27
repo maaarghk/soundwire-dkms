@@ -16,9 +16,9 @@
 #include <linux/slab.h>
 #include <linux/delay.h>
 #include <linux/workqueue.h>
-#include <sound/soc.h>
-#include <sound/jack.h>
-#include <sound/da7219.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/da7219.h>
 
 #include "da7219.h"
 #include "da7219-aad.h"

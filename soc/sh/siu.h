@@ -59,9 +59,9 @@ struct siu_firmware {
 #include <linux/io.h>
 #include <linux/sh_dma.h>
 
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
 
 #define SIU_PERIOD_BYTES_MAX	8192		/* DMA transfer/period size */
 #define SIU_PERIOD_BYTES_MIN	256		/* DMA transfer/period size */

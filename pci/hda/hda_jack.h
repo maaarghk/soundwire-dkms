@@ -9,7 +9,7 @@
 #define __SOUND_HDA_JACK_H
 
 #include <linux/err.h>
-#include <sound/jack.h>
+#include <dkms/sound/jack.h>
 
 struct auto_pin_cfg;
 struct hda_jack_tbl;

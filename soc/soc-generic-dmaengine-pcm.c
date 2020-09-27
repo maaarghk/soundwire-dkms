@@ -7,13 +7,13 @@
 #include <linux/init.h>
 #include <linux/dmaengine.h>
 #include <linux/slab.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 #include <linux/dma-mapping.h>
 #include <linux/of.h>
 
-#include <sound/dmaengine_pcm.h>
+#include <dkms/sound/dmaengine_pcm.h>
 
 /*
  * The platforms dmaengine driver does not support reporting the amount of

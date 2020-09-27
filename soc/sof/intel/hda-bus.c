@@ -8,7 +8,7 @@
 // Authors: Keyon Jie <yang.jie@linux.intel.com>
 
 #include <linux/io.h>
-#include <sound/hdaudio.h>
+#include <dkms/sound/hdaudio.h>
 #include "../sof-priv.h"
 #include "hda.h"
 

@@ -8,8 +8,8 @@
  *  Copyright (C) 1999-2000 Takashi Iwai <tiwai@suse.de>
  */
 
-#include <sound/emux_synth.h>
-#include <sound/seq_kernel.h>
+#include <dkms/sound/emux_synth.h>
+#include <dkms/sound/seq_kernel.h>
 
 /*
  * Hardware parameters.

@@ -13,10 +13,10 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/device.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/initval.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc.h>
 
 static const struct snd_soc_dapm_widget wm8727_dapm_widgets[] = {
 SND_SOC_DAPM_OUTPUT("VOUTL"),

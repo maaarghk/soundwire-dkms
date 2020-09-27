@@ -18,7 +18,7 @@
 #include <linux/of.h>
 #include <linux/platform_data/asoc-ux500-msp.h>
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include "ux500_msp_i2s.h"
 

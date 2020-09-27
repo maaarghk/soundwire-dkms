@@ -7,9 +7,9 @@
 
 #include <linux/slab.h>
 #include <linux/export.h>
-#include <sound/core.h>
-#include <sound/control.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/tlv.h>
 
 /*
  * a subset of information returned via ctl info callback

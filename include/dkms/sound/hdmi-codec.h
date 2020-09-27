@@ -13,9 +13,9 @@
 #include <linux/of_graph.h>
 #include <linux/hdmi.h>
 #include <drm/drm_edid.h>
-#include <sound/asoundef.h>
-#include <sound/soc.h>
-#include <uapi/sound/asound.h>
+#include <dkms/sound/asoundef.h>
+#include <dkms/sound/soc.h>
+#include <dkms/uapi/sound/asound.h>
 
 /*
  * Protocol between ASoC cpu-dai and HDMI-encoder

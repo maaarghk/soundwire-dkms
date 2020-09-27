@@ -16,10 +16,10 @@
 #include <linux/regulator/consumer.h>
 #include <linux/slab.h>
 #include <linux/slimbus.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/tlv.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/tlv.h>
 #include "wcd-clsh-v2.h"
 
 #define WCD934X_RATES_MASK (SNDRV_PCM_RATE_8000 | SNDRV_PCM_RATE_16000 |\

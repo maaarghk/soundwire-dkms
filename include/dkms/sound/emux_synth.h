@@ -8,13 +8,13 @@
  *  Copyright (C) 2000 Takashi Iwai <tiwai@suse.de>
  */
 
-#include <sound/seq_kernel.h>
-#include <sound/seq_device.h>
-#include <sound/soundfont.h>
-#include <sound/seq_midi_emul.h>
-#include <sound/seq_oss.h>
-#include <sound/emux_legacy.h>
-#include <sound/seq_virmidi.h>
+#include <dkms/sound/seq_kernel.h>
+#include <dkms/sound/seq_device.h>
+#include <dkms/sound/soundfont.h>
+#include <dkms/sound/seq_midi_emul.h>
+#include <dkms/sound/seq_oss.h>
+#include <dkms/sound/emux_legacy.h>
+#include <dkms/sound/seq_virmidi.h>
 
 /*
  * compile flags

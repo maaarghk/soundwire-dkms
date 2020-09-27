@@ -7,8 +7,8 @@
  */
 
 #include <linux/dmi.h>
-#include <sound/soc-acpi.h>
-#include <sound/soc-acpi-intel-match.h>
+#include <dkms/sound/soc-acpi.h>
+#include <dkms/sound/soc-acpi-intel-match.h>
 
 enum {
 	APL_RVP,

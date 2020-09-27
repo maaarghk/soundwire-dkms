@@ -7,7 +7,7 @@
 //	Copyright 2005 Openedhand Ltd.
 
 #include <linux/module.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include <asm/mach-types.h>
 

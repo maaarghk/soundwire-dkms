@@ -6,8 +6,8 @@
  *
  */
 
-#include <sound/soc-acpi.h>
-#include <sound/soc-acpi-intel-match.h>
+#include <dkms/sound/soc-acpi.h>
+#include <dkms/sound/soc-acpi-intel-match.h>
 
 static struct snd_soc_acpi_codecs tgl_codecs = {
 	.num_codecs = 1,

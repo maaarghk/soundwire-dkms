@@ -11,8 +11,8 @@
 #define __SEQ_OSS_SYNTH_H
 
 #include "seq_oss_device.h"
-#include <sound/seq_oss_legacy.h>
-#include <sound/seq_device.h>
+#include <dkms/sound/seq_oss_legacy.h>
+#include <dkms/sound/seq_device.h>
 
 void snd_seq_oss_synth_init(void);
 int snd_seq_oss_synth_probe(struct device *dev);

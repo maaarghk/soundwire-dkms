@@ -14,8 +14,8 @@
 #include <linux/module.h>
 #include <linux/types.h>
 
-#include <sound/pcm.h>
-#include <sound/sof/stream.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/sof/stream.h>
 
 #include "../ops.h"
 #include "../sof-priv.h"

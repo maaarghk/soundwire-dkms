@@ -6,7 +6,7 @@
 
 #include <linux/init.h>
 #include <linux/export.h>
-#include <sound/core.h>
+#include <dkms/sound/core.h>
 
 #include "seq_info.h"
 #include "seq_clientmgr.h"

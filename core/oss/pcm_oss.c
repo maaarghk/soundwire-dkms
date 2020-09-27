@@ -20,15 +20,15 @@
 #include <linux/math64.h>
 #include <linux/string.h>
 #include <linux/compat.h>
-#include <sound/core.h>
-#include <sound/minors.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/minors.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
 #include "pcm_plugin.h"
-#include <sound/info.h>
+#include <dkms/sound/info.h>
 #include <linux/soundcard.h>
-#include <sound/initval.h>
-#include <sound/mixer_oss.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/mixer_oss.h>
 
 #define OSS_ALSAEMULVER		_SIOR ('M', 249, int)
 

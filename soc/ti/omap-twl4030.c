@@ -23,10 +23,10 @@
 #include <linux/gpio.h>
 #include <linux/of_gpio.h>
 
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
-#include <sound/jack.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/jack.h>
 
 #include "omap-mcbsp.h"
 

@@ -19,11 +19,11 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 #include <linux/pm_runtime.h>
-#include <sound/designware_i2s.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/dmaengine_pcm.h>
+#include <dkms/sound/designware_i2s.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/dmaengine_pcm.h>
 #include "local.h"
 
 static inline void i2s_write_reg(void __iomem *io_base, int reg, u32 val)

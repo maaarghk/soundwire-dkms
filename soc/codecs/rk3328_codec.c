@@ -14,8 +14,8 @@
 #include <linux/pm_runtime.h>
 #include <linux/regmap.h>
 #include <linux/mfd/syscon.h>
-#include <sound/dmaengine_pcm.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/pcm_params.h>
 #include "rk3328_codec.h"
 
 /*

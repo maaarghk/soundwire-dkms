@@ -8,7 +8,7 @@
 // Author: Cezary Rojewski <cezary.rojewski@intel.com>
 //
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 #include "compress.h"
 #include "ops.h"
 #include "probe.h"

@@ -16,9 +16,9 @@
  */
 
 #include <linux/module.h>
-#include <sound/hdaudio_ext.h>
-#include <sound/hda_register.h>
-#include <sound/hda_component.h>
+#include <dkms/sound/hdaudio_ext.h>
+#include <dkms/sound/hda_register.h>
+#include <dkms/sound/hda_component.h>
 #include "../ops.h"
 #include "hda.h"
 

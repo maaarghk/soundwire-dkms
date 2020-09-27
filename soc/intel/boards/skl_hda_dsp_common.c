@@ -6,15 +6,15 @@
  */
 #include <linux/module.h>
 #include <linux/platform_device.h>
-#include <sound/core.h>
-#include <sound/jack.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 #include "../../codecs/hdac_hdmi.h"
 #include "skl_hda_dsp_common.h"
 
-#include <sound/hda_codec.h>
+#include <dkms/sound/hda_codec.h>
 #include "../../codecs/hdac_hda.h"
 
 #define NAME_SIZE	32

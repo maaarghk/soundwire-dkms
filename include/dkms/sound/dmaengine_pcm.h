@@ -7,8 +7,8 @@
 #ifndef __SOUND_DMAENGINE_PCM_H__
 #define __SOUND_DMAENGINE_PCM_H__
 
-#include <sound/pcm.h>
-#include <sound/soc.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
 #include <linux/dmaengine.h>
 
 /**

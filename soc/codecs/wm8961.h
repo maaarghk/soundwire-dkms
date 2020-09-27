@@ -6,7 +6,7 @@
 #ifndef _WM8961_H
 #define _WM8961_H
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #define WM8961_BCLK  1
 #define WM8961_LRCLK 2

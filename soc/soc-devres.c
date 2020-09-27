@@ -6,8 +6,8 @@
 
 #include <linux/module.h>
 #include <linux/moduleparam.h>
-#include <sound/soc.h>
-#include <sound/dmaengine_pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/dmaengine_pcm.h>
 
 static void devm_dai_release(struct device *dev, void *res)
 {

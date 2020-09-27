@@ -12,11 +12,11 @@
 #include <linux/wait.h>
 #include <linux/slab.h>
 #include <linux/sched/signal.h>
-#include <sound/core.h>
-#include <sound/seq_oss.h>
-#include <sound/rawmidi.h>
-#include <sound/seq_kernel.h>
-#include <sound/info.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/seq_oss.h>
+#include <dkms/sound/rawmidi.h>
+#include <dkms/sound/seq_kernel.h>
+#include <dkms/sound/info.h>
 #include "../seq_clientmgr.h"
 
 /* max. applications */

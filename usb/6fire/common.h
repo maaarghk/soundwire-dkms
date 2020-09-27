@@ -12,7 +12,7 @@
 
 #include <linux/slab.h>
 #include <linux/usb.h>
-#include <sound/core.h>
+#include <dkms/sound/core.h>
 
 #define PREFIX "6fire: "
 

@@ -6,9 +6,9 @@
 #include <linux/device.h>
 #include <linux/usb.h>
 #include <linux/gfp.h>
-#include <sound/rawmidi.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
+#include <dkms/sound/rawmidi.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
 
 #include "device.h"
 #include "midi.h"

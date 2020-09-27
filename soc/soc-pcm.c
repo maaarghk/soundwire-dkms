@@ -19,13 +19,13 @@
 #include <linux/workqueue.h>
 #include <linux/export.h>
 #include <linux/debugfs.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dpcm.h>
-#include <sound/soc-link.h>
-#include <sound/initval.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dpcm.h>
+#include <dkms/sound/soc-link.h>
+#include <dkms/sound/initval.h>
 
 #define DPCM_MAX_BE_USERS	8
 

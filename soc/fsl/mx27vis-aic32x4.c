@@ -12,11 +12,11 @@
 #include <linux/i2c.h>
 #include <linux/gpio.h>
 #include <linux/platform_data/asoc-mx27vis.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/tlv.h>
 #include <asm/mach-types.h>
 
 #include "../codecs/tlv320aic32x4.h"

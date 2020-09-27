@@ -12,7 +12,7 @@
 #include <linux/of.h>
 #include <linux/of_device.h>
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include "../codecs/wm8904.h"
 #include "atmel_ssc_dai.h"

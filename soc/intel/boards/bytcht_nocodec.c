@@ -12,9 +12,9 @@
  */
 
 #include <linux/module.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 #include "../atom/sst-atom-controls.h"
 
 static const struct snd_soc_dapm_widget widgets[] = {

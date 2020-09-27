@@ -11,9 +11,9 @@
 #include <linux/slab.h>
 #include <linux/usb.h>
 
-#include <sound/core.h>
-#include <sound/initval.h>
-#include <sound/hwdep.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/hwdep.h>
 
 #include "capture.h"
 #include "driver.h"

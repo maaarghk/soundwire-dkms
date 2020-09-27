@@ -8,8 +8,8 @@
 // Author: Cezary Rojewski <cezary.rojewski@intel.com>
 //
 
-#include <sound/hdaudio_ext.h>
-#include <sound/soc.h>
+#include <dkms/sound/hdaudio_ext.h>
+#include <dkms/sound/soc.h>
 #include "../sof-priv.h"
 #include "hda.h"
 

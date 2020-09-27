@@ -15,8 +15,8 @@
 #include <linux/regmap.h>
 #include <linux/regulator/consumer.h>
 
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 
 #define PISTACHIO_INTERNAL_DAC_CTRL			0x40
 #define PISTACHIO_INTERNAL_DAC_CTRL_PWR_SEL_MASK	0x2

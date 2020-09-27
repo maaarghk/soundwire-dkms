@@ -8,8 +8,8 @@
 // Authors: Keyon Jie <yang.jie@linux.intel.com>
 //
 
-#include <sound/pcm_params.h>
-#include <sound/hdaudio_ext.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/hdaudio_ext.h>
 #include "../sof-priv.h"
 #include "../sof-audio.h"
 #include "hda.h"

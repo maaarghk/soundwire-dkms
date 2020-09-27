@@ -8,7 +8,7 @@
 #include <linux/time.h>
 #include <linux/export.h>
 #include <linux/errno.h>
-#include <sound/core.h>
+#include <dkms/sound/core.h>
 
 /**
  * snd_device_new - create an ALSA device component

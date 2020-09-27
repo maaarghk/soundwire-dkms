@@ -9,7 +9,7 @@
 #ifndef __SOUND_PCM_INDIRECT_H
 #define __SOUND_PCM_INDIRECT_H
 
-#include <sound/pcm.h>
+#include <dkms/sound/pcm.h>
 
 struct snd_pcm_indirect {
 	unsigned int hw_buffer_size;	/* Byte size of hardware buffer */

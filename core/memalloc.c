@@ -14,7 +14,7 @@
 #ifdef CONFIG_X86
 #include <asm/set_memory.h>
 #endif
-#include <sound/memalloc.h>
+#include <dkms/sound/memalloc.h>
 
 /*
  *

@@ -8,7 +8,7 @@
 
 #include <linux/module.h>
 #include <linux/of_address.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include "fsl_utils.h"
 

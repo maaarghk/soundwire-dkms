@@ -9,8 +9,8 @@
 #include <linux/module.h>
 #include <linux/gpio.h>
 #include <linux/of_gpio.h>
-#include <sound/soc.h>
-#include <sound/jack.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/jack.h>
 #include "../../codecs/rt5645.h"
 
 #define MCLK_FOR_CODECS		12288000

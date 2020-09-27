@@ -10,7 +10,7 @@
 #define __INCLUDE_SOUND_SOF_HEADER_H__
 
 #include <linux/types.h>
-#include <uapi/sound/sof/abi.h>
+#include <dkms/uapi/sound/sof/abi.h>
 
 /** \addtogroup sof_uapi uAPI
  *  SOF uAPI specification.

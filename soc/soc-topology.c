@@ -25,10 +25,10 @@
 #include <linux/list.h>
 #include <linux/firmware.h>
 #include <linux/slab.h>
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/soc-topology.h>
-#include <sound/tlv.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/soc-topology.h>
+#include <dkms/sound/tlv.h>
 
 #define SOC_TPLG_MAGIC_BIG_ENDIAN            0x436F5341 /* ASoC in reverse */
 

@@ -12,7 +12,7 @@
 
 #include <linux/regmap.h>
 #include <linux/regulator/consumer.h>
-#include <sound/da7218.h>
+#include <dkms/sound/da7218.h>
 
 
 /*

@@ -10,10 +10,10 @@
 #include <linux/mfd/wl1273-core.h>
 #include <linux/slab.h>
 #include <linux/module.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/initval.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/initval.h>
 
 #include "wl1273.h"
 

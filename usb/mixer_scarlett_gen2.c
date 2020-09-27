@@ -96,8 +96,8 @@
 #include <linux/usb.h>
 #include <linux/moduleparam.h>
 
-#include <sound/control.h>
-#include <sound/tlv.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/tlv.h>
 
 #include "usbaudio.h"
 #include "mixer.h"

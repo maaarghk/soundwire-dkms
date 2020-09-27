@@ -7,10 +7,10 @@
 #include <linux/delay.h>
 #include <linux/export.h>
 #include <linux/clocksource.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/hdaudio.h>
-#include <sound/hda_register.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/hdaudio.h>
+#include <dkms/sound/hda_register.h>
 #include "trace.h"
 
 /**

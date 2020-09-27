@@ -19,9 +19,9 @@
 #include <linux/mfd/dbx500-prcmu.h>
 #include <linux/platform_data/asoc-ux500-msp.h>
 
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
-#include <sound/dmaengine_pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
+#include <dkms/sound/dmaengine_pcm.h>
 
 #include "ux500_msp_i2s.h"
 #include "ux500_msp_dai.h"

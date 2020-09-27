@@ -10,9 +10,9 @@
 #include <linux/of.h>
 #include <linux/mod_devicetable.h>
 #include <linux/platform_device.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 
 #define STORM_SYSCLK_MULT			4
 

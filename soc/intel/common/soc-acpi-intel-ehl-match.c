@@ -6,8 +6,8 @@
  *
  */
 
-#include <sound/soc-acpi.h>
-#include <sound/soc-acpi-intel-match.h>
+#include <dkms/sound/soc-acpi.h>
+#include <dkms/sound/soc-acpi-intel-match.h>
 #include "../skylake/skl.h"
 
 struct snd_soc_acpi_mach snd_soc_acpi_intel_ehl_machines[] = {

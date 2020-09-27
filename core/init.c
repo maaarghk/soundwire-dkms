@@ -15,9 +15,9 @@
 #include <linux/pm.h>
 #include <linux/completion.h>
 
-#include <sound/core.h>
-#include <sound/control.h>
-#include <sound/info.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/info.h>
 
 /* monitor files for graceful shutdown (hotplug) */
 struct snd_monitor_file {

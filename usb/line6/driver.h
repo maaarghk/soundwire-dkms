@@ -11,7 +11,7 @@
 #include <linux/usb.h>
 #include <linux/mutex.h>
 #include <linux/kfifo.h>
-#include <sound/core.h>
+#include <dkms/sound/core.h>
 
 #include "midi.h"
 

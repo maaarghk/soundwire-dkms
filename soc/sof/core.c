@@ -10,8 +10,8 @@
 
 #include <linux/firmware.h>
 #include <linux/module.h>
-#include <sound/soc.h>
-#include <sound/sof.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/sof.h>
 #include "sof-priv.h"
 #include "ops.h"
 #if IS_ENABLED(CONFIG_SND_SOC_SOF_DEBUG_PROBES)

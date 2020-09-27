@@ -123,11 +123,11 @@
 #include <linux/slab.h>
 #include <linux/interrupt.h>
 #include <linux/usb.h>
-#include <sound/core.h>
-#include <sound/initval.h>
-#include <sound/pcm.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/pcm.h>
 
-#include <sound/rawmidi.h>
+#include <dkms/sound/rawmidi.h>
 #include "usx2y.h"
 #include "usbusx2y.h"
 #include "usX2Yhwdep.h"

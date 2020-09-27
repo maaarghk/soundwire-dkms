@@ -16,7 +16,7 @@
  * #define RSND_DEBUG_NO_IRQ_STATUS 1
  */
 
-#include <sound/simple_card_utils.h>
+#include <dkms/sound/simple_card_utils.h>
 #include <linux/delay.h>
 #include "rsnd.h"
 #define RSND_SSI_NAME_SIZE 16

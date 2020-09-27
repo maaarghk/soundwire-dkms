@@ -15,10 +15,10 @@
 #include <linux/module.h>
 #include <linux/of.h>
 #include <linux/platform_device.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
-#include <sound/soc-dapm.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
+#include <dkms/sound/soc-dapm.h>
 
 struct max98357a_priv {
 	struct gpio_desc *sdmode;

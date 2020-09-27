@@ -22,8 +22,8 @@
  */
   
 #include <linux/time.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
 #include "pcm_plugin.h"
 
 #define	SIGN_BIT	(0x80)		/* Sign bit for a u-law byte. */

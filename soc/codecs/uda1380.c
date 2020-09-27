@@ -20,12 +20,12 @@
 #include <linux/delay.h>
 #include <linux/i2c.h>
 #include <linux/workqueue.h>
-#include <sound/core.h>
-#include <sound/control.h>
-#include <sound/initval.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
-#include <sound/uda1380.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/uda1380.h>
 
 #include "uda1380.h"
 

@@ -6,7 +6,7 @@
 #include <linux/types.h>
 #include <linux/ioctl.h>
 
-#include <linux/usb/ch9.h>
+#include <dkms/linux/usb/ch9.h>
 
 
 enum {

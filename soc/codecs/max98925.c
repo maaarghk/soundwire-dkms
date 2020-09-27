@@ -9,10 +9,10 @@
 #include <linux/regmap.h>
 #include <linux/slab.h>
 #include <linux/cdev.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 #include "max98925.h"
 
 static const char *const dai_text[] = {

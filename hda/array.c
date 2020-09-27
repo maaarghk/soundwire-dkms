@@ -4,8 +4,8 @@
  */
 
 #include <linux/slab.h>
-#include <sound/core.h>
-#include <sound/hdaudio.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/hdaudio.h>
 
 /**
  * snd_array_new - get a new element from the given array

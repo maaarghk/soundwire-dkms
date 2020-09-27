@@ -5,8 +5,8 @@
  * Copyright (c) 2011 Cambridge Silicon Radio Limited, a CSR plc group company.
  */
 #include <linux/module.h>
-#include <sound/soc.h>
-#include <sound/dmaengine_pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/dmaengine_pcm.h>
 
 struct sirf_audio_port {
 	struct regmap *regmap;

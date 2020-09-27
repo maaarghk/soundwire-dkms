@@ -13,8 +13,8 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 
-#include <sound/control.h>
-#include <sound/soc.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/soc.h>
 
 #include "sigmadsp.h"
 

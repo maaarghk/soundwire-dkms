@@ -6,7 +6,7 @@
 #ifndef __FSL_SAI_H
 #define __FSL_SAI_H
 
-#include <sound/dmaengine_pcm.h>
+#include <dkms/sound/dmaengine_pcm.h>
 
 #define FSL_SAI_FORMATS (SNDRV_PCM_FMTBIT_S16_LE |\
 			 SNDRV_PCM_FMTBIT_S20_3LE |\

@@ -23,9 +23,9 @@
 
 #include <linux/module.h>
 #include <linux/slab.h>
-#include <sound/core.h>
-#include <sound/soc.h>
-#include <sound/initval.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/initval.h>
 #include <linux/i2c.h>
 #include <linux/delay.h>
 #include <linux/regulator/consumer.h>

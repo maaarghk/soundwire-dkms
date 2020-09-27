@@ -8,8 +8,8 @@
  *                        Jaroslav Kysela <perex@perex.cz>
  */
 
-#include <sound/rawmidi.h>
-#include <sound/seq_midi_event.h>
+#include <dkms/sound/rawmidi.h>
+#include <dkms/sound/seq_midi_event.h>
 
 /*
  * device file instance:

@@ -4,8 +4,8 @@
 #include <linux/module.h>
 #include <linux/mod_devicetable.h>
 #include <linux/pm_domain.h>
-#include <linux/soundwire/sdw.h>
-#include <linux/soundwire/sdw_type.h>
+#include <dkms/linux/soundwire/sdw.h>
+#include <dkms/linux/soundwire/sdw_type.h>
 #include "bus.h"
 #include "sysfs_local.h"
 

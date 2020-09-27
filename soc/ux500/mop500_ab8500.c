@@ -15,10 +15,10 @@
 #include <linux/clk.h>
 #include <linux/mutex.h>
 
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
 
 #include "ux500_pcm.h"
 #include "ux500_msp_dai.h"

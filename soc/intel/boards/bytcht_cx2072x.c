@@ -10,11 +10,11 @@
 #include <linux/module.h>
 #include <linux/platform_device.h>
 #include <linux/slab.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/jack.h>
-#include <sound/soc.h>
-#include <sound/soc-acpi.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-acpi.h>
 #include "../../codecs/cx2072x.h"
 #include "../atom/sst-atom-controls.h"
 

@@ -11,8 +11,8 @@
 #include <linux/reset.h>
 #include <linux/mfd/syscon.h>
 
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
 
 /* DAC definitions */
 

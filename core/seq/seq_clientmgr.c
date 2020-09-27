@@ -9,18 +9,18 @@
 #include <linux/init.h>
 #include <linux/export.h>
 #include <linux/slab.h>
-#include <sound/core.h>
-#include <sound/minors.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/minors.h>
 #include <linux/kmod.h>
 
-#include <sound/seq_kernel.h>
+#include <dkms/sound/seq_kernel.h>
 #include "seq_clientmgr.h"
 #include "seq_memory.h"
 #include "seq_queue.h"
 #include "seq_timer.h"
 #include "seq_info.h"
 #include "seq_system.h"
-#include <sound/seq_device.h>
+#include <dkms/sound/seq_device.h>
 #ifdef CONFIG_COMPAT
 #include <linux/compat.h>
 #endif

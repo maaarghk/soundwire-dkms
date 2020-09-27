@@ -27,8 +27,8 @@
 #define __COMPRESS_OFFLOAD_H
 
 #include <linux/types.h>
-#include <sound/asound.h>
-#include <sound/compress_params.h>
+#include <dkms/sound/asound.h>
+#include <dkms/sound/compress_params.h>
 
 
 #define SNDRV_COMPRESS_VERSION SNDRV_PROTOCOL_VERSION(0, 2, 0)

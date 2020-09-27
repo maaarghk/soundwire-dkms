@@ -8,8 +8,8 @@
 #include <linux/slab.h>
 #include <linux/export.h>
 #include <linux/sort.h>
-#include <sound/core.h>
-#include <sound/hda_codec.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/hda_codec.h>
 #include "hda_local.h"
 #include "hda_auto_parser.h"
 

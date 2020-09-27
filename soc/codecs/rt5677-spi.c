@@ -24,7 +24,7 @@
 #include <linux/firmware.h>
 #include <linux/acpi.h>
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include "rt5677.h"
 #include "rt5677-spi.h"

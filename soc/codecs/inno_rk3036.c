@@ -6,12 +6,12 @@
  * Author: Zheng ShunQian<zhengsq@rock-chips.com>
  */
 
-#include <sound/soc.h>
-#include <sound/tlv.h>
-#include <sound/soc-dapm.h>
-#include <sound/soc-dai.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/soc-dai.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
 
 #include <linux/platform_device.h>
 #include <linux/of.h>

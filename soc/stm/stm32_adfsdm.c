@@ -17,8 +17,8 @@
 #include <linux/iio/consumer.h>
 #include <linux/iio/adc/stm32-dfsdm-adc.h>
 
-#include <sound/pcm.h>
-#include <sound/soc.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
 
 #define STM32_ADFSDM_DRV_NAME "stm32-adfsdm"
 

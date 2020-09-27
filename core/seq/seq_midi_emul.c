@@ -19,11 +19,11 @@
 #include <linux/slab.h>
 #include <linux/string.h>
 #include <linux/module.h>
-#include <sound/core.h>
-#include <sound/seq_kernel.h>
-#include <sound/seq_midi_emul.h>
-#include <sound/initval.h>
-#include <sound/asoundef.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/seq_kernel.h>
+#include <dkms/sound/seq_midi_emul.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/asoundef.h>
 
 MODULE_AUTHOR("Takashi Iwai / Steve Ratcliffe");
 MODULE_DESCRIPTION("Advanced Linux Sound Architecture sequencer MIDI emulation.");

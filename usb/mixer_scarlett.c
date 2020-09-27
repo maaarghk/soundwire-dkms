@@ -119,11 +119,11 @@
 
 #include <linux/slab.h>
 #include <linux/usb.h>
-#include <linux/usb/audio-v2.h>
+#include <dkms/linux/usb/audio-v2.h>
 
-#include <sound/core.h>
-#include <sound/control.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/tlv.h>
 
 #include "usbaudio.h"
 #include "mixer.h"

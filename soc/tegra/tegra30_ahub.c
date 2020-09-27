@@ -15,7 +15,7 @@
 #include <linux/regmap.h>
 #include <linux/reset.h>
 #include <linux/slab.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 #include "tegra30_ahub.h"
 
 #define DRV_NAME "tegra30-ahub"

@@ -12,12 +12,12 @@
 #include <linux/err.h>
 #include <linux/string.h>
 #include <linux/platform_device.h>
-#include <sound/soc.h>
-#include <sound/pcm_params.h>
-#include <sound/dmaengine_pcm.h>
-#include <uapi/sound/asound.h>
-#include <sound/asoundef.h>
-#include <sound/omap-hdmi-audio.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/uapi/sound/asound.h>
+#include <dkms/sound/asoundef.h>
+#include <dkms/sound/omap-hdmi-audio.h>
 
 #include "sdma-pcm.h"
 

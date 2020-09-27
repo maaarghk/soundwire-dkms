@@ -3,7 +3,7 @@
 // Copyright 2009 Simtec Electronics
 
 #include <linux/module.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include "s3c24xx_simtec.h"
 

@@ -11,7 +11,7 @@
 #ifndef __SOF_PROBE_H
 #define __SOF_PROBE_H
 
-#include <sound/sof/header.h>
+#include <dkms/sound/sof/header.h>
 
 struct snd_sof_dev;
 

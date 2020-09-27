@@ -9,9 +9,9 @@
 
 #include <linux/clk.h>
 #include <linux/regmap.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
 
 #define AXG_TDM_NUM_LANES	4
 #define AXG_TDM_CHANNEL_MAX	128

@@ -4,12 +4,12 @@
 //
 //Copyright 2016 Advanced Micro Devices, Inc.
 
-#include <sound/core.h>
-#include <sound/soc.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc-dapm.h>
-#include <sound/jack.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/jack.h>
 #include <linux/clk.h>
 #include <linux/gpio.h>
 #include <linux/gpio/consumer.h>

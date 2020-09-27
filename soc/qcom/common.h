@@ -4,7 +4,7 @@
 #ifndef __QCOM_SND_COMMON_H__
 #define __QCOM_SND_COMMON_H__
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 int qcom_snd_parse_of(struct snd_soc_card *card);
 

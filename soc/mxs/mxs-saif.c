@@ -15,10 +15,10 @@
 #include <linux/delay.h>
 #include <linux/io.h>
 #include <linux/time.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 
 #include "mxs-saif.h"
 

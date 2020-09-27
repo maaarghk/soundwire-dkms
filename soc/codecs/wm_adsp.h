@@ -10,9 +10,9 @@
 #ifndef __WM_ADSP_H
 #define __WM_ADSP_H
 
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/compress_driver.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/compress_driver.h>
 
 #include "wmfw.h"
 

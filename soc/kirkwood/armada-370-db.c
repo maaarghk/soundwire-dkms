@@ -10,7 +10,7 @@
 #include <linux/interrupt.h>
 #include <linux/platform_device.h>
 #include <linux/slab.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 #include <linux/of.h>
 #include <linux/platform_data/asoc-kirkwood.h>
 #include "../codecs/cs42l51.h"

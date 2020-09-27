@@ -3,8 +3,8 @@
 
 #include <linux/acpi.h>
 #include <linux/of.h>
-#include <linux/soundwire/sdw.h>
-#include <linux/soundwire/sdw_type.h>
+#include <dkms/linux/soundwire/sdw.h>
+#include <dkms/linux/soundwire/sdw_type.h>
 #include "bus.h"
 
 static void sdw_slave_release(struct device *dev)

@@ -6,7 +6,7 @@
 #ifndef _SAMSUNG_DMA_H
 #define _SAMSUNG_DMA_H
 
-#include <sound/dmaengine_pcm.h>
+#include <dkms/sound/dmaengine_pcm.h>
 
 /*
  * @tx, @rx arguments can be NULL if the DMA channel names are "tx", "rx",

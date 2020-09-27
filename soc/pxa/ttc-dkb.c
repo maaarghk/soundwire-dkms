@@ -6,12 +6,12 @@
  */
 #include <linux/module.h>
 #include <linux/moduleparam.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
-#include <sound/jack.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/jack.h>
 #include <asm/mach-types.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/pcm_params.h>
 #include "../codecs/88pm860x-codec.h"
 
 static struct snd_soc_jack hs_jack, mic_jack;

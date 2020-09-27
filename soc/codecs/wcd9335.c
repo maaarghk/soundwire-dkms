@@ -13,14 +13,14 @@
 #include <linux/delay.h>
 #include <linux/kernel.h>
 #include <linux/slimbus.h>
-#include <sound/soc.h>
-#include <sound/pcm_params.h>
-#include <sound/soc-dapm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc-dapm.h>
 #include <linux/of_gpio.h>
 #include <linux/of.h>
 #include <linux/of_irq.h>
-#include <sound/tlv.h>
-#include <sound/info.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/info.h>
 #include "wcd9335.h"
 #include "wcd-clsh-v2.h"
 

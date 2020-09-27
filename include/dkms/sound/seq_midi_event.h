@@ -9,7 +9,7 @@
  *                        Jaroslav Kysela <perex@perex.cz>
  */
 
-#include <sound/asequencer.h>
+#include <dkms/sound/asequencer.h>
 
 #define MAX_MIDI_EVENT_BUF	256
 

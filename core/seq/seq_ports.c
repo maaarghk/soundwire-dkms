@@ -5,7 +5,7 @@
  *                         Jaroslav Kysela <perex@perex.cz>
  */
 
-#include <sound/core.h>
+#include <dkms/sound/core.h>
 #include <linux/slab.h>
 #include <linux/module.h>
 #include "seq_system.h"

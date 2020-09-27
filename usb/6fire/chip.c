@@ -21,7 +21,7 @@
 #include <linux/module.h>
 #include <linux/init.h>
 #include <linux/gfp.h>
-#include <sound/initval.h>
+#include <dkms/sound/initval.h>
 
 MODULE_AUTHOR("Torsten Schenk <torsten.schenk@zoho.com>");
 MODULE_DESCRIPTION("TerraTec DMX 6Fire USB audio driver");

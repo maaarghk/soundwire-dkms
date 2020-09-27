@@ -8,11 +8,11 @@
 
 #include <linux/timecounter.h>
 #include <linux/interrupt.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/initval.h>
-#include <sound/hda_codec.h>
-#include <sound/hda_register.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/hda_codec.h>
+#include <dkms/sound/hda_register.h>
 
 #define AZX_MAX_CODECS		HDA_MAX_CODECS
 #define AZX_DEFAULT_CODECS	4

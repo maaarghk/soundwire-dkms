@@ -17,10 +17,10 @@
 #include <linux/gpio.h>
 #include <linux/of_gpio.h>
 
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 
 #include "../codecs/sgtl5000.h"
 

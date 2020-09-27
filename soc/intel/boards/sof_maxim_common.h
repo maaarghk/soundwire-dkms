@@ -10,7 +10,7 @@
 #ifndef __SOF_MAXIM_COMMON_H
 #define __SOF_MAXIM_COMMON_H
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #define MAX_98373_CODEC_DAI	"max98373-aif1"
 #define MAX_98373_DEV0_NAME	"i2c-MX98373:00"

@@ -10,7 +10,7 @@
 #include <linux/module.h>
 #include <linux/mod_devicetable.h>
 #include <linux/slab.h>
-#include <linux/soundwire/sdw.h>
+#include <dkms/linux/soundwire/sdw.h>
 #include "bus.h"
 
 #define SDW_STRM_RATE_GROUPING		1

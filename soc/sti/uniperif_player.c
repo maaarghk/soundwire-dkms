@@ -8,8 +8,8 @@
 #include <linux/clk.h>
 #include <linux/mfd/syscon.h>
 
-#include <sound/asoundef.h>
-#include <sound/soc.h>
+#include <dkms/sound/asoundef.h>
+#include <dkms/sound/soc.h>
 
 #include "uniperif.h"
 

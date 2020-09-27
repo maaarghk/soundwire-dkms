@@ -6,8 +6,8 @@
 #ifndef __SND_SEQ_TIMER_H
 #define __SND_SEQ_TIMER_H
 
-#include <sound/timer.h>
-#include <sound/seq_kernel.h>
+#include <dkms/sound/timer.h>
+#include <dkms/sound/seq_kernel.h>
 
 struct snd_seq_timer_tick {
 	snd_seq_tick_time_t	cur_tick;	/* current tick */

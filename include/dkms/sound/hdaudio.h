@@ -11,10 +11,10 @@
 #include <linux/io.h>
 #include <linux/pm_runtime.h>
 #include <linux/timecounter.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/memalloc.h>
-#include <sound/hda_verbs.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/memalloc.h>
+#include <dkms/sound/hda_verbs.h>
 #include <drm/i915_component.h>
 
 /* codec node id */

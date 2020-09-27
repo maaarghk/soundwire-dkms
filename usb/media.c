@@ -22,8 +22,8 @@
 #include <linux/slab.h>
 #include <linux/usb.h>
 
-#include <sound/pcm.h>
-#include <sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/core.h>
 
 #include "usbaudio.h"
 #include "card.h"

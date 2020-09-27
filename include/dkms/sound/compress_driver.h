@@ -12,10 +12,10 @@
 
 #include <linux/types.h>
 #include <linux/sched.h>
-#include <sound/core.h>
-#include <sound/compress_offload.h>
-#include <sound/asound.h>
-#include <sound/pcm.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/compress_offload.h>
+#include <dkms/sound/asound.h>
+#include <dkms/sound/pcm.h>
 
 struct snd_compr_ops;
 

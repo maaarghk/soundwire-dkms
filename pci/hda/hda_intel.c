@@ -43,15 +43,15 @@
 #include <asm/set_memory.h>
 #include <asm/cpufeature.h>
 #endif
-#include <sound/core.h>
-#include <sound/initval.h>
-#include <sound/hdaudio.h>
-#include <sound/hda_i915.h>
-#include <sound/intel-dsp-config.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/hdaudio.h>
+#include <dkms/sound/hda_i915.h>
+#include <dkms/sound/intel-dsp-config.h>
 #include <linux/vgaarb.h>
 #include <linux/vga_switcheroo.h>
 #include <linux/firmware.h>
-#include <sound/hda_codec.h>
+#include <dkms/sound/hda_codec.h>
 #include "hda_controller.h"
 #include "hda_intel.h"
 

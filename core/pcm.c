@@ -11,12 +11,12 @@
 #include <linux/mutex.h>
 #include <linux/device.h>
 #include <linux/nospec.h>
-#include <sound/core.h>
-#include <sound/minors.h>
-#include <sound/pcm.h>
-#include <sound/timer.h>
-#include <sound/control.h>
-#include <sound/info.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/minors.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/timer.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/info.h>
 
 #include "pcm_local.h"
 

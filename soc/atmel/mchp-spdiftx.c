@@ -11,10 +11,10 @@
 #include <linux/module.h>
 #include <linux/spinlock.h>
 
-#include <sound/asoundef.h>
-#include <sound/dmaengine_pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/asoundef.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 
 /*
  * ---- S/PDIF Transmitter Controller Register map ----

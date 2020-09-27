@@ -8,7 +8,7 @@
 #ifndef CAPTURE_H
 #define CAPTURE_H
 
-#include <sound/pcm.h>
+#include <dkms/sound/pcm.h>
 
 #include "driver.h"
 #include "pcm.h"

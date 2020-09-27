@@ -14,10 +14,10 @@
 #include <linux/module.h>
 #include <linux/mod_devicetable.h>
 #include <linux/pm_runtime.h>
-#include <linux/soundwire/sdw_registers.h>
-#include <linux/soundwire/sdw.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/linux/soundwire/sdw_registers.h>
+#include <dkms/linux/soundwire/sdw.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 #include <linux/workqueue.h>
 #include "bus.h"
 #include "cadence_master.h"

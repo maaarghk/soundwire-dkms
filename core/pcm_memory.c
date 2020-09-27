@@ -11,10 +11,10 @@
 #include <linux/moduleparam.h>
 #include <linux/vmalloc.h>
 #include <linux/export.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/info.h>
-#include <sound/initval.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/info.h>
+#include <dkms/sound/initval.h>
 #include "pcm_local.h"
 
 static int preallocate_dma = 1;

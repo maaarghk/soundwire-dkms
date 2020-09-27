@@ -13,13 +13,13 @@
 #include <linux/delay.h>
 #include <linux/slab.h>
 #include <linux/workqueue.h>
-#include <sound/core.h>
-#include <sound/compress_params.h>
-#include <sound/compress_driver.h>
-#include <sound/soc.h>
-#include <sound/initval.h>
-#include <sound/soc-dpcm.h>
-#include <sound/soc-link.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/compress_params.h>
+#include <dkms/sound/compress_driver.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc-dpcm.h>
+#include <dkms/sound/soc-link.h>
 #include <linux/pm_runtime.h>
 
 static int soc_compr_components_open(struct snd_compr_stream *cstream,

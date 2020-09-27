@@ -18,11 +18,11 @@
 #include <linux/pm_runtime.h>
 #include <linux/sched.h>
 #include <linux/delay.h>
-#include <sound/asound.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
-#include <sound/compress_driver.h>
+#include <dkms/sound/asound.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/compress_driver.h>
 #include <asm/platform_sst_audio.h>
 #include "../sst-mfld-platform.h"
 #include "sst.h"

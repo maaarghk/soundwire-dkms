@@ -13,9 +13,9 @@
 #include <linux/errno.h>
 #include <linux/firmware.h>
 #include <linux/workqueue.h>
-#include <sound/tlv.h>
-#include <sound/pcm_params.h>
-#include <uapi/sound/sof/tokens.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/uapi/sound/sof/tokens.h>
 #include "sof-priv.h"
 #include "sof-audio.h"
 #include "ops.h"

@@ -3,7 +3,7 @@
 // Copyright (c) 2017-2018, Linaro Limited
 
 #include <linux/slab.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 #include <linux/kernel.h>
 #include <linux/delay.h>
 #include "wcd9335.h"

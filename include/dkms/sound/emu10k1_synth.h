@@ -7,8 +7,8 @@
  *  Copyright (C) 2000 Takashi Iwai <tiwai@suse.de>
  */
 
-#include <sound/emu10k1.h>
-#include <sound/emux_synth.h>
+#include <dkms/sound/emu10k1.h>
+#include <dkms/sound/emux_synth.h>
 
 /* sequencer device id */
 #define SNDRV_SEQ_DEV_ID_EMU10K1_SYNTH	"emu10k1-synth"

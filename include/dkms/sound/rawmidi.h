@@ -7,7 +7,7 @@
  *  Copyright (c) by Jaroslav Kysela <perex@perex.cz>
  */
 
-#include <sound/asound.h>
+#include <dkms/sound/asound.h>
 #include <linux/interrupt.h>
 #include <linux/spinlock.h>
 #include <linux/wait.h>
@@ -16,7 +16,7 @@
 #include <linux/device.h>
 
 #if IS_ENABLED(CONFIG_SND_SEQUENCER)
-#include <sound/seq_device.h>
+#include <dkms/sound/seq_device.h>
 #endif
 
 /*

@@ -7,7 +7,7 @@
 #define _WM8994_H
 
 #include <linux/clk.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 #include <linux/firmware.h>
 #include <linux/completion.h>
 #include <linux/workqueue.h>

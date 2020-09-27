@@ -19,8 +19,8 @@
 #include <linux/io.h>
 #include <linux/pci.h>
 #include <asm/io.h>
-#include <sound/core.h>
-#include <sound/hda_codec.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/hda_codec.h>
 #include "hda_local.h"
 #include "hda_auto_parser.h"
 #include "hda_jack.h"
@@ -31,7 +31,7 @@
 /*#define ENABLE_TUNING_CONTROLS*/
 
 #ifdef ENABLE_TUNING_CONTROLS
-#include <sound/tlv.h>
+#include <dkms/sound/tlv.h>
 #endif
 
 #define FLOAT_ZERO	0x00000000

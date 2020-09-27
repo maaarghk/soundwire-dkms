@@ -21,9 +21,9 @@
 #include <linux/platform_device.h>
 #include <linux/pm_runtime.h>
 #include <linux/reset.h>
-#include <sound/dmaengine_pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 
 #define	SUN4I_SPDIF_CTL		(0x00)
 	#define SUN4I_SPDIF_CTL_MCLKDIV(v)		((v) << 4) /* v even */

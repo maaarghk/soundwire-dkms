@@ -7,8 +7,8 @@
 #define __SOUND_HDA_REGMAP_H
 
 #include <linux/regmap.h>
-#include <sound/core.h>
-#include <sound/hdaudio.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/hdaudio.h>
 
 #define AC_AMP_FAKE_MUTE	0x10	/* fake mute bit set to amp verbs */
 

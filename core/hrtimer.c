@@ -9,8 +9,8 @@
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 #include <linux/hrtimer.h>
-#include <sound/core.h>
-#include <sound/timer.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/timer.h>
 
 MODULE_AUTHOR("Takashi Iwai <tiwai@suse.de>");
 MODULE_DESCRIPTION("ALSA hrtimer backend");

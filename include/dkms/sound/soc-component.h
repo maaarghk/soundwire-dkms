@@ -8,7 +8,7 @@
 #ifndef __SOC_COMPONENT_H
 #define __SOC_COMPONENT_H
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 /*
  * Component probe and remove ordering levels for components with runtime

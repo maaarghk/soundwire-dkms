@@ -21,7 +21,7 @@
 #include <linux/dma-mapping.h>
 #include <linux/debugfs.h>
 #include <linux/pm_runtime.h>
-#include <sound/asound.h>
+#include <dkms/sound/asound.h>
 
 #include "sst-haswell-ipc.h"
 #include "../common/sst-dsp.h"

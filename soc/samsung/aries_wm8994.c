@@ -9,9 +9,9 @@
 #include <linux/of_device.h>
 #include <linux/of_gpio.h>
 #include <linux/regulator/consumer.h>
-#include <sound/jack.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 
 #include "i2s.h"
 #include "../codecs/wm8994.h"

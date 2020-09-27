@@ -13,8 +13,8 @@
 #include <linux/tty.h>
 #include <linux/module.h>
 
-#include <sound/soc.h>
-#include <sound/jack.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/jack.h>
 
 #include <asm/mach-types.h>
 

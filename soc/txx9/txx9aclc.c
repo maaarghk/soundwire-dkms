@@ -14,10 +14,10 @@
 #include <linux/scatterlist.h>
 #include <linux/slab.h>
 #include <linux/dmaengine.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 #include "txx9aclc.h"
 
 #define DRV_NAME "txx9aclc"

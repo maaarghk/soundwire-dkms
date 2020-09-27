@@ -14,9 +14,9 @@
 #include <linux/gpio.h>
 #include <linux/module.h>
 #include <linux/soc/cirrus/ep93xx.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
 #include <asm/mach-types.h>
 
 static int edb93xx_hw_params(struct snd_pcm_substream *substream,

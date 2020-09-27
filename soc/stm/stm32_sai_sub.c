@@ -15,10 +15,10 @@
 #include <linux/pm_runtime.h>
 #include <linux/regmap.h>
 
-#include <sound/asoundef.h>
-#include <sound/core.h>
-#include <sound/dmaengine_pcm.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/asoundef.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/pcm_params.h>
 
 #include "stm32_sai.h"
 

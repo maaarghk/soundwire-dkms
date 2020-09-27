@@ -12,7 +12,7 @@
 #include <linux/module.h>
 #include <linux/of.h>
 #include <linux/regmap.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include "tlv320aic32x4.h"
 

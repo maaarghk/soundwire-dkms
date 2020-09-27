@@ -10,9 +10,9 @@
 #include <linux/module.h>
 #include <linux/pm_runtime.h>
 #include <linux/regmap.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 #include "mtk-afe-platform-driver.h"
-#include <sound/pcm_params.h>
+#include <dkms/sound/pcm_params.h>
 #include "mtk-afe-fe-dai.h"
 #include "mtk-base-afe.h"
 

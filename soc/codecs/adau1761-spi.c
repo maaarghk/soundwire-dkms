@@ -10,7 +10,7 @@
 #include <linux/module.h>
 #include <linux/regmap.h>
 #include <linux/spi/spi.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include "adau1761.h"
 

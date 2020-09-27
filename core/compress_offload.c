@@ -26,12 +26,12 @@
 #include <linux/uaccess.h>
 #include <linux/module.h>
 #include <linux/compat.h>
-#include <sound/core.h>
-#include <sound/initval.h>
-#include <sound/info.h>
-#include <sound/compress_params.h>
-#include <sound/compress_offload.h>
-#include <sound/compress_driver.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/info.h>
+#include <dkms/sound/compress_params.h>
+#include <dkms/sound/compress_offload.h>
+#include <dkms/sound/compress_driver.h>
 
 /* struct snd_compr_codec_caps overflows the ioctl bit size for some
  * architectures, so we need to disable the relevant ioctls.

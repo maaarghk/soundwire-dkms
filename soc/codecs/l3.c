@@ -17,7 +17,7 @@
 #include <linux/device.h>
 #include <linux/gpio.h>
 
-#include <sound/l3.h>
+#include <dkms/sound/l3.h>
 
 /*
  * Send one byte of data to the chip.  Data is latched into the chip on

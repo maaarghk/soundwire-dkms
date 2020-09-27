@@ -13,9 +13,9 @@
 
 #include <cpu/sh7722.h>
 
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
 
 #include "../codecs/wm8978.h"
 #include "siu.h"

@@ -8,7 +8,7 @@
 
 #include <linux/kernel.h>
 #include <linux/types.h>
-#include <linux/usb/typec.h>
+#include <dkms/linux/usb/typec.h>
 
 /* USB PD Messages */
 enum pd_ctrl_msg_type {

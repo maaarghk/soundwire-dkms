@@ -12,7 +12,7 @@
 #include <linux/regmap.h>
 #include <linux/slab.h>
 
-#include <sound/ac97_codec.h>
+#include <dkms/sound/ac97_codec.h>
 
 bool regmap_ac97_default_volatile(struct device *dev, unsigned int reg)
 {

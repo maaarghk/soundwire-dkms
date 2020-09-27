@@ -8,8 +8,8 @@
 #include <linux/slab.h>
 #include <linux/usb.h>
 #include <linux/export.h>
-#include <sound/core.h>
-#include <sound/rawmidi.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/rawmidi.h>
 
 #include "driver.h"
 #include "midi.h"

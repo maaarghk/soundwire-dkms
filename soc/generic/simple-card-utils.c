@@ -11,8 +11,8 @@
 #include <linux/of.h>
 #include <linux/of_gpio.h>
 #include <linux/of_graph.h>
-#include <sound/jack.h>
-#include <sound/simple_card_utils.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/simple_card_utils.h>
 
 void asoc_simple_convert_fixup(struct asoc_simple_data *data,
 			       struct snd_pcm_hw_params *params)

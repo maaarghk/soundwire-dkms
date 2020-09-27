@@ -12,9 +12,9 @@
 #include <linux/of_device.h>
 #include <linux/of_gpio.h>
 #include <linux/regulator/consumer.h>
-#include <sound/jack.h>
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
 
 #include "i2s.h"
 #include "../codecs/wm8994.h"

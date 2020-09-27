@@ -6,9 +6,9 @@
 // Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
 //
 
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
-#include <sound/soc-link.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
+#include <dkms/sound/soc-link.h>
 
 #define soc_dai_ret(dai, ret) _soc_dai_ret(dai, __func__, ret)
 static inline int _soc_dai_ret(struct snd_soc_dai *dai,

@@ -10,9 +10,9 @@
 
 #include <linux/spinlock.h>
 #include <linux/types.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
 
 struct platform_device;
 

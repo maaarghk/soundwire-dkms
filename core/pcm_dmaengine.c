@@ -13,11 +13,11 @@
 #include <linux/init.h>
 #include <linux/dmaengine.h>
 #include <linux/slab.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 
-#include <sound/dmaengine_pcm.h>
+#include <dkms/sound/dmaengine_pcm.h>
 
 struct dmaengine_pcm_runtime_data {
 	struct dma_chan *dma_chan;

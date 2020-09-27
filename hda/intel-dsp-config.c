@@ -6,11 +6,11 @@
 #include <linux/dmi.h>
 #include <linux/module.h>
 #include <linux/pci.h>
-#include <linux/soundwire/sdw.h>
-#include <linux/soundwire/sdw_intel.h>
-#include <sound/core.h>
-#include <sound/intel-dsp-config.h>
-#include <sound/intel-nhlt.h>
+#include <dkms/linux/soundwire/sdw.h>
+#include <dkms/linux/soundwire/sdw_intel.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/intel-dsp-config.h>
+#include <dkms/sound/intel-nhlt.h>
 
 static int dsp_driver;
 

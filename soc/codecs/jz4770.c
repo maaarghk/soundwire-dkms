@@ -12,11 +12,11 @@
 #include <linux/regmap.h>
 #include <linux/time64.h>
 
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
-#include <sound/soc-dapm.h>
-#include <sound/tlv.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/tlv.h>
 
 #define ICDC_RGADW_OFFSET		0x00
 #define ICDC_RGDATA_OFFSET		0x04

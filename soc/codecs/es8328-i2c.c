@@ -11,7 +11,7 @@
 #include <linux/i2c.h>
 #include <linux/regmap.h>
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include "es8328.h"
 

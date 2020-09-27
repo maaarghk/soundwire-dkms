@@ -15,8 +15,8 @@
  * Hardware interface for generic Intel audio DSP HDA IP
  */
 
-#include <sound/hda_register.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/hda_register.h>
+#include <dkms/sound/pcm_params.h>
 #include "../sof-audio.h"
 #include "../ops.h"
 #include "hda.h"

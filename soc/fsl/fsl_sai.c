@@ -14,9 +14,9 @@
 #include <linux/regmap.h>
 #include <linux/slab.h>
 #include <linux/time.h>
-#include <sound/core.h>
-#include <sound/dmaengine_pcm.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/pcm_params.h>
 #include <linux/mfd/syscon.h>
 #include <linux/mfd/syscon/imx6q-iomuxc-gpr.h>
 

@@ -16,8 +16,8 @@
 #include <linux/pm_runtime.h>
 #include <linux/mfd/syscon.h>
 #include <linux/regmap.h>
-#include <sound/pcm_params.h>
-#include <sound/dmaengine_pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/dmaengine_pcm.h>
 
 #include "rockchip_spdif.h"
 

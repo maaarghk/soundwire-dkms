@@ -4,9 +4,9 @@
 //
 // Copyright 2012 Wolfson Microelectronics
 
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/jack.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/jack.h>
 #include <linux/gpio.h>
 #include <linux/module.h>
 

@@ -13,10 +13,10 @@
 #include <linux/delay.h>
 #include <linux/mutex.h>
 #include <linux/clk.h>
-#include <sound/tlv.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
 
 #include "tscs42xx.h"
 

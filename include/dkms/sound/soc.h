@@ -19,11 +19,11 @@
 #include <linux/kernel.h>
 #include <linux/regmap.h>
 #include <linux/log2.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/compress_driver.h>
-#include <sound/control.h>
-#include <sound/ac97_codec.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/compress_driver.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/ac97_codec.h>
 
 /*
  * Convenience kcontrol builders
@@ -383,9 +383,9 @@ struct soc_enum;
 struct snd_soc_jack;
 struct snd_soc_jack_zone;
 struct snd_soc_jack_pin;
-#include <sound/soc-dapm.h>
-#include <sound/soc-dpcm.h>
-#include <sound/soc-topology.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/soc-dpcm.h>
+#include <dkms/sound/soc-topology.h>
 
 struct snd_soc_jack_gpio;
 
@@ -1367,7 +1367,7 @@ struct snd_soc_dai *snd_soc_find_dai(
 struct snd_soc_dai *snd_soc_find_dai_with_mutex(
 	const struct snd_soc_dai_link_component *dlc);
 
-#include <sound/soc-dai.h>
+#include <dkms/sound/soc-dai.h>
 
 static inline
 int snd_soc_fixup_dai_links_platform_name(struct snd_soc_card *card,
@@ -1413,7 +1413,7 @@ static inline void snd_soc_dapm_mutex_unlock(struct snd_soc_dapm_context *dapm)
 	mutex_unlock(&dapm->card->dapm_mutex);
 }
 
-#include <sound/soc-component.h>
-#include <sound/soc-card.h>
+#include <dkms/sound/soc-component.h>
+#include <dkms/sound/soc-card.h>
 
 #endif

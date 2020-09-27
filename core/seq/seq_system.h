@@ -6,7 +6,7 @@
 #ifndef __SND_SEQ_SYSTEM_H
 #define __SND_SEQ_SYSTEM_H
 
-#include <sound/seq_kernel.h>
+#include <dkms/sound/seq_kernel.h>
 
 
 /* entry points for broadcasting system events */

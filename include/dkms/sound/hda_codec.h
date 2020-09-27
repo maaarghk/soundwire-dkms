@@ -10,13 +10,13 @@
 
 #include <linux/kref.h>
 #include <linux/mod_devicetable.h>
-#include <sound/info.h>
-#include <sound/control.h>
-#include <sound/pcm.h>
-#include <sound/hwdep.h>
-#include <sound/hdaudio.h>
-#include <sound/hda_verbs.h>
-#include <sound/hda_regmap.h>
+#include <dkms/sound/info.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/hwdep.h>
+#include <dkms/sound/hdaudio.h>
+#include <dkms/sound/hda_verbs.h>
+#include <dkms/sound/hda_regmap.h>
 
 #define IS_BXT(pci) ((pci)->vendor == 0x8086 && (pci)->device == 0x5a98)
 #define IS_CFL(pci) ((pci)->vendor == 0x8086 && (pci)->device == 0xa348)

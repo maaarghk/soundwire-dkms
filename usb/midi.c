@@ -46,13 +46,13 @@
 #include <linux/timer.h>
 #include <linux/usb.h>
 #include <linux/wait.h>
-#include <linux/usb/audio.h>
+#include <dkms/linux/usb/audio.h>
 #include <linux/module.h>
 
-#include <sound/core.h>
-#include <sound/control.h>
-#include <sound/rawmidi.h>
-#include <sound/asequencer.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/rawmidi.h>
+#include <dkms/sound/asequencer.h>
 #include "usbaudio.h"
 #include "midi.h"
 #include "power.h"

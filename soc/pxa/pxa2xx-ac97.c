@@ -14,12 +14,12 @@
 #include <linux/dmaengine.h>
 #include <linux/dma/pxa-dma.h>
 
-#include <sound/ac97/controller.h>
-#include <sound/core.h>
-#include <sound/ac97_codec.h>
-#include <sound/soc.h>
-#include <sound/pxa2xx-lib.h>
-#include <sound/dmaengine_pcm.h>
+#include <dkms/sound/ac97/controller.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/ac97_codec.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/pxa2xx-lib.h>
+#include <dkms/sound/dmaengine_pcm.h>
 
 #include <mach/hardware.h>
 #include <mach/regs-ac97.h>

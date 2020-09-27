@@ -13,18 +13,18 @@
 #include <linux/delay.h>
 #include <linux/pm_runtime.h>
 #include <linux/pm.h>
-#include <linux/soundwire/sdw.h>
+#include <dkms/linux/soundwire/sdw.h>
 #include <linux/regmap.h>
 #include <linux/slab.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/initval.h>
-#include <sound/tlv.h>
-#include <sound/hda_verbs.h>
-#include <sound/jack.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/hda_verbs.h>
+#include <dkms/sound/jack.h>
 
 #include "rt711.h"
 

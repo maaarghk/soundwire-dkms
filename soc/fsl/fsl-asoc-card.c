@@ -11,12 +11,12 @@
 #include <linux/module.h>
 #include <linux/of_platform.h>
 #if IS_ENABLED(CONFIG_SND_AC97_CODEC)
-#include <sound/ac97_codec.h>
+#include <dkms/sound/ac97_codec.h>
 #endif
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/jack.h>
-#include <sound/simple_card_utils.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/simple_card_utils.h>
 
 #include "fsl_esai.h"
 #include "fsl_sai.h"

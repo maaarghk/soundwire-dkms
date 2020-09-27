@@ -7,8 +7,8 @@
 
 #include <linux/device.h>
 #include <linux/errno.h>
-#include <sound/soc.h>
-#include <sound/soc-acpi.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-acpi.h>
 #include "sof_sdw_common.h"
 
 static int rt715_rtd_init(struct snd_soc_pcm_runtime *rtd)

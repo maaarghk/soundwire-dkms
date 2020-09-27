@@ -14,7 +14,7 @@
 #include <linux/notifier.h>
 #include <linux/mfd/arizona/core.h>
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include "wm_adsp.h"
 

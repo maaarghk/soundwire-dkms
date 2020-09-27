@@ -12,7 +12,7 @@
 #include <linux/sizes.h>
 #include <linux/pm_runtime.h>
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 #include <drm/amd_asic_type.h>
 #include "acp.h"
 

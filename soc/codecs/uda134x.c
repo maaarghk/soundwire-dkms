@@ -13,13 +13,13 @@
 #include <linux/module.h>
 #include <linux/delay.h>
 #include <linux/slab.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/initval.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/initval.h>
 
-#include <sound/uda134x.h>
-#include <sound/l3.h>
+#include <dkms/sound/uda134x.h>
+#include <dkms/sound/l3.h>
 
 #include "uda134x.h"
 

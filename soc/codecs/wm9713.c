@@ -17,15 +17,15 @@
 #include <linux/module.h>
 #include <linux/device.h>
 #include <linux/regmap.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/ac97_codec.h>
-#include <sound/ac97/codec.h>
-#include <sound/ac97/compat.h>
-#include <sound/initval.h>
-#include <sound/pcm_params.h>
-#include <sound/tlv.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/ac97_codec.h>
+#include <dkms/sound/ac97/codec.h>
+#include <dkms/sound/ac97/compat.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/soc.h>
 
 #include "wm9713.h"
 

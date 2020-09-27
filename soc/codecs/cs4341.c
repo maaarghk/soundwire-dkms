@@ -10,10 +10,10 @@
 #include <linux/regmap.h>
 #include <linux/spi/spi.h>
 
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 
 #define CS4341_REG_MODE1	0x00
 #define CS4341_REG_MODE2	0x01

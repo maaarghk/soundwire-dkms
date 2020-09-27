@@ -5,7 +5,7 @@
 // Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
 
 #include <linux/module.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 /*
  * ak4554 is very simple DA/AD converter which has no setting register.

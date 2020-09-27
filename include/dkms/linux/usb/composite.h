@@ -37,8 +37,8 @@
 
 #include <linux/bcd.h>
 #include <linux/version.h>
-#include <linux/usb/ch9.h>
-#include <linux/usb/gadget.h>
+#include <dkms/linux/usb/ch9.h>
+#include <dkms/linux/usb/gadget.h>
 #include <linux/log2.h>
 #include <linux/configfs.h>
 

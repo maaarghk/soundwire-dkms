@@ -11,8 +11,8 @@
 //
 
 #include <linux/pm_runtime.h>
-#include <sound/pcm_params.h>
-#include <sound/sof.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/sof.h>
 #include "sof-priv.h"
 #include "sof-audio.h"
 #include "ops.h"

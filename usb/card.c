@@ -29,17 +29,17 @@
 #include <linux/usb.h>
 #include <linux/moduleparam.h>
 #include <linux/mutex.h>
-#include <linux/usb/audio.h>
-#include <linux/usb/audio-v2.h>
-#include <linux/usb/audio-v3.h>
+#include <dkms/linux/usb/audio.h>
+#include <dkms/linux/usb/audio-v2.h>
+#include <dkms/linux/usb/audio-v3.h>
 #include <linux/module.h>
 
-#include <sound/control.h>
-#include <sound/core.h>
-#include <sound/info.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/initval.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/info.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/initval.h>
 
 #include "usbaudio.h"
 #include "card.h"

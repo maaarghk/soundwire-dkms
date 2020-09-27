@@ -12,8 +12,8 @@
 #include <linux/of_irq.h>
 
 #include <linux/module.h>
-#include <sound/sof.h>
-#include <sound/sof/xtensa.h>
+#include <dkms/sound/sof.h>
+#include <dkms/sound/sof/xtensa.h>
 #include <linux/firmware/imx/dsp.h>
 
 #include "../ops.h"

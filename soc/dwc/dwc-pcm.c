@@ -13,8 +13,8 @@
 
 #include <linux/io.h>
 #include <linux/rcupdate.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
 #include "local.h"
 
 #define BUFFER_BYTES_MAX	(3 * 2 * 8 * PERIOD_BYTES_MIN)

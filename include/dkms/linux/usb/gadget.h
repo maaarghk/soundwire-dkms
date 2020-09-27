@@ -25,7 +25,7 @@
 #include <linux/scatterlist.h>
 #include <linux/types.h>
 #include <linux/workqueue.h>
-#include <linux/usb/ch9.h>
+#include <dkms/linux/usb/ch9.h>
 
 #define UDC_TRACE_STR_MAX	512
 

@@ -14,9 +14,9 @@
 #include <linux/of.h>
 #include <linux/pm.h>
 #include <linux/slab.h>
-#include <sound/soc.h>
-#include <sound/pcm.h>
-#include <sound/initval.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/initval.h>
 
 #define REG_MQS_CTRL		0x00
 

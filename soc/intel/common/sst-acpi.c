@@ -12,8 +12,8 @@
 #include <linux/platform_device.h>
 
 #include "sst-dsp.h"
-#include <sound/soc-acpi.h>
-#include <sound/soc-acpi-intel-match.h>
+#include <dkms/sound/soc-acpi.h>
+#include <dkms/sound/soc-acpi-intel-match.h>
 
 #define SST_LPT_DSP_DMA_ADDR_OFFSET	0x0F0000
 #define SST_WPT_DSP_DMA_ADDR_OFFSET	0x0FE000

@@ -7,7 +7,7 @@
  *  Copyright (c) by Jaroslav Kysela <perex@perex.cz>
  */
 
-#include <sound/asound.h>
+#include <dkms/sound/asound.h>
 #include <linux/poll.h>
 
 struct snd_hwdep;

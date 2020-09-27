@@ -19,9 +19,9 @@
 #include <linux/platform_device.h>
 #include <linux/device.h>
 
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
-#include <sound/soc-dapm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
+#include <dkms/sound/soc-dapm.h>
 
 #include "../codecs/wm8731.h"
 #include "atmel_ssc_dai.h"

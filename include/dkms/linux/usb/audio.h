@@ -21,7 +21,7 @@
 #ifndef __LINUX_USB_AUDIO_H
 #define __LINUX_USB_AUDIO_H
 
-#include <uapi/linux/usb/audio.h>
+#include <dkms/uapi/linux/usb/audio.h>
 
 
 struct usb_audio_control {

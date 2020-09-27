@@ -8,9 +8,9 @@
 #include <linux/export.h>
 #include <linux/slab.h>
 #include <linux/time.h>
-#include <sound/core.h>
-#include <sound/minors.h>
-#include <sound/info.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/minors.h>
+#include <dkms/sound/info.h>
 #include <linux/sound.h>
 #include <linux/mutex.h>
 

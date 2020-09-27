@@ -6,7 +6,7 @@
 #ifndef __SND_SEQ_PORTS_H
 #define __SND_SEQ_PORTS_H
 
-#include <sound/seq_kernel.h>
+#include <dkms/sound/seq_kernel.h>
 #include "seq_lock.h"
 
 /* list of 'exported' ports */

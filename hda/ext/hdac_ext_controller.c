@@ -11,8 +11,8 @@
 
 #include <linux/delay.h>
 #include <linux/slab.h>
-#include <sound/hda_register.h>
-#include <sound/hdaudio_ext.h>
+#include <dkms/sound/hda_register.h>
+#include <dkms/sound/hdaudio_ext.h>
 
 /*
  * maximum HDAC capablities we should parse to avoid endless looping:

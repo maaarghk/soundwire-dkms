@@ -8,9 +8,9 @@
 #include <linux/input.h>
 #include <linux/slab.h>
 #include <linux/module.h>
-#include <sound/jack.h>
-#include <sound/core.h>
-#include <sound/control.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/control.h>
 
 struct snd_jack_kctl {
 	struct snd_kcontrol *kctl;

@@ -15,13 +15,13 @@
 #include <linux/io.h>
 #include <linux/dma-mapping.h>
 #include <linux/vmalloc.h>
-#include <sound/core.h>
-#include <sound/control.h>
-#include <sound/info.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/timer.h>
-#include <sound/minors.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/info.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/timer.h>
+#include <dkms/sound/minors.h>
 #include <linux/uio.h>
 #include <linux/delay.h>
 

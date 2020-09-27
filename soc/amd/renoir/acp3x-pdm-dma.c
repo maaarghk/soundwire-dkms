@@ -9,9 +9,9 @@
 #include <linux/err.h>
 #include <linux/io.h>
 #include <linux/pm_runtime.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
 
 #include "rn_acp3x.h"
 

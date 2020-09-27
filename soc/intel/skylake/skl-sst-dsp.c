@@ -7,7 +7,7 @@
  *	Jeeja KP <jeeja.kp@intel.com>
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
-#include <sound/pcm.h>
+#include <dkms/sound/pcm.h>
 
 #include "../common/sst-dsp.h"
 #include "../common/sst-ipc.h"

@@ -6,7 +6,7 @@
 
 #include <linux/of_platform.h>
 #include <linux/module.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 /*
  * The everest 7134 is a very simple DA converter with no register

@@ -10,7 +10,7 @@
 
 #include <linux/regmap.h>
 
-#include <sound/dmaengine_pcm.h>
+#include <dkms/sound/dmaengine_pcm.h>
 
 /*
  * Register access macros

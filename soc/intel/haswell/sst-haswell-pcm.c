@@ -12,13 +12,13 @@
 #include <linux/pm_runtime.h>
 #include <linux/pgtable.h>
 #include <asm/page.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/dmaengine_pcm.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
-#include <sound/compress_driver.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/compress_driver.h>
 
 #include "../haswell/sst-haswell-ipc.h"
 #include "../common/sst-dsp-priv.h"

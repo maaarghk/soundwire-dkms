@@ -4,7 +4,7 @@
 #define __USB_TYPEC_MUX
 
 #include <linux/property.h>
-#include <linux/usb/typec.h>
+#include <dkms/linux/usb/typec.h>
 
 struct device;
 struct typec_mux;

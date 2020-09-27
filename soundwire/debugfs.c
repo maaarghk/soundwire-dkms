@@ -5,8 +5,8 @@
 #include <linux/debugfs.h>
 #include <linux/mod_devicetable.h>
 #include <linux/slab.h>
-#include <linux/soundwire/sdw.h>
-#include <linux/soundwire/sdw_registers.h>
+#include <dkms/linux/soundwire/sdw.h>
+#include <dkms/linux/soundwire/sdw_registers.h>
 #include "bus.h"
 
 static struct dentry *sdw_debugfs_root;

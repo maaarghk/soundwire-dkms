@@ -2,7 +2,7 @@
 // Copyright (c) 2015-2019 Intel Corporation
 
 #include <linux/acpi.h>
-#include <sound/intel-nhlt.h>
+#include <dkms/sound/intel-nhlt.h>
 
 struct nhlt_acpi_table *intel_nhlt_init(struct device *dev)
 {

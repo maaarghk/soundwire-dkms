@@ -15,10 +15,10 @@
 #include <linux/spinlock.h>
 #include <linux/delay.h>
 #include <linux/soc/qcom/apr.h>
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
 #include "q6dsp-errno.h"
 #include "q6core.h"
 #include "q6afe.h"

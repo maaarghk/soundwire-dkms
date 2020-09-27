@@ -15,7 +15,7 @@
 #include <linux/interrupt.h>
 #include <linux/kernel.h>
 #include <linux/types.h>
-#include <sound/pcm.h>
+#include <dkms/sound/pcm.h>
 #include "sof-priv.h"
 
 #define sof_ops(sdev) \

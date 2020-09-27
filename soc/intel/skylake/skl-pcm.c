@@ -13,8 +13,8 @@
 #include <linux/pci.h>
 #include <linux/pm_runtime.h>
 #include <linux/delay.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 #include "skl.h"
 #include "skl-topology.h"
 #include "skl-sst-dsp.h"

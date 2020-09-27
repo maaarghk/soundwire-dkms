@@ -22,8 +22,8 @@
 #include <asm/tsc.h>
 #endif
 
-#include <sound/core.h>
-#include <sound/initval.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/initval.h>
 #include "hda_controller.h"
 
 #define CREATE_TRACE_POINTS

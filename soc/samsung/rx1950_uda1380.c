@@ -15,8 +15,8 @@
 #include <linux/gpio/consumer.h>
 #include <linux/module.h>
 
-#include <sound/soc.h>
-#include <sound/jack.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/jack.h>
 
 #include "regs-iis.h"
 #include "s3c24xx-i2s.h"

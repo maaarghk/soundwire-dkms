@@ -15,8 +15,8 @@
 #include <linux/clk.h>
 #include <linux/io.h>
 
-#include <sound/soc.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/pcm_params.h>
 
 #include "regs-i2s-v2.h"
 #include "s3c-i2s-v2.h"

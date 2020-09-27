@@ -11,10 +11,10 @@
 #include <linux/init.h>
 #include <linux/device.h>
 #include <linux/module.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/initval.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc.h>
 
 #include <linux/of.h>
 

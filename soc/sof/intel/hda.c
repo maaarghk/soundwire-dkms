@@ -15,22 +15,22 @@
  * Hardware interface for generic Intel audio DSP HDA IP
  */
 
-#include <sound/hdaudio_ext.h>
-#include <sound/hda_register.h>
+#include <dkms/sound/hdaudio_ext.h>
+#include <dkms/sound/hda_register.h>
 
 #include <linux/acpi.h>
 #include <linux/module.h>
-#include <linux/soundwire/sdw.h>
-#include <linux/soundwire/sdw_intel.h>
-#include <sound/intel-nhlt.h>
-#include <sound/sof.h>
-#include <sound/sof/xtensa.h>
+#include <dkms/linux/soundwire/sdw.h>
+#include <dkms/linux/soundwire/sdw_intel.h>
+#include <dkms/sound/intel-nhlt.h>
+#include <dkms/sound/sof.h>
+#include <dkms/sound/sof/xtensa.h>
 #include "../sof-audio.h"
 #include "../ops.h"
 #include "hda.h"
 
 #if IS_ENABLED(CONFIG_SND_SOC_SOF_HDA)
-#include <sound/soc-acpi-intel-match.h>
+#include <dkms/sound/soc-acpi-intel-match.h>
 #endif
 
 /* platform specific devices */

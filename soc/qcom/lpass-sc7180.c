@@ -13,8 +13,8 @@
 #include <linux/of.h>
 #include <linux/platform_device.h>
 #include <dt-bindings/sound/sc7180-lpass.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
 
 #include "lpass-lpaif-reg.h"
 #include "lpass.h"

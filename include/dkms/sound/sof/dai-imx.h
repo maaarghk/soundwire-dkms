@@ -8,7 +8,7 @@
 #ifndef __INCLUDE_SOUND_SOF_DAI_IMX_H__
 #define __INCLUDE_SOUND_SOF_DAI_IMX_H__
 
-#include <sound/sof/header.h>
+#include <dkms/sound/sof/header.h>
 
 /* ESAI Configuration Request - SOF_IPC_DAI_ESAI_CONFIG */
 struct sof_ipc_dai_esai_params {

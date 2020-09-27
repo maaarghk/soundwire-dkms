@@ -9,7 +9,7 @@
 #ifndef __INCLUDE_SOUND_SOF_DAI_INTEL_H__
 #define __INCLUDE_SOUND_SOF_DAI_INTEL_H__
 
-#include <sound/sof/header.h>
+#include <dkms/sound/sof/header.h>
 
  /* ssc1: TINTE */
 #define SOF_DAI_INTEL_SSP_QUIRK_TINTE		(1 << 0)

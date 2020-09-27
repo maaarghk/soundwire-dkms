@@ -13,12 +13,12 @@
 #include <linux/module.h>
 #include <linux/string.h>
 #include <linux/sched/signal.h>
-#include <sound/core.h>
-#include <sound/timer.h>
-#include <sound/control.h>
-#include <sound/info.h>
-#include <sound/minors.h>
-#include <sound/initval.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/timer.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/info.h>
+#include <dkms/sound/minors.h>
+#include <dkms/sound/initval.h>
 #include <linux/kmod.h>
 
 /* internal flags */

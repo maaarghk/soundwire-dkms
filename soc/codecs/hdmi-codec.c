@@ -6,15 +6,15 @@
  */
 #include <linux/module.h>
 #include <linux/string.h>
-#include <sound/core.h>
-#include <sound/jack.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
-#include <sound/pcm_drm_eld.h>
-#include <sound/hdmi-codec.h>
-#include <sound/pcm_iec958.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/pcm_drm_eld.h>
+#include <dkms/sound/hdmi-codec.h>
+#include <dkms/sound/pcm_iec958.h>
 
 #include <drm/drm_crtc.h> /* This is only to get MAX_ELD_BYTES */
 

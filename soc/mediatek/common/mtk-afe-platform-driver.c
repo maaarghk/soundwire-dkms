@@ -8,7 +8,7 @@
 
 #include <linux/module.h>
 #include <linux/dma-mapping.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include "mtk-afe-platform-driver.h"
 #include "mtk-base-afe.h"

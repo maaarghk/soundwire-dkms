@@ -11,8 +11,8 @@
 #include <linux/gpio.h>
 #include <linux/module.h>
 
-#include <sound/soc.h>
-#include <sound/s3c24xx_uda134x.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/s3c24xx_uda134x.h>
 
 #include "regs-iis.h"
 #include "s3c24xx-i2s.h"

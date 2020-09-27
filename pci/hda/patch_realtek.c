@@ -18,9 +18,9 @@
 #include <linux/module.h>
 #include <linux/input.h>
 #include <linux/leds.h>
-#include <sound/core.h>
-#include <sound/jack.h>
-#include <sound/hda_codec.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/hda_codec.h>
 #include "hda_local.h"
 #include "hda_auto_parser.h"
 #include "hda_jack.h"

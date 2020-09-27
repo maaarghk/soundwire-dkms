@@ -14,7 +14,7 @@
 #include <linux/of_irq.h>
 #include <linux/of_platform.h>
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include <linux/fsl/bestcomm/bestcomm.h>
 #include <linux/fsl/bestcomm/gen_bd.h>

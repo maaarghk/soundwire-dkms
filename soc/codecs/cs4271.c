@@ -18,10 +18,10 @@
 #include <linux/of_device.h>
 #include <linux/of_gpio.h>
 #include <linux/regulator/consumer.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
-#include <sound/cs4271.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/cs4271.h>
 #include "cs4271.h"
 
 #define CS4271_PCM_FORMATS (SNDRV_PCM_FMTBIT_S16_LE | \

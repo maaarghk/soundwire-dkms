@@ -12,10 +12,10 @@
 #ifndef __SOUND_SOC_SKL_H
 #define __SOUND_SOC_SKL_H
 
-#include <sound/hda_register.h>
-#include <sound/hdaudio_ext.h>
-#include <sound/hda_codec.h>
-#include <sound/soc.h>
+#include <dkms/sound/hda_register.h>
+#include <dkms/sound/hdaudio_ext.h>
+#include <dkms/sound/hda_codec.h>
+#include <dkms/sound/soc.h>
 #include "skl-ssp-clk.h"
 #include "skl-sst-ipc.h"
 

@@ -8,7 +8,7 @@
 #include <linux/device.h>
 #include <linux/module.h>
 #include <linux/export.h>
-#include <sound/hdaudio.h>
+#include <dkms/sound/hdaudio.h>
 #include "local.h"
 #include "trace.h"
 

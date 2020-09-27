@@ -2,7 +2,7 @@
 #ifndef __USB_STREAM_H
 #define __USB_STREAM_H
 
-#include <uapi/sound/usb_stream.h>
+#include <dkms/uapi/sound/usb_stream.h>
 
 #define USB_STREAM_NURBS 4
 #define USB_STREAM_URBDEPTH 4

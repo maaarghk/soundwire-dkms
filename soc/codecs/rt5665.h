@@ -9,7 +9,7 @@
 #ifndef __RT5665_H__
 #define __RT5665_H__
 
-#include <sound/rt5665.h>
+#include <dkms/sound/rt5665.h>
 
 #define DEVICE_ID 0x6451
 

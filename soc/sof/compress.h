@@ -11,7 +11,7 @@
 #ifndef __SOF_COMPRESS_H
 #define __SOF_COMPRESS_H
 
-#include <sound/compress_driver.h>
+#include <dkms/sound/compress_driver.h>
 
 extern struct snd_compress_ops sof_probe_compressed_ops;
 

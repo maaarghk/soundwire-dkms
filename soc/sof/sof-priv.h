@@ -12,12 +12,12 @@
 #define __SOUND_SOC_SOF_PRIV_H
 
 #include <linux/device.h>
-#include <sound/hdaudio.h>
-#include <sound/sof.h>
-#include <sound/sof/info.h>
-#include <sound/sof/pm.h>
-#include <sound/sof/trace.h>
-#include <uapi/sound/sof/fw.h>
+#include <dkms/sound/hdaudio.h>
+#include <dkms/sound/sof.h>
+#include <dkms/sound/sof/info.h>
+#include <dkms/sound/sof/pm.h>
+#include <dkms/sound/sof/trace.h>
+#include <dkms/uapi/sound/sof/fw.h>
 
 /* debug flags */
 #define SOF_DBG_ENABLE_TRACE	BIT(0)

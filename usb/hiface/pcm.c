@@ -11,7 +11,7 @@
  */
 
 #include <linux/slab.h>
-#include <sound/pcm.h>
+#include <dkms/sound/pcm.h>
 
 #include "pcm.h"
 #include "chip.h"

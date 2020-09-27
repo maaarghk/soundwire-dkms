@@ -5,8 +5,8 @@
 #include <linux/delay.h>
 #include <linux/mod_devicetable.h>
 #include <linux/pm_runtime.h>
-#include <linux/soundwire/sdw_registers.h>
-#include <linux/soundwire/sdw.h>
+#include <dkms/linux/soundwire/sdw_registers.h>
+#include <dkms/linux/soundwire/sdw.h>
 #include "bus.h"
 #include "sysfs_local.h"
 

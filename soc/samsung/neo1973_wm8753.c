@@ -13,7 +13,7 @@
 #include <linux/platform_device.h>
 #include <linux/gpio/consumer.h>
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include "regs-iis.h"
 #include "../codecs/wm8753.h"

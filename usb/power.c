@@ -5,9 +5,9 @@
 
 #include <linux/slab.h>
 #include <linux/usb.h>
-#include <linux/usb/audio.h>
-#include <linux/usb/audio-v2.h>
-#include <linux/usb/audio-v3.h>
+#include <dkms/linux/usb/audio.h>
+#include <dkms/linux/usb/audio-v2.h>
+#include <dkms/linux/usb/audio-v3.h>
 
 #include "usbaudio.h"
 #include "helper.h"

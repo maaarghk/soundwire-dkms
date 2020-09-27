@@ -10,7 +10,7 @@
 #ifndef __DA732X_H_
 #define __DA732X_H_
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 /* General */
 #define	DA732X_U8_MASK			0xFF

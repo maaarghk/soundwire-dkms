@@ -12,7 +12,7 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 #include <linux/io.h>
-#include <sound/hdaudio_ext.h>
+#include <dkms/sound/hdaudio_ext.h>
 
 MODULE_DESCRIPTION("HDA extended core");
 MODULE_LICENSE("GPL v2");

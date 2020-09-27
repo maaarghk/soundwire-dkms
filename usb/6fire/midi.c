@@ -9,7 +9,7 @@
  * Copyright:	(C) Torsten Schenk
  */
 
-#include <sound/rawmidi.h>
+#include <dkms/sound/rawmidi.h>
 
 #include "midi.h"
 #include "chip.h"

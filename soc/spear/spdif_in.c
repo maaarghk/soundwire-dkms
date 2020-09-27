@@ -18,12 +18,12 @@
 #include <linux/ioport.h>
 #include <linux/module.h>
 #include <linux/platform_device.h>
-#include <sound/dmaengine_pcm.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/spear_dma.h>
-#include <sound/spear_spdif.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/spear_dma.h>
+#include <dkms/sound/spear_spdif.h>
 #include "spdif_in_regs.h"
 #include "spear_pcm.h"
 

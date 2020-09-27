@@ -24,11 +24,11 @@
 #include <linux/device.h>
 #include <linux/init.h>
 #include <linux/module.h>
-#include <sound/core.h>
-#include <sound/info.h>
-#include <sound/seq_device.h>
-#include <sound/seq_kernel.h>
-#include <sound/initval.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/info.h>
+#include <dkms/sound/seq_device.h>
+#include <dkms/sound/seq_kernel.h>
+#include <dkms/sound/initval.h>
 #include <linux/kmod.h>
 #include <linux/slab.h>
 #include <linux/mutex.h>

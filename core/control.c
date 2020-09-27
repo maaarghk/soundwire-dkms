@@ -13,10 +13,10 @@
 #include <linux/mm.h>
 #include <linux/math64.h>
 #include <linux/sched/signal.h>
-#include <sound/core.h>
-#include <sound/minors.h>
-#include <sound/info.h>
-#include <sound/control.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/minors.h>
+#include <dkms/sound/info.h>
+#include <dkms/sound/control.h>
 
 /* max number of user-defined controls */
 #define MAX_USER_CONTROLS	32

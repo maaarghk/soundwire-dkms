@@ -13,11 +13,11 @@
 #include <linux/kernel.h>
 #include <linux/device.h>
 #include <linux/module.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/ac97_codec.h>
-#include <sound/initval.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/ac97_codec.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc.h>
 
 static const struct snd_soc_dapm_widget ac97_widgets[] = {
 	SND_SOC_DAPM_INPUT("RX"),

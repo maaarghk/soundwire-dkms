@@ -7,12 +7,12 @@
  * Copyright (C) 1998,99 Takashi Iwai <tiwai@suse.de>
  */
 
-#include <sound/asoundef.h>
+#include <dkms/sound/asoundef.h>
 #include "seq_oss_midi.h"
 #include "seq_oss_readq.h"
 #include "seq_oss_timer.h"
 #include "seq_oss_event.h"
-#include <sound/seq_midi_event.h>
+#include <dkms/sound/seq_midi_event.h>
 #include "../seq_lock.h"
 #include <linux/init.h>
 #include <linux/slab.h>

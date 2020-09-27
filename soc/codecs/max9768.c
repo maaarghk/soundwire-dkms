@@ -12,10 +12,10 @@
 #include <linux/gpio.h>
 #include <linux/regmap.h>
 
-#include <sound/core.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
-#include <sound/max9768.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/max9768.h>
 
 /* "Registers" */
 #define MAX9768_VOL 0

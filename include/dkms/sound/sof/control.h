@@ -9,8 +9,8 @@
 #ifndef __INCLUDE_SOUND_SOF_CONTROL_H__
 #define __INCLUDE_SOUND_SOF_CONTROL_H__
 
-#include <uapi/sound/sof/header.h>
-#include <sound/sof/header.h>
+#include <dkms/uapi/sound/sof/header.h>
+#include <dkms/sound/sof/header.h>
 
 /*
  * Component Mixers and Controls

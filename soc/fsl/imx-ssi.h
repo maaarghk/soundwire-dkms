@@ -183,7 +183,7 @@
 
 #include <linux/dmaengine.h>
 #include <linux/platform_data/dma-imx.h>
-#include <sound/dmaengine_pcm.h>
+#include <dkms/sound/dmaengine_pcm.h>
 #include "imx-pcm.h"
 
 struct imx_ssi {

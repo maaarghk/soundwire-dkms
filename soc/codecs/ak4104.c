@@ -11,10 +11,10 @@
 #include <linux/of_device.h>
 #include <linux/gpio/consumer.h>
 #include <linux/regulator/consumer.h>
-#include <sound/asoundef.h>
-#include <sound/core.h>
-#include <sound/soc.h>
-#include <sound/initval.h>
+#include <dkms/sound/asoundef.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/initval.h>
 
 /* AK4104 registers addresses */
 #define AK4104_REG_CONTROL1		0x00

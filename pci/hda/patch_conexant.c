@@ -11,10 +11,10 @@
 #include <linux/delay.h>
 #include <linux/slab.h>
 #include <linux/module.h>
-#include <sound/core.h>
-#include <sound/jack.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/jack.h>
 
-#include <sound/hda_codec.h>
+#include <dkms/sound/hda_codec.h>
 #include "hda_local.h"
 #include "hda_auto_parser.h"
 #include "hda_beep.h"

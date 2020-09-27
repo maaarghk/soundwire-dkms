@@ -12,8 +12,8 @@
 #define __INCLUDE_SOUND_SOF_H
 
 #include <linux/pci.h>
-#include <sound/soc.h>
-#include <sound/soc-acpi.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-acpi.h>
 
 struct snd_sof_dsp_ops;
 

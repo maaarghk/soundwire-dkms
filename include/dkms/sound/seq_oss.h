@@ -8,8 +8,8 @@
  * Copyright (C) 1998,99 Takashi Iwai
  */
 
-#include <sound/asequencer.h>
-#include <sound/seq_kernel.h>
+#include <dkms/sound/asequencer.h>
+#include <dkms/sound/seq_kernel.h>
 
 /*
  * argument structure for synthesizer operations

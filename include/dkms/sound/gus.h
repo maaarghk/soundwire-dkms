@@ -7,11 +7,11 @@
  *  Copyright (c) by Jaroslav Kysela <perex@perex.cz>
  */
 
-#include <sound/pcm.h>
-#include <sound/rawmidi.h>
-#include <sound/timer.h>
-#include <sound/seq_midi_emul.h>
-#include <sound/seq_device.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/rawmidi.h>
+#include <dkms/sound/timer.h>
+#include <dkms/sound/seq_midi_emul.h>
+#include <dkms/sound/seq_device.h>
 #include <linux/io.h>
 
 /* IO ports */

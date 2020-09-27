@@ -17,8 +17,8 @@
 #ifndef __TEGRA_PCM_H__
 #define __TEGRA_PCM_H__
 
-#include <sound/dmaengine_pcm.h>
-#include <sound/asound.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/asound.h>
 
 int tegra_pcm_construct(struct snd_soc_component *component,
 			struct snd_soc_pcm_runtime *rtd);

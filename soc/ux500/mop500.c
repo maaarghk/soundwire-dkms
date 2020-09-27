@@ -15,8 +15,8 @@
 #include <linux/spi/spi.h>
 #include <linux/of.h>
 
-#include <sound/soc.h>
-#include <sound/initval.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/initval.h>
 
 #include "ux500_pcm.h"
 #include "ux500_msp_dai.h"

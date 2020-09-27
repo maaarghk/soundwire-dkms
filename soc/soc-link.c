@@ -5,8 +5,8 @@
 // Copyright (C) 2019 Renesas Electronics Corp.
 // Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
 //
-#include <sound/soc.h>
-#include <sound/soc-link.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-link.h>
 
 #define soc_link_ret(rtd, ret) _soc_link_ret(rtd, __func__, ret)
 static inline int _soc_link_ret(struct snd_soc_pcm_runtime *rtd,

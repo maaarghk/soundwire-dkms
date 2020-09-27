@@ -25,14 +25,14 @@
 #include <linux/wait.h>
 #include <linux/module.h>
 #include <linux/slab.h>
-#include <sound/core.h>
-#include <sound/rawmidi.h>
-#include <sound/info.h>
-#include <sound/control.h>
-#include <sound/minors.h>
-#include <sound/seq_kernel.h>
-#include <sound/seq_midi_event.h>
-#include <sound/seq_virmidi.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/rawmidi.h>
+#include <dkms/sound/info.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/minors.h>
+#include <dkms/sound/seq_kernel.h>
+#include <dkms/sound/seq_midi_event.h>
+#include <dkms/sound/seq_virmidi.h>
 
 MODULE_AUTHOR("Takashi Iwai <tiwai@suse.de>");
 MODULE_DESCRIPTION("Virtual Raw MIDI client on Sequencer");

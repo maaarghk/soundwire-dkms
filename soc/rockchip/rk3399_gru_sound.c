@@ -14,11 +14,11 @@
 #include <linux/spi/spi.h>
 #include <linux/i2c.h>
 #include <linux/input.h>
-#include <sound/core.h>
-#include <sound/jack.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 #include "rockchip_i2s.h"
 #include "../codecs/da7219.h"
 #include "../codecs/da7219-aad.h"

@@ -7,8 +7,8 @@
  *  Copyright (c) by Jaroslav Kysela <perex@perex.cz>
  */
 
-#include <sound/pcm.h>
-#include <sound/rawmidi.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/rawmidi.h>
 #include <linux/interrupt.h>
 #include <linux/io.h>
 

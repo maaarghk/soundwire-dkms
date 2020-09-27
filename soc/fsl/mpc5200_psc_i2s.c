@@ -10,9 +10,9 @@
 #include <linux/of_device.h>
 #include <linux/of_platform.h>
 
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 
 #include <asm/mpc52xx_psc.h>
 

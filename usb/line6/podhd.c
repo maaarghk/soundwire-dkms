@@ -10,9 +10,9 @@
 #include <linux/usb.h>
 #include <linux/slab.h>
 #include <linux/module.h>
-#include <sound/core.h>
-#include <sound/control.h>
-#include <sound/pcm.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/pcm.h>
 
 #include "driver.h"
 #include "pcm.h"

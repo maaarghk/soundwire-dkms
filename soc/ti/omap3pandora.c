@@ -12,9 +12,9 @@
 #include <linux/regulator/consumer.h>
 #include <linux/module.h>
 
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
 
 #include <asm/mach-types.h>
 #include <linux/platform_data/asoc-ti-mcbsp.h>

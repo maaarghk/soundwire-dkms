@@ -12,17 +12,17 @@
 #include <linux/module.h>
 #include <linux/pm.h>
 #include <linux/pm_runtime.h>
-#include <sound/core.h>
-#include <sound/hda_codec.h>
-#include <sound/asoundef.h>
-#include <sound/tlv.h>
-#include <sound/initval.h>
-#include <sound/jack.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/hda_codec.h>
+#include <dkms/sound/asoundef.h>
+#include <dkms/sound/tlv.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/jack.h>
 #include "hda_local.h"
 #include "hda_beep.h"
 #include "hda_jack.h"
-#include <sound/hda_hwdep.h>
-#include <sound/hda_component.h>
+#include <dkms/sound/hda_hwdep.h>
+#include <dkms/sound/hda_component.h>
 
 #define codec_in_pm(codec)		snd_hdac_is_in_pm(&codec->core)
 #define hda_codec_is_power_on(codec)	snd_hdac_is_power_on(&codec->core)

@@ -13,7 +13,7 @@
 #include <linux/clk.h>
 #include <linux/regmap.h>
 #include <linux/regulator/consumer.h>
-#include <sound/da7213.h>
+#include <dkms/sound/da7213.h>
 
 /*
  * Registers

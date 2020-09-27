@@ -7,9 +7,9 @@
 #include <linux/module.h>
 #include <linux/workqueue.h>
 
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 
 #include "pcm1789.h"
 

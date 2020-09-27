@@ -7,7 +7,7 @@
  */
 
 #include <linux/module.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include "mt2701-afe-common.h"
 

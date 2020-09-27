@@ -6,7 +6,7 @@
 #ifndef _FSL_EASRC_H
 #define _FSL_EASRC_H
 
-#include <sound/asound.h>
+#include <dkms/sound/asound.h>
 #include <linux/platform_data/dma-imx.h>
 
 #include "fsl_asrc_common.h"

@@ -19,13 +19,13 @@
 #include <linux/bitops.h>
 #include <linux/ctype.h>
 #include <linux/slab.h>
-#include <sound/core.h>
-#include <sound/jack.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/soc-dpcm.h>
-#include <sound/initval.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dpcm.h>
+#include <dkms/sound/initval.h>
 
 /**
  * snd_soc_info_enum_double - enumerated double mixer info callback

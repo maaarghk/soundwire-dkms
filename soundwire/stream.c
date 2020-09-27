@@ -11,9 +11,9 @@
 #include <linux/module.h>
 #include <linux/mod_devicetable.h>
 #include <linux/slab.h>
-#include <linux/soundwire/sdw_registers.h>
-#include <linux/soundwire/sdw.h>
-#include <sound/soc.h>
+#include <dkms/linux/soundwire/sdw_registers.h>
+#include <dkms/linux/soundwire/sdw.h>
+#include <dkms/sound/soc.h>
 #include "bus.h"
 
 /*

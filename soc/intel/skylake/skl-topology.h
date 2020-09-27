@@ -14,9 +14,9 @@
 
 #include <linux/types.h>
 
-#include <sound/hdaudio_ext.h>
-#include <sound/soc.h>
-#include <uapi/sound/skl-tplg-interface.h>
+#include <dkms/sound/hdaudio_ext.h>
+#include <dkms/sound/soc.h>
+#include <dkms/uapi/sound/skl-tplg-interface.h>
 #include "skl.h"
 
 #define BITS_PER_BYTE 8

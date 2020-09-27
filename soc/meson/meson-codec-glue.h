@@ -7,7 +7,7 @@
 #ifndef _MESON_CODEC_GLUE_H
 #define _MESON_CODEC_GLUE_H
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 struct meson_codec_glue_input {
 	struct snd_soc_pcm_stream params;

@@ -9,7 +9,7 @@
 #ifndef __INCLUDE_SOUND_SOF_XTENSA_H__
 #define __INCLUDE_SOUND_SOF_XTENSA_H__
 
-#include <sound/sof/header.h>
+#include <dkms/sound/sof/header.h>
 
 /*
  * Architecture specific debug

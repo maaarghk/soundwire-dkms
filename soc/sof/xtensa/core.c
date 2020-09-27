@@ -9,8 +9,8 @@
 //
 
 #include <linux/module.h>
-#include <sound/sof.h>
-#include <sound/sof/xtensa.h>
+#include <dkms/sound/sof.h>
+#include <dkms/sound/sof/xtensa.h>
 #include "../sof-priv.h"
 
 struct xtensa_exception_cause {

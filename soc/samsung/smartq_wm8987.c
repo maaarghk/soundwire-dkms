@@ -9,8 +9,8 @@
 #include <linux/gpio/consumer.h>
 #include <linux/module.h>
 
-#include <sound/soc.h>
-#include <sound/jack.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/jack.h>
 
 #include "i2s.h"
 #include "../codecs/wm8750.h"

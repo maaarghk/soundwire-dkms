@@ -2,7 +2,7 @@
 #ifndef __USBMIXER_H
 #define __USBMIXER_H
 
-#include <sound/info.h>
+#include <dkms/sound/info.h>
 
 struct media_mixer_ctl;
 

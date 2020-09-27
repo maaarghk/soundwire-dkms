@@ -18,7 +18,7 @@
 #include <linux/of_graph.h>
 #include <linux/platform_device.h>
 #include <linux/string.h>
-#include <sound/simple_card_utils.h>
+#include <dkms/sound/simple_card_utils.h>
 
 #define DPCM_SELECTABLE 1
 

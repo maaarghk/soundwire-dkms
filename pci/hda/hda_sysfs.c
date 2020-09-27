@@ -14,11 +14,11 @@
 #include <linux/ctype.h>
 #include <linux/string.h>
 #include <linux/export.h>
-#include <sound/core.h>
-#include <sound/hda_codec.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/hda_codec.h>
 #include "hda_local.h"
-#include <sound/hda_hwdep.h>
-#include <sound/minors.h>
+#include <dkms/sound/hda_hwdep.h>
+#include <dkms/sound/minors.h>
 
 /* hint string pair */
 struct hda_hint {

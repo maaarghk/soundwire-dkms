@@ -15,7 +15,7 @@
 #include <linux/clk-provider.h>
 #include <linux/regmap.h>
 #include <linux/regulator/consumer.h>
-#include <sound/da7219.h>
+#include <dkms/sound/da7219.h>
 
 /*
  * Registers

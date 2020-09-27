@@ -21,8 +21,8 @@
 #include <linux/async.h>
 #include <linux/acpi.h>
 #include <linux/sysfs.h>
-#include <sound/core.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/soc.h>
 #include <asm/platform_sst_audio.h>
 #include "../sst-mfld-platform.h"
 #include "sst.h"

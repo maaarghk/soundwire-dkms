@@ -6,8 +6,8 @@
 #include <linux/module.h>
 #include <linux/of_platform.h>
 #include <linux/regmap.h>
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
 
 #include "axg-tdm-formatter.h"
 

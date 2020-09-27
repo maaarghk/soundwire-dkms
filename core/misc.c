@@ -10,7 +10,7 @@
 #include <linux/time.h>
 #include <linux/slab.h>
 #include <linux/ioport.h>
-#include <sound/core.h>
+#include <dkms/sound/core.h>
 
 #ifdef CONFIG_SND_DEBUG
 

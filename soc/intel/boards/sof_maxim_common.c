@@ -2,11 +2,11 @@
 //
 // Copyright(c) 2020 Intel Corporation. All rights reserved.
 #include <linux/string.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
-#include <sound/soc-dapm.h>
-#include <uapi/sound/asound.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/uapi/sound/asound.h>
 #include "sof_maxim_common.h"
 
 #define MAX_98373_PIN_NAME 16

@@ -8,10 +8,10 @@
 #include <linux/device.h>
 #include <linux/dmi.h>
 #include <linux/module.h>
-#include <linux/soundwire/sdw.h>
-#include <linux/soundwire/sdw_type.h>
-#include <sound/soc.h>
-#include <sound/soc-acpi.h>
+#include <dkms/linux/soundwire/sdw.h>
+#include <dkms/linux/soundwire/sdw_type.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-acpi.h>
 #include "sof_sdw_common.h"
 
 unsigned long sof_sdw_quirk = SOF_RT711_JD_SRC_JD1;

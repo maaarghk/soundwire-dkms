@@ -13,8 +13,8 @@
  */
 
 #include <linux/module.h>
-#include <sound/sof.h>
-#include <sound/sof/xtensa.h>
+#include <dkms/sound/sof.h>
+#include <dkms/sound/sof/xtensa.h>
 #include "../ops.h"
 #include "shim.h"
 #include "../sof-audio.h"

@@ -4,8 +4,8 @@
 #include <linux/device.h>
 #include <linux/acpi.h>
 #include <linux/pm_runtime.h>
-#include <linux/soundwire/sdw.h>
-#include <linux/soundwire/sdw_type.h>
+#include <dkms/linux/soundwire/sdw.h>
+#include <dkms/linux/soundwire/sdw_type.h>
 #include "bus.h"
 
 /*

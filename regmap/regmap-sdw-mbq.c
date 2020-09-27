@@ -5,8 +5,8 @@
 #include <linux/errno.h>
 #include <linux/module.h>
 #include <linux/regmap.h>
-#include <linux/soundwire/sdw.h>
-#include <linux/soundwire/sdw_registers.h>
+#include <dkms/linux/soundwire/sdw.h>
+#include <dkms/linux/soundwire/sdw_registers.h>
 #include "internal.h"
 
 static int regmap_sdw_mbq_write(void *context, unsigned int reg, unsigned int val)

@@ -9,8 +9,8 @@
 #include <linux/of.h>
 #include <linux/regmap.h>
 #include <linux/reset.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
 
 #define DRV_NAME        "evea"
 #define EVEA_RATES      SNDRV_PCM_RATE_48000

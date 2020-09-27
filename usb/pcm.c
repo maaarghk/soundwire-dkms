@@ -7,12 +7,12 @@
 #include <linux/bitrev.h>
 #include <linux/ratelimit.h>
 #include <linux/usb.h>
-#include <linux/usb/audio.h>
-#include <linux/usb/audio-v2.h>
+#include <dkms/linux/usb/audio.h>
+#include <dkms/linux/usb/audio-v2.h>
 
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
 
 #include "usbaudio.h"
 #include "card.h"

@@ -536,7 +536,7 @@ extern void usb_destroy_configuration(struct usb_device *dev);
  * HCD Root Hub support
  */
 
-#include <linux/usb/ch11.h>
+#include <dkms/linux/usb/ch11.h>
 
 /*
  * As of USB 2.0, full/low speed devices are segregated into trees.

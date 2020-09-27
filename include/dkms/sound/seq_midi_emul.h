@@ -8,7 +8,7 @@
  *  Copyright (C) 1999 Steve Ratcliffe
  */
 
-#include <sound/seq_kernel.h>
+#include <dkms/sound/seq_kernel.h>
 
 /*
  * This structure is used to keep track of the current state on each

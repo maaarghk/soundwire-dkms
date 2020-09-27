@@ -12,12 +12,12 @@
 #include <linux/interrupt.h>
 #include <linux/io.h>
 #include <linux/platform_device.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/pcm_params.h>
 #include <linux/pm_runtime.h>
-#include <sound/soc.h>
-#include <linux/soundwire/sdw_registers.h>
-#include <linux/soundwire/sdw.h>
-#include <linux/soundwire/sdw_intel.h>
+#include <dkms/sound/soc.h>
+#include <dkms/linux/soundwire/sdw_registers.h>
+#include <dkms/linux/soundwire/sdw.h>
+#include <dkms/linux/soundwire/sdw_intel.h>
 #include "cadence_master.h"
 #include "bus.h"
 #include "intel.h"

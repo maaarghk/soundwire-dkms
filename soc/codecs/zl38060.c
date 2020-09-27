@@ -22,10 +22,10 @@
 #include <linux/module.h>
 #include <linux/ihex.h>
 
-#include <sound/pcm_params.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
 
 #define DRV_NAME		"zl38060"
 

@@ -35,11 +35,11 @@
 #include <asm/mach-types.h>
 #include <mach/audio.h>
 
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
-#include <sound/initval.h>
-#include <sound/ac97_codec.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/ac97_codec.h>
 
 #include "../codecs/wm9713.h"
 

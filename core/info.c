@@ -10,9 +10,9 @@
 #include <linux/slab.h>
 #include <linux/string.h>
 #include <linux/module.h>
-#include <sound/core.h>
-#include <sound/minors.h>
-#include <sound/info.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/minors.h>
+#include <dkms/sound/info.h>
 #include <linux/utsname.h>
 #include <linux/proc_fs.h>
 #include <linux/mutex.h>

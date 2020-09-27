@@ -11,11 +11,11 @@
 #include <linux/mutex.h>
 #include <linux/module.h>
 #include <linux/sched/signal.h>
-#include <sound/core.h>
-#include <sound/control.h>
-#include <sound/minors.h>
-#include <sound/hwdep.h>
-#include <sound/info.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/minors.h>
+#include <dkms/sound/hwdep.h>
+#include <dkms/sound/info.h>
 
 MODULE_AUTHOR("Jaroslav Kysela <perex@perex.cz>");
 MODULE_DESCRIPTION("Hardware dependent layer");

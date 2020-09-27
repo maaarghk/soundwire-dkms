@@ -7,11 +7,11 @@
 
 #include <linux/input.h>
 #include <linux/module.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
 #include <linux/platform_device.h>
-#include <sound/soc.h>
-#include <sound/soc-acpi.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-acpi.h>
 #include "../../codecs/da7219.h"
 #include "../../codecs/da7219-aad.h"
 #include "hda_dsp_common.h"

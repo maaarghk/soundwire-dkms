@@ -21,8 +21,8 @@
 #include <linux/of.h>
 #include <linux/pinctrl/consumer.h>
 #include <linux/slab.h>
-#include <sound/ac97_codec.h>
-#include <sound/soc.h>
+#include <dkms/sound/ac97_codec.h>
+#include <dkms/sound/soc.h>
 
 struct snd_ac97_reset_cfg {
 	struct pinctrl *pctl;

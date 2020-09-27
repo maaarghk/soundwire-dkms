@@ -7,7 +7,7 @@
 #define __LINUX_USB_CHIPIDEA_H
 
 #include <linux/extcon.h>
-#include <linux/usb/otg.h>
+#include <dkms/linux/usb/otg.h>
 
 struct ci_hdrc;
 

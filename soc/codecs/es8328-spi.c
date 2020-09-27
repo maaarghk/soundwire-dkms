@@ -10,7 +10,7 @@
 #include <linux/module.h>
 #include <linux/regmap.h>
 #include <linux/spi/spi.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 #include "es8328.h"
 
 static const struct of_device_id es8328_of_match[] = {

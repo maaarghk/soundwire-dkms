@@ -11,11 +11,11 @@
 #ifndef __SOF_INTEL_HDA_H
 #define __SOF_INTEL_HDA_H
 
-#include <linux/soundwire/sdw.h>
-#include <linux/soundwire/sdw_intel.h>
-#include <sound/compress_driver.h>
-#include <sound/hda_codec.h>
-#include <sound/hdaudio_ext.h>
+#include <dkms/linux/soundwire/sdw.h>
+#include <dkms/linux/soundwire/sdw_intel.h>
+#include <dkms/sound/compress_driver.h>
+#include <dkms/sound/hda_codec.h>
+#include <dkms/sound/hdaudio_ext.h>
 #include "shim.h"
 
 /* PCI registers */

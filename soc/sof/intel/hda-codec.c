@@ -9,11 +9,11 @@
 //
 
 #include <linux/module.h>
-#include <sound/hdaudio_ext.h>
-#include <sound/hda_register.h>
-#include <sound/hda_codec.h>
-#include <sound/hda_i915.h>
-#include <sound/sof.h>
+#include <dkms/sound/hdaudio_ext.h>
+#include <dkms/sound/hda_register.h>
+#include <dkms/sound/hda_codec.h>
+#include <dkms/sound/hda_i915.h>
+#include <dkms/sound/sof.h>
 #include "../ops.h"
 #include "hda.h"
 #if IS_ENABLED(CONFIG_SND_SOC_SOF_HDA_AUDIO_CODEC)

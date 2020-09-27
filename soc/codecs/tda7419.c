@@ -11,10 +11,10 @@
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/regmap.h>
-#include <sound/core.h>
-#include <sound/control.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 
 #define TDA7419_MAIN_SRC_REG		0x00
 #define TDA7419_LOUDNESS_REG		0x01

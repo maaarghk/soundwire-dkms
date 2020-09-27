@@ -27,9 +27,9 @@
 #include <linux/slab.h>
 #include <linux/time.h>
 #include <linux/vmalloc.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
 #include "pcm_plugin.h"
 
 #define snd_pcm_plug_first(plug) ((plug)->runtime->oss.plugin_first)

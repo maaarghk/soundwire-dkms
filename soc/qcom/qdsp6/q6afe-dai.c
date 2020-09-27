@@ -8,9 +8,9 @@
 #include <linux/device.h>
 #include <linux/platform_device.h>
 #include <linux/slab.h>
-#include <sound/pcm.h>
-#include <sound/soc.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/pcm_params.h>
 #include "q6afe.h"
 
 #define Q6AFE_TDM_PB_DAI(pre, num, did) {				\

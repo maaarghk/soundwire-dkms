@@ -12,11 +12,11 @@
 #include <linux/slab.h>
 #include <linux/platform_device.h>
 #include <linux/regmap.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 #include "ml26124.h"
 
 #define DVOL_CTL_DVMUTE_ON		BIT(4)	/* Digital volume MUTE On */

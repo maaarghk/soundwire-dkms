@@ -10,9 +10,9 @@
 #include <linux/i2c.h>
 #include <linux/module.h>
 #include <linux/regmap.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 #include "max9867.h"
 
 struct max9867_priv {

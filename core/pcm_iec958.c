@@ -4,10 +4,10 @@
  */
 #include <linux/export.h>
 #include <linux/types.h>
-#include <sound/asoundef.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/pcm_iec958.h>
+#include <dkms/sound/asoundef.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/pcm_iec958.h>
 
 static int create_iec958_consumer(uint rate, uint sample_width,
 				  u8 *cs, size_t len)

@@ -11,9 +11,9 @@
 #define __DA7219_AAD_H
 
 #include <linux/timer.h>
-#include <sound/soc.h>
-#include <sound/jack.h>
-#include <sound/da7219-aad.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/da7219-aad.h>
 
 /*
  * Registers

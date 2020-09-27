@@ -11,7 +11,7 @@
 #include <linux/platform_device.h>
 #include <linux/pm_runtime.h>
 #include <linux/regmap.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 #include "tegra210_ahub.h"
 
 static int tegra_ahub_get_value_enum(struct snd_kcontrol *kctl,

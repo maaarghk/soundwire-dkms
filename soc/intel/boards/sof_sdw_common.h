@@ -11,7 +11,7 @@
 
 #include <linux/bits.h>
 #include <linux/types.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #define MAX_NO_PROPS 2
 #define MAX_HDMI_NUM 4

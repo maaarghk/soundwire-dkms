@@ -12,9 +12,9 @@
 #include <linux/regmap.h>
 #include <linux/platform_device.h>
 #include <linux/mfd/motorola-cpcap.h>
-#include <sound/core.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 
 /* Register 513 CPCAP_REG_CC     --- CODEC */
 #define CPCAP_BIT_CDC_CLK2                15

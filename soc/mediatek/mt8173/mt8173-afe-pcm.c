@@ -15,7 +15,7 @@
 #include <linux/of_address.h>
 #include <linux/dma-mapping.h>
 #include <linux/pm_runtime.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 #include "mt8173-afe-common.h"
 #include "../common/mtk-base-afe.h"
 #include "../common/mtk-afe-platform-driver.h"

@@ -13,10 +13,10 @@
 #include <linux/regmap.h>
 #include <linux/slab.h>
 #include <linux/slimbus.h>
-#include <linux/soundwire/sdw.h>
-#include <linux/soundwire/sdw_registers.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/linux/soundwire/sdw.h>
+#include <dkms/linux/soundwire/sdw_registers.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 #include "bus.h"
 
 #define SWRM_COMP_HW_VERSION					0x00

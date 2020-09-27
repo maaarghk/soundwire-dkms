@@ -19,7 +19,7 @@
 #include <linux/bits.h>
 #include <linux/compiler.h>
 #include <linux/types.h>
-#include <sound/sof/info.h>
+#include <dkms/sound/sof/info.h>
 
 /* In ASCII `XMan` */
 #define SOF_EXT_MAN_MAGIC_NUMBER	0x6e614d58

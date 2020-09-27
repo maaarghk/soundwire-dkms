@@ -23,8 +23,8 @@
 #include <linux/mutex.h>
 #include <linux/workqueue.h>
 
-#include <sound/soc.h>
-#include <sound/wm0010.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/wm0010.h>
 
 #define DEVICE_ID_WM0010	10
 

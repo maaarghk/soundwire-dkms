@@ -9,7 +9,7 @@
 // Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
 //
 #include <linux/module.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #define soc_component_ret(dai, ret) _soc_component_ret(dai, __func__, ret)
 static inline int _soc_component_ret(struct snd_soc_component *component,

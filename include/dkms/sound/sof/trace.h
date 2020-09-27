@@ -9,8 +9,8 @@
 #ifndef __INCLUDE_SOUND_SOF_TRACE_H__
 #define __INCLUDE_SOUND_SOF_TRACE_H__
 
-#include <sound/sof/header.h>
-#include <sound/sof/stream.h>
+#include <dkms/sound/sof/header.h>
+#include <dkms/sound/sof/stream.h>
 
 /*
  * DMA for Trace

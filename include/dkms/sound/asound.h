@@ -21,5 +21,5 @@
 #endif
 #endif
 
-#include <uapi/sound/asound.h>
+#include <dkms/uapi/sound/asound.h>
 #endif /* __SOUND_ASOUND_H */

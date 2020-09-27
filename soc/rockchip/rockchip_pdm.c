@@ -13,8 +13,8 @@
 #include <linux/rational.h>
 #include <linux/regmap.h>
 #include <linux/reset.h>
-#include <sound/dmaengine_pcm.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/pcm_params.h>
 
 #include "rockchip_pdm.h"
 

@@ -12,9 +12,9 @@
 #include <linux/delay.h>
 #include <linux/regmap.h>
 #include <linux/slab.h>
-#include <sound/soc.h>
-#include <sound/initval.h>
-#include <sound/tlv.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/tlv.h>
 
 #include "ak4671.h"
 

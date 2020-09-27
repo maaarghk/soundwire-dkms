@@ -11,8 +11,8 @@
 #ifndef __HDA_DSP_COMMON_H
 #define __HDA_DSP_COMMON_H
 
-#include <sound/hda_codec.h>
-#include <sound/hda_i915.h>
+#include <dkms/sound/hda_codec.h>
+#include <dkms/sound/hda_i915.h>
 #include "../../codecs/hdac_hda.h"
 
 #if IS_ENABLED(CONFIG_SND_SOC_SOF_HDA_AUDIO_CODEC)

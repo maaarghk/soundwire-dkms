@@ -13,8 +13,8 @@
 #include <linux/of_platform.h>
 #include <linux/platform_data/dma-imx.h>
 #include <linux/pm_runtime.h>
-#include <sound/dmaengine_pcm.h>
-#include <sound/pcm_params.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/pcm_params.h>
 
 #include "fsl_asrc.h"
 

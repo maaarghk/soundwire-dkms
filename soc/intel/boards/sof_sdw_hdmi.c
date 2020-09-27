@@ -9,9 +9,9 @@
 #include <linux/errno.h>
 #include <linux/kernel.h>
 #include <linux/list.h>
-#include <sound/soc.h>
-#include <sound/soc-acpi.h>
-#include <sound/jack.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-acpi.h>
+#include <dkms/sound/jack.h>
 #include "sof_sdw_common.h"
 #include "../../codecs/hdac_hdmi.h"
 #include "hda_dsp_common.h"

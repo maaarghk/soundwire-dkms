@@ -5,8 +5,8 @@
 
 #include <linux/module.h>
 #include <linux/of_platform.h>
-#include <sound/soc.h>
-#include <sound/soc-dai.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dai.h>
 
 #include "axg-tdm.h"
 #include "meson-card.h"

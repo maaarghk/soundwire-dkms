@@ -15,10 +15,10 @@
 #include <linux/regmap.h>
 #include <linux/regulator/consumer.h>
 #include <linux/gcd.h>
-#include <sound/soc.h>
-#include <sound/soc-dapm.h>
-#include <sound/pcm_params.h>
-#include <sound/tlv.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/soc-dapm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/tlv.h>
 
 #include "pcm512x.h"
 

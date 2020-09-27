@@ -11,11 +11,11 @@
 #include <linux/of_gpio.h>
 #include <linux/regmap.h>
 #include <linux/slab.h>
-#include <linux/soundwire/sdw.h>
-#include <linux/soundwire/sdw_registers.h>
-#include <linux/soundwire/sdw_type.h>
-#include <sound/soc.h>
-#include <sound/tlv.h>
+#include <dkms/linux/soundwire/sdw.h>
+#include <dkms/linux/soundwire/sdw_registers.h>
+#include <dkms/linux/soundwire/sdw_type.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/tlv.h>
 
 #define WSA881X_DIGITAL_BASE		0x3000
 #define WSA881X_ANALOG_BASE		0x3100

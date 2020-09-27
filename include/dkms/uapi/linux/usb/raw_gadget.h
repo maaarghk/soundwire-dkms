@@ -10,7 +10,7 @@
 
 #include <asm/ioctl.h>
 #include <linux/types.h>
-#include <linux/usb/ch9.h>
+#include <dkms/linux/usb/ch9.h>
 
 /* Maximum length of driver_name/device_name in the usb_raw_init struct. */
 #define UDC_NAME_LENGTH_MAX 128

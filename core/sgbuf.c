@@ -9,7 +9,7 @@
 #include <linux/mm.h>
 #include <linux/vmalloc.h>
 #include <linux/export.h>
-#include <sound/memalloc.h>
+#include <dkms/sound/memalloc.h>
 
 
 /* table entries are align to 32 */

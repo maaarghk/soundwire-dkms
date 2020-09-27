@@ -21,8 +21,8 @@
   
 #include <linux/time.h>
 #include <linux/export.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
 
 #include "pcm_local.h"
 

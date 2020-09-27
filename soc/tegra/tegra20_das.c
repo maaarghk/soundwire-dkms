@@ -12,7 +12,7 @@
 #include <linux/platform_device.h>
 #include <linux/regmap.h>
 #include <linux/slab.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 #include "tegra20_das.h"
 
 #define DRV_NAME "tegra20-das"

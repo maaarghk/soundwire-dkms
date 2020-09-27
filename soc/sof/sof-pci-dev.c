@@ -13,10 +13,10 @@
 #include <linux/module.h>
 #include <linux/pci.h>
 #include <linux/pm_runtime.h>
-#include <sound/intel-dsp-config.h>
-#include <sound/soc-acpi.h>
-#include <sound/soc-acpi-intel-match.h>
-#include <sound/sof.h>
+#include <dkms/sound/intel-dsp-config.h>
+#include <dkms/sound/soc-acpi.h>
+#include <dkms/sound/soc-acpi-intel-match.h>
+#include <dkms/sound/sof.h>
 #include "ops.h"
 
 /* platform specific devices */

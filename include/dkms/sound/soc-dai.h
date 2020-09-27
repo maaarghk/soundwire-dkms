@@ -12,7 +12,7 @@
 
 
 #include <linux/list.h>
-#include <sound/asoc.h>
+#include <dkms/sound/asoc.h>
 
 struct snd_pcm_substream;
 struct snd_soc_dapm_widget;

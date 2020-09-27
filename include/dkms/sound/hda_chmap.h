@@ -6,8 +6,8 @@
 #ifndef __SOUND_HDA_CHMAP_H
 #define __SOUND_HDA_CHMAP_H
 
-#include <sound/pcm.h>
-#include <sound/hdaudio.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/hdaudio.h>
 
 
 #define SND_PRINT_CHANNEL_ALLOCATION_ADVISED_BUFSIZE 80

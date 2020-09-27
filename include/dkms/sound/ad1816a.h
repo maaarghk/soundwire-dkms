@@ -8,9 +8,9 @@
 
 */
 
-#include <sound/control.h>
-#include <sound/pcm.h>
-#include <sound/timer.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/timer.h>
 
 #define AD1816A_REG(r)			(chip->port + r)
 

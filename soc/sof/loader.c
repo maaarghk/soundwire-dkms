@@ -11,8 +11,8 @@
 //
 
 #include <linux/firmware.h>
-#include <sound/sof.h>
-#include <sound/sof/ext_manifest.h>
+#include <dkms/sound/sof.h>
+#include <dkms/sound/sof/ext_manifest.h>
 #include "ops.h"
 
 static int get_ext_windows(struct snd_sof_dev *sdev,

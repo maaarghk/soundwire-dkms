@@ -4,7 +4,7 @@
  *   Copyright (c) 1998 by Frank van de Pol <fvdpol@coil.demon.nl>
  */
 
-#include <sound/core.h>
+#include <dkms/sound/core.h>
 #include <linux/slab.h>
 #include <linux/sched/signal.h>
 

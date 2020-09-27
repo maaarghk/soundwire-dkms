@@ -18,9 +18,9 @@
 #include <linux/regmap.h>
 #include <linux/pm_runtime.h>
 
-#include <sound/asoundef.h>
-#include <sound/dmaengine_pcm.h>
-#include <sound/soc.h>
+#include <dkms/sound/asoundef.h>
+#include <dkms/sound/dmaengine_pcm.h>
+#include <dkms/sound/soc.h>
 
 #include "fsl_spdif.h"
 #include "imx-pcm.h"

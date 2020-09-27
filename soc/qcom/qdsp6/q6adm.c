@@ -14,7 +14,7 @@
 #include <linux/slab.h>
 #include <linux/soc/qcom/apr.h>
 #include <linux/wait.h>
-#include <sound/asound.h>
+#include <dkms/sound/asound.h>
 #include "q6adm.h"
 #include "q6afe.h"
 #include "q6core.h"

@@ -9,7 +9,7 @@
 //
 
 #include <linux/module.h>
-#include <sound/sof.h>
+#include <dkms/sound/sof.h>
 #include "sof-priv.h"
 
 static struct snd_soc_card sof_nocodec_card = {

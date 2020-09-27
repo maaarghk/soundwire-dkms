@@ -9,9 +9,9 @@
 #include <linux/module.h>
 #include <linux/of_device.h>
 #include <linux/pinctrl/consumer.h>
-#include <sound/jack.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
 
 #include "../../codecs/rt1015.h"
 #include "../../codecs/ts3a227e.h"

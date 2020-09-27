@@ -5,7 +5,7 @@
 #define __SOUND_HDA_COMPONENT_H
 
 #include <drm/drm_audio_component.h>
-#include <sound/hdaudio.h>
+#include <dkms/sound/hdaudio.h>
 
 /* virtual idx for controller */
 #define HDA_CODEC_IDX_CONTROLLER	HDA_MAX_CODECS

@@ -2,10 +2,10 @@
 //
 // Copyright(c) 2019 Intel Corporation. All rights reserved.
 
-#include <sound/pcm.h>
-#include <sound/soc.h>
-#include <sound/hda_codec.h>
-#include <sound/hda_i915.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/hda_codec.h>
+#include <dkms/sound/hda_i915.h>
 #include "../../codecs/hdac_hda.h"
 
 #include "hda_dsp_common.h"

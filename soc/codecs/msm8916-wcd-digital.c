@@ -11,10 +11,10 @@
 #include <linux/platform_device.h>
 #include <linux/regmap.h>
 #include <linux/mfd/syscon.h>
-#include <sound/soc.h>
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/tlv.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/tlv.h>
 
 #define LPASS_CDC_CLK_RX_RESET_CTL		(0x000)
 #define LPASS_CDC_CLK_TX_RESET_B1_CTL		(0x004)

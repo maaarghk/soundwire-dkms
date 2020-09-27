@@ -12,7 +12,7 @@
 #include <linux/regmap.h>
 #include <linux/list.h>
 
-#include <sound/pcm.h>
+#include <dkms/sound/pcm.h>
 
 struct sigmadsp;
 struct snd_soc_component;

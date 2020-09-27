@@ -12,9 +12,9 @@
 #include <linux/of_device.h>
 #include <linux/platform_device.h>
 #include <linux/string.h>
-#include <sound/simple_card.h>
-#include <sound/soc-dai.h>
-#include <sound/soc.h>
+#include <dkms/sound/simple_card.h>
+#include <dkms/sound/soc-dai.h>
+#include <dkms/sound/soc.h>
 
 #define DPCM_SELECTABLE 1
 

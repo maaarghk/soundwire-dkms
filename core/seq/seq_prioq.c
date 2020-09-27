@@ -6,7 +6,7 @@
 
 #include <linux/time.h>
 #include <linux/slab.h>
-#include <sound/core.h>
+#include <dkms/sound/core.h>
 #include "seq_timer.h"
 #include "seq_prioq.h"
 

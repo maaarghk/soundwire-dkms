@@ -17,10 +17,10 @@
 #include <linux/slab.h>
 #include <linux/platform_data/dma-ste-dma40.h>
 
-#include <sound/pcm.h>
-#include <sound/pcm_params.h>
-#include <sound/soc.h>
-#include <sound/dmaengine_pcm.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_params.h>
+#include <dkms/sound/soc.h>
+#include <dkms/sound/dmaengine_pcm.h>
 
 #include "ux500_msp_i2s.h"
 #include "ux500_pcm.h"

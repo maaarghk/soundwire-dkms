@@ -8,7 +8,7 @@
 #include <linux/firmware.h>
 #include <linux/module.h>
 #include <linux/pm_runtime.h>
-#include <sound/sof.h>
+#include <dkms/sound/sof.h>
 
 #include "ops.h"
 

@@ -6,7 +6,7 @@
 #include <linux/clk.h>
 #include <linux/module.h>
 
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 
 #include <linux/platform_data/asoc-s3c24xx_simtec.h>
 

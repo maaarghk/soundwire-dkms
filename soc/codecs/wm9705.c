@@ -12,13 +12,13 @@
 #include <linux/kernel.h>
 #include <linux/device.h>
 #include <linux/regmap.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
-#include <sound/ac97_codec.h>
-#include <sound/ac97/codec.h>
-#include <sound/ac97/compat.h>
-#include <sound/initval.h>
-#include <sound/soc.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/ac97_codec.h>
+#include <dkms/sound/ac97/codec.h>
+#include <dkms/sound/ac97/compat.h>
+#include <dkms/sound/initval.h>
+#include <dkms/sound/soc.h>
 
 #define WM9705_VENDOR_ID 0x574d4c05
 #define WM9705_VENDOR_ID_MASK 0xffffffff

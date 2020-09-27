@@ -11,7 +11,7 @@
 #define __LINUX_USB_OTG_H
 
 #include <linux/phy/phy.h>
-#include <linux/usb/phy.h>
+#include <dkms/linux/usb/phy.h>
 
 struct usb_otg {
 	u8			default_a;

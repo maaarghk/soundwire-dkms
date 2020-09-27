@@ -8,7 +8,7 @@
 #include <linux/module.h>
 #include <linux/i2c.h>
 #include <linux/regmap.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 #include "cs4271.h"
 
 static int cs4271_i2c_probe(struct i2c_client *client,

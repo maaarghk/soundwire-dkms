@@ -8,8 +8,8 @@
 #include <linux/slab.h>
 #include <linux/init.h>
 #include <linux/usb.h>
-#include <sound/core.h>
-#include <sound/pcm.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/pcm.h>
 
 #include "device.h"
 #include "audio.h"

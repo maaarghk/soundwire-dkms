@@ -4,8 +4,8 @@
  */
 #include <linux/export.h>
 #include <drm/drm_edid.h>
-#include <sound/pcm.h>
-#include <sound/pcm_drm_eld.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/pcm_drm_eld.h>
 
 static const unsigned int eld_rates[] = {
 	32000,

@@ -8,7 +8,7 @@
  */
 
 #include <linux/module.h>
-#include <sound/soc.h>
+#include <dkms/sound/soc.h>
 #include <linux/delay.h>
 #include <linux/gpio.h>
 #include <linux/pinctrl/consumer.h>

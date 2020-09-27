@@ -6,8 +6,8 @@
 //
 // Author: Mark Brown <broonie@opensource.wolfsonmicro.com>
 
-#include <sound/jack.h>
-#include <sound/soc.h>
+#include <dkms/sound/jack.h>
+#include <dkms/sound/soc.h>
 #include <linux/gpio.h>
 #include <linux/gpio/consumer.h>
 #include <linux/interrupt.h>

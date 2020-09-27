@@ -7,11 +7,11 @@
  *  Definitions for CS4231 & InterWave chips & compatible chips
  */
 
-#include <sound/control.h>
-#include <sound/pcm.h>
-#include <sound/timer.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/pcm.h>
+#include <dkms/sound/timer.h>
 
-#include <sound/cs4231-regs.h>
+#include <dkms/sound/cs4231-regs.h>
 
 /* defines for codec.mode */
 

@@ -14,8 +14,8 @@
  */
 
 #include <linux/interrupt.h>
-#include <sound/control.h>
-#include <sound/tlv.h>
+#include <dkms/sound/control.h>
+#include <dkms/sound/tlv.h>
 
 #include "control.h"
 #include "comm.h"

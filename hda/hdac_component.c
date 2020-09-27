@@ -5,10 +5,10 @@
 #include <linux/module.h>
 #include <linux/pci.h>
 #include <linux/component.h>
-#include <sound/core.h>
-#include <sound/hdaudio.h>
-#include <sound/hda_component.h>
-#include <sound/hda_register.h>
+#include <dkms/sound/core.h>
+#include <dkms/sound/hdaudio.h>
+#include <dkms/sound/hda_component.h>
+#include <dkms/sound/hda_register.h>
 
 static void hdac_acomp_release(struct device *dev, void *res)
 {
