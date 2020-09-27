@@ -39,8 +39,6 @@
 #define EXCEPT_MAX_HDR_SIZE	0x400
 #define HDA_EXT_ROM_STATUS_SIZE 8
 
-#if IS_ENABLED(CONFIG_SND_SOC_SOF_INTEL_SOUNDWIRE)
-
 /*
  * The default for SoundWire clock stop quirks is to power gate the IP
  * and do a Bus Reset, this will need to be modified when the DSP
@@ -264,7 +262,6 @@ void hda_sdw_process_wakeen(struct snd_sof_dev *sdev)
 	sdw_intel_process_wakeen_event(hdev->sdw);
 }
 
-#endif
 
 /*
  * Debug
@@ -1067,7 +1064,6 @@ static int hda_generic_machine_select(struct snd_sof_dev *sdev)
 }
 #endif
 
-#if IS_ENABLED(CONFIG_SND_SOC_SOF_INTEL_SOUNDWIRE)
 /* Check if all Slaves defined on the link can be found */
 static bool link_slaves_found(struct snd_sof_dev *sdev,
 			      const struct snd_soc_acpi_link_adr *link,
@@ -1185,12 +1181,6 @@ static int hda_sdw_machine_select(struct snd_sof_dev *sdev)
 
 	return 0;
 }
-#else
-static int hda_sdw_machine_select(struct snd_sof_dev *sdev)
-{
-	return 0;
-}
-#endif
 
 void hda_set_mach_params(const struct snd_soc_acpi_mach *mach,
 			 struct device *dev)

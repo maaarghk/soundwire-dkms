@@ -348,7 +348,6 @@ static int snd_intel_dsp_check_dmic(struct pci_dev *pci)
 	return ret;
 }
 
-#if IS_ENABLED(CONFIG_SND_SOC_SOF_INTEL_SOUNDWIRE)
 static int snd_intel_dsp_check_soundwire(struct pci_dev *pci)
 {
 	struct sdw_intel_acpi_info info;
@@ -363,12 +362,6 @@ static int snd_intel_dsp_check_soundwire(struct pci_dev *pci)
 
 	return info.link_mask;
 }
-#else
-static int snd_intel_dsp_check_soundwire(struct pci_dev *pci)
-{
-	return 0;
-}
-#endif
 
 int snd_intel_dsp_driver_probe(struct pci_dev *pci)
 {

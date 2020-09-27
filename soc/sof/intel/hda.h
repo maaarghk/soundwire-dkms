@@ -672,57 +672,10 @@ int hda_dsp_trace_trigger(struct snd_sof_dev *sdev, int cmd);
 /*
  * SoundWire support
  */
-#if IS_ENABLED(CONFIG_SND_SOC_SOF_INTEL_SOUNDWIRE)
 
 int hda_sdw_startup(struct snd_sof_dev *sdev);
 void hda_sdw_int_enable(struct snd_sof_dev *sdev, bool enable);
 void hda_sdw_process_wakeen(struct snd_sof_dev *sdev);
-
-#else
-
-static inline int hda_sdw_acpi_scan(struct snd_sof_dev *sdev)
-{
-	return 0;
-}
-
-static inline int hda_sdw_probe(struct snd_sof_dev *sdev)
-{
-	return 0;
-}
-
-static inline int hda_sdw_startup(struct snd_sof_dev *sdev)
-{
-	return 0;
-}
-
-static inline int hda_sdw_exit(struct snd_sof_dev *sdev)
-{
-	return 0;
-}
-
-static inline void hda_sdw_int_enable(struct snd_sof_dev *sdev, bool enable)
-{
-}
-
-static inline bool hda_dsp_check_sdw_irq(struct snd_sof_dev *sdev)
-{
-	return false;
-}
-
-static inline irqreturn_t hda_dsp_sdw_thread(int irq, void *context)
-{
-	return IRQ_HANDLED;
-}
-
-static inline bool hda_sdw_check_wakeen_irq(struct snd_sof_dev *sdev)
-{
-	return false;
-}
-
-static inline void hda_sdw_process_wakeen(struct snd_sof_dev *sdev)
-{
-}
-#endif
 
 /* common dai driver */
 extern struct snd_soc_dai_driver skl_dai[];
